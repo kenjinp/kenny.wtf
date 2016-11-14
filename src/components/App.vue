@@ -11,6 +11,36 @@
   </div>
 </template>
 
+<script>
+import store from '../store/store'
+
+export default {
+  name: 'AppView',
+  created () {
+    this.sayHello()
+  },
+  methods: {
+    sayHello () {
+      const styleHeader = [
+        'color: #3545E5;',
+        'font-family: sans-serif;',
+        'font-weight: bold;',
+        'font-size: 1.8em;'
+      ].join(' ')
+      const styleText = [
+        'color: #3545E5;',
+        'font-family: sans-serif;',
+        'font-weight: bold;',
+        'font-size: 1.1em;'
+      ].join(' ')
+      console.log('%cHowdy', styleHeader)
+      console.log('%c( ͡° ͜ʖ ͡°)', styleText)
+    }
+  },
+  store
+}
+</script>
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

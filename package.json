@@ -13,8 +13,13 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "detect-browser": "^1.5.0",
+    "lodash": "^4.17.0",
+    "mobile-detect": "^1.3.5",
     "vue": "^2.0.1",
-    "vue-router": "^2.0.1"
+    "vue-router": "^2.0.1",
+    "vuex": "^2.0.0",
+    "vuex-router-sync": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

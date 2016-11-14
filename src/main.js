@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import { sync } from 'vuex-router-sync'
+import store from './store/store'
 import Router from 'vue-router'
 import App from './components/App.vue'
 import HelloView from './components/Hello.vue'
@@ -28,7 +30,10 @@ var router = new Router({
   base: '/'
 })
 
+sync(store, router)
+
 new Vue({
   router,
+  store,
   ...App
 }).$mount('#app')
