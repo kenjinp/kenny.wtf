@@ -22,7 +22,11 @@ var routes = [
   }
 ]
 // routing
-var router = new Router({routes})
+var router = new Router({
+  routes: routes,
+  mode: 'history',
+  base: '/'
+})
 
 new Vue({
   router,
