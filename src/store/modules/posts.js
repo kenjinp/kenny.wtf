@@ -1,4 +1,8 @@
 import contentful from 'contentful'
+import Markdown from 'markdown-it'
+import _ from 'lodash'
+
+const md = new Markdown('commonmark', { linkify: true })
 
 const client = contentful.createClient({
   accessToken: '60310cb898f4d18ae5d55a3981a2da1ed8cfe86390793543a0003c3495da2096',
@@ -32,7 +36,13 @@ const actions = {
 // mutations
 const mutations = {
   FETCH_POSTS (state, { items }) {
-    state.posts = items
+    let posts = _.map(items, (item) => {
+      if (item.fields && item.fields.body) {
+        item.fields.body = md.render(item.fields.body)
+      }
+      return item
+    })
+    state.posts = posts
   }
 }
 
