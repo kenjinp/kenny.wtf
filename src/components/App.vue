@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <img src="../assets/logo.png">
+    <!-- <img src="../assets/logo.png"> -->
+    <div id="logo">
+      {{ emoji }}
+    </div>
     <!-- main view -->
     <router-view
       class="view"
@@ -8,17 +11,31 @@
       transition
       transition-mode="out-in">
     </router-view>
+    <posts
+      v-for="post in getPosts"
+      :post="post"
+      ></posts>
   </div>
 </template>
 
 <script>
+import Posts from './Post.vue'
+
 import store from '../store/store'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AppView',
+  computed: mapGetters([ 'emoji', 'getPosts' ]),
+  components: { Posts },
   created () {
     this.sayHello()
+    this.randomizeEmoji()
+    this.fetchPosts()
   },
+  // data: {
+  //   posts: store.getPosts()
+  // },
   methods: {
     sayHello () {
       const styleHeader = [
@@ -35,7 +52,11 @@ export default {
       ].join(' ')
       console.log('%cHowdy', styleHeader)
       console.log('%c( ͡° ͜ʖ ͡°)', styleText)
-    }
+    },
+    ...mapActions([
+      'randomizeEmoji',
+      'fetchPosts'
+    ])
   },
   store
 }
@@ -49,5 +70,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#logo {
+  font-size: 100px;
 }
 </style>

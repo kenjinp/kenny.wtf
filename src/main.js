@@ -5,14 +5,15 @@ import Router from 'vue-router'
 import App from './components/App.vue'
 import HelloView from './components/Hello.vue'
 import AboutView from './components/About.vue'
+import PostView from './components/Post.vue'
 
 // install router
 Vue.use(Router)
 
 var routes = [
   {
-    path: '/',
-    component: HelloView
+    path: '/:post',
+    component: PostView
   },
   {
     path: '/hello',
@@ -35,5 +36,5 @@ sync(store, router)
 new Vue({
   router,
   store,
-  ...App
+  render: h => h(App)
 }).$mount('#app')
