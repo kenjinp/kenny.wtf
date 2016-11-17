@@ -1,5 +1,5 @@
 <template>
-  <div class="post">
+  <div class="post" :id="post.fields.slug">
     <h2 v-html="post.fields.title"></h2>
     <div v-html="post.fields.body"></div>
   </div>

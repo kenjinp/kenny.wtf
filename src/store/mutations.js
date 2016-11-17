@@ -3,10 +3,10 @@
 // export const DEVICE = 'DEVICE'
 // YOU need to pass all of the actions possible in here, even from sub-modules
 
-import posts from './modules/posts.js'
+// import posts from './modules/posts.js'
 
 export const RANDOMIZE_EMOJI = (state, message) => {
   state.emoji = message
 }
 
-export const FETCH_POSTS = posts.mutations.FETCH_POSTS
+// export const FETCH_POSTS = posts.mutations.FETCH_POSTS

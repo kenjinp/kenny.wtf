@@ -1,25 +1,32 @@
 <template>
   <div id="app">
+
     <!-- <img src="../assets/logo.png"> -->
     <div id="logo">
       {{ emoji }}
     </div>
     <h1>I don't know what to put here.</h1>
     <small>Maybe that will be enough?</small>
-    <!-- main view -->
-    <router-view
+    <ul>
+      <router-link
+        v-for="slug in slugs"
+        :to="{ name: 'post', params: { postSlug: slug.slug }}">
+        {{ slug.title }}
+      </router-link>
+    </ul>
+    <!-- <router-view
       class="view"
       keep-alive
       transition
       transition-mode="out-in">
-    </router-view>
+    </router-view> -->
+    <!-- main view -->
     <posts
-      v-for="post in getPosts"
+      v-for="post in posts"
       :post="post"
       ></posts>
   </div>
 </template>
-
 <script>
 import Posts from './Post.vue'
 
@@ -28,16 +35,17 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AppView',
-  computed: mapGetters([ 'emoji', 'getPosts' ]),
+  computed: mapGetters([ 'emoji', 'posts', 'slugs', 'route' ]),
   components: { Posts },
   created () {
+    console.log(this)
     this.sayHello()
     this.randomizeEmoji()
     this.fetchPosts()
   },
-  // data: {
-  //   posts: store.getPosts()
-  // },
+  watch: {
+    '$route': 'talkAboutRoutes'
+  },
   methods: {
     sayHello () {
       const styleHeader = [
@@ -54,6 +62,9 @@ export default {
       ].join(' ')
       console.log('%cHowdy', styleHeader)
       console.log('%c( ͡° ͜ʖ ͡°)', styleText)
+    },
+    talkAboutRoutes () {
+      console.log('routes have changed', this.$route, this)
     },
     ...mapActions([
       'randomizeEmoji',

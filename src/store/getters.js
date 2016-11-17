@@ -1,10 +1,9 @@
 // this is the same
-export const getDevice = state => state.device
+export const device = state => state.device
 // as this
-export const getSize = state => {
+export const size = state => {
   return state.size
 }
-export const getPage = state => state.page
-export const getRoute = state => state.route
-export const getPosts = state => state.posts
+export const page = state => state.page
+export const route = state => state.route
 export const emoji = state => state.emoji

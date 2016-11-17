@@ -18,7 +18,20 @@ const state = {
 
 // getters
 const getters = {
-  posts: state => state.posts
+  posts: state => state.posts,
+  slugs: (state) => {
+    return _.chain(state.posts)
+      .map((item) => {
+        if (item.fields && item.fields.slug && item.fields.title) {
+          return {
+            slug: item.fields.slug,
+            title: item.fields.title
+          }
+        }
+      })
+      .without()
+      .value()
+  }
 }
 
 // actions
