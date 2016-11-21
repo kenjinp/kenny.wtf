@@ -4,6 +4,7 @@ import * as getters from './getters'
 import * as mutations from './mutations'
 import actions from './actions'
 import posts from './modules/posts.js'
+import fingerprints from './modules/fingerprints.js'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
   mutations,
   getters,
   modules: {
-    posts
+    posts,
+    fingerprints
   },
   strict: debug
 })

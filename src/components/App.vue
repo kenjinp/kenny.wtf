@@ -42,6 +42,7 @@ export default {
     this.sayHello()
     this.randomizeEmoji()
     this.fetchPosts()
+    this.fetchFingerprints()
   },
   watch: {
     '$route': 'talkAboutRoutes'
@@ -68,7 +69,8 @@ export default {
     },
     ...mapActions([
       'randomizeEmoji',
-      'fetchPosts'
+      'fetchPosts',
+      'fetchFingerprints'
     ])
   },
   store
