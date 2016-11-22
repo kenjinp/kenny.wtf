@@ -25,10 +25,12 @@
       v-for="post in posts"
       :post="post"
       ></posts>
+    <world></world>
   </div>
 </template>
 <script>
 import Posts from './Post.vue'
+import World from './World.vue'
 
 import store from '../store/store'
 import { mapGetters, mapActions } from 'vuex'
@@ -36,7 +38,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'AppView',
   computed: mapGetters([ 'emoji', 'posts', 'slugs', 'route' ]),
-  components: { Posts },
+  components: { Posts, World },
   created () {
     console.log(this)
     this.sayHello()
