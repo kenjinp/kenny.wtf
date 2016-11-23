@@ -1,36 +1,40 @@
 <template>
   <div class="world">
-    <div class="world__inner"></div>
   </div>
 </template>
 
 <script>
 import TweenLite from 'gsap'
 import throttle from 'lodash'
+import World from '../world'
 
 export default {
   name: 'WorldView',
   data () {
     return {
-      msg: 'Lol! This is hello.'
+      msg: ''
     }
   },
-  created () {
+  mounted () {
     // make world
-
-    TweenLite.ticker.addEventListener('tick', () => {
-      // render
-      console.log('tick')
-    })
+    this.makeWorld()
 
     // set events
-    this.keyboardEvent = throttle(this.keyboardEvent, 850, { 'trailing': false })
-    this.scrollEvent = throttle(this.scrollEvent, 1500, { 'trailing': false })
-    this.touchMove = throttle(this.touchMove, 1000, { 'trailing': false })
+    this.keyboardEvent = throttle(this.keyboardEvent, 850, { trailing: false })
+    this.scrollEvent = throttle(this.scrollEvent, 1500, { trailing: false })
+    this.touchMove = throttle(this.touchMove, 1000, { trailing: false })
     this.touchMove = this.touchMove.bind(this)
     this.touchStart = this.touchStart.bind(this)
   },
   methods: {
+    makeWorld () {
+      this.world = new World(this.$el)
+
+      TweenLite.ticker.addEventListener('tick', () => {
+        // render
+        // console.log('tick')
+      })
+    },
     addEventListeners () {
       window.addEventListener('keyup', this.keyboardEvent, false)
       window.addEventListener('wheel', this.scrollEvent, true)
@@ -129,20 +133,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
-  font-weight: normal
+  font-weight: normal;
 }
 
 ul {
-  list-style-type: none
-  padding: 0
+  list-style-type: none;
+  padding: 0;
 }
 
 li {
-  display: inline-block
-  margin: 0 10px
+  display: inline-block;
+  margin: 0 10px;
 }
 
 a {
-  color: #42b983
+  color: #42b983;
 }
 </style>

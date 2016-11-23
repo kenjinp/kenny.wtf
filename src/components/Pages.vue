@@ -1,12 +1,21 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="pages">
+    <posts
+      v-for="post in posts"
+      :post="post"
+      ></posts>
   </div>
 </template>
 
 <script>
+import Posts from './Post.vue'
+// import store from '../store/store'
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'HelloView',
+  name: 'PagesView',
+  components: { Posts },
+  computed: mapGetters([ 'posts' ]),
   data () {
     return {
       msg: 'Lol! This is hello.'

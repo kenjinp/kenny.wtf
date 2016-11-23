@@ -1,15 +1,16 @@
-import RendererWEBGL from './components/core/rendererWEBGL';
-import RendererCSS3D from './components/core/rendererCSS3D';
+import RendererWEBGL from './components/core/rendererWEBGL'
+import RendererCSS3D from './components/core/rendererCSS3D'
 
-import SceneWEBGL from './components/core/sceneWEBGL';
-import SceneCSS3D from './components/core/sceneCSS3D';
+import SceneWEBGL from './components/core/sceneWEBGL'
+import SceneCSS3D from './components/core/sceneCSS3D'
 
-import Stage from './components/core/stage';
+import Stage from './components/core/stage'
 
-import Clock from './components/helpers/clock';
-import Camera from './components/core/camera';
-import Emitter from './components/helpers/emitter';
-
+import Clock from './components/core/clock'
+import Camera from './components/core/camera'
+import Emitter from './components/helpers/emitter'
+import THREE from 'three'
+import * as _ from 'lodash'
 /*
  * World class
  */
@@ -21,37 +22,32 @@ class World {
    * @constructor
    */
   constructor (container, pages) {
-    this.container = container;
-    this.stages = [
-      new Stage('home', new THREE.Vector3(0, 2000, 0)),
-      new Stage('cases', new THREE.Vector3(0, 500, 0)),
-      new Stage('about', new THREE.Vector3(0, -500, 0)),
-      new Stage('contact', new THREE.Vector3(0, -2000, 0))
-    ];
+    this.container = container
+    this.stages = _.map(pages, (val, index) => {
+      return new Stage('name' + index, new THREE.Vector3(0, index * 500, 0))
+    })
 
-    this.css3d = true;
-
-    const width = this.container.offsetWidth;
-    const height = this.container.offsetHeight;
+    const width = this.container.offsetWidth
+    const height = this.container.offsetHeight
 
     // CLOCK
-    this.clock = new Clock();
+    this.clock = new Clock()
 
     // RENDER
     this.renderer = {
       webgl: new RendererWEBGL(this.container),
       css3d: this.css3d ? new RendererCSS3D(this.container) : null
-    };
+    }
 
     // CAMERA
-    this.camera = new Camera(width, height);
-    this.camera.position.z = 1000;
+    this.camera = new Camera(width, height)
+    this.camera.position.z = 1000
 
     // SCENE (Add stages info/data here too!)
     this.scene = {
       webgl: new SceneWEBGL(this.renderer.webgl, this.camera, this.clock, this.stages),
-      css3d: this.css3d ? new SceneCSS3D(this.renderer.css3d, this.camera, this.stages, pages) : null
-    };
+      css3d: new SceneCSS3D(this.renderer.css3d, this.camera, this.stages, pages)
+    }
   }
 
   /**
@@ -59,11 +55,11 @@ class World {
    * @return {void}
    */
   render () {
-    this.camera.update(this.clock.delta);
+    this.camera.update(this.clock.delta)
 
-    this.scene.webgl.render();
+    this.scene.webgl.render()
     if (this.css3d) {
-      this.scene.css3d.render();
+      this.scene.css3d.render()
     }
   }
 
@@ -73,7 +69,7 @@ class World {
    * @return {void}
    */
   moveToStage (index) {
-    this.camera.moveTo(this.stages[index].position);
+    this.camera.moveTo(this.stages[index].position)
   }
 
   /**
@@ -82,10 +78,10 @@ class World {
    * @return {void}
    */
   startAnimate (index) {
-    const x = this.stages[index].position.x;
-    const y = this.stages[index].position.y;
-    const z = this.stages[index].position.z - 4000;
-    this.camera.start(new THREE.Vector3(x, y, z), this.stages[index].position);
+    const x = this.stages[index].position.x
+    const y = this.stages[index].position.y
+    const z = this.stages[index].position.z - 4000
+    this.camera.start(new THREE.Vector3(x, y, z), this.stages[index].position)
   }
 
   /**
@@ -95,7 +91,7 @@ class World {
    * @return {void}
    */
   resize (width, height) {
-    Emitter.emit('resize', width, height);
+    Emitter.emit('resize', width, height)
   }
 
   /**
@@ -105,8 +101,8 @@ class World {
    * @return {void}
    */
   mouseMove (x, y) {
-    Emitter.emit('mousemove', x, y);
+    Emitter.emit('mousemove', x, y)
   }
-};
+}
 
-export default World;
+export default World

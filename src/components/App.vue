@@ -21,15 +21,12 @@
       transition-mode="out-in">
     </router-view> -->
     <!-- main view -->
-    <posts
-      v-for="post in posts"
-      :post="post"
-      ></posts>
+    <pages></pages>
     <world></world>
   </div>
 </template>
 <script>
-import Posts from './Post.vue'
+import Pages from './Pages.vue'
 import World from './World.vue'
 
 import store from '../store/store'
@@ -38,7 +35,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'AppView',
   computed: mapGetters([ 'emoji', 'posts', 'slugs', 'route' ]),
-  components: { Posts, World },
+  components: { Pages, World },
   created () {
     console.log(this)
     this.sayHello()
