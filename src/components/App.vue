@@ -37,7 +37,6 @@ export default {
   computed: mapGetters([ 'emoji', 'posts', 'slugs', 'route' ]),
   components: { Pages, World },
   created () {
-    console.log(this)
     this.sayHello()
     this.randomizeEmoji()
     this.fetchPosts()

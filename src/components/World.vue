@@ -5,34 +5,44 @@
 
 <script>
 import TweenLite from 'gsap'
-import throttle from 'lodash'
+import * as _ from 'lodash'
 import World from '../world'
+// import store from '../store/store'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'WorldView',
+  computed: mapGetters([ 'posts' ]),
   data () {
     return {
-      msg: ''
+      pages: []
+    }
+  },
+  watch: {
+    posts (pages) {
+      if (pages.length) {
+        this.pages = _.map(this.$parent.$children[0].$children, (vue) => {
+          return vue.$el
+        })
+        // make world
+        this.makeWorld()
+      }
     }
   },
   mounted () {
-    // make world
-    this.makeWorld()
-
     // set events
-    this.keyboardEvent = throttle(this.keyboardEvent, 850, { trailing: false })
-    this.scrollEvent = throttle(this.scrollEvent, 1500, { trailing: false })
-    this.touchMove = throttle(this.touchMove, 1000, { trailing: false })
+    this.keyboardEvent = _.throttle(this.keyboardEvent, 850, { trailing: false })
+    this.scrollEvent = _.throttle(this.scrollEvent, 1500, { trailing: false })
+    this.touchMove = _.throttle(this.touchMove, 1000, { trailing: false })
     this.touchMove = this.touchMove.bind(this)
     this.touchStart = this.touchStart.bind(this)
   },
   methods: {
     makeWorld () {
-      this.world = new World(this.$el)
-
+      this.world = new World(this.$el, this.pages)
       TweenLite.ticker.addEventListener('tick', () => {
         // render
-        // console.log('tick')
+        this.world.render()
       })
     },
     addEventListeners () {
@@ -132,21 +142,23 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+/*
+ * Mobile
+ */
+.world {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backgorund-color: blue;
+  overflow: hidden;
+  /*// padding: $border-size $border-size ($nav-mobile-height + $border-size) $border-size;*/
+  transform: translateZ(0);
+  .world__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

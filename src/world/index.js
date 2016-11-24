@@ -9,7 +9,7 @@ import Stage from './components/core/stage'
 import Clock from './components/core/clock'
 import Camera from './components/core/camera'
 import Emitter from './components/helpers/emitter'
-import THREE from 'three'
+import * as THREE from 'three'
 import * as _ from 'lodash'
 /*
  * World class
@@ -22,8 +22,10 @@ class World {
    * @constructor
    */
   constructor (container, pages) {
+    console.log('making world', container, pages)
     this.container = container
     this.stages = _.map(pages, (val, index) => {
+      console.log(val, index)
       return new Stage('name' + index, new THREE.Vector3(0, index * 500, 0))
     })
 
@@ -36,7 +38,7 @@ class World {
     // RENDER
     this.renderer = {
       webgl: new RendererWEBGL(this.container),
-      css3d: this.css3d ? new RendererCSS3D(this.container) : null
+      css3d: new RendererCSS3D(this.container)
     }
 
     // CAMERA
@@ -46,7 +48,7 @@ class World {
     // SCENE (Add stages info/data here too!)
     this.scene = {
       webgl: new SceneWEBGL(this.renderer.webgl, this.camera, this.clock, this.stages),
-      css3d: new SceneCSS3D(this.renderer.css3d, this.camera, this.stages, pages)
+      css3d: new SceneCSS3D(this.renderer.css3d, this.camera, this.clock, this.stages)
     }
   }
 
@@ -58,9 +60,7 @@ class World {
     this.camera.update(this.clock.delta)
 
     this.scene.webgl.render()
-    if (this.css3d) {
-      this.scene.css3d.render()
-    }
+    this.scene.css3d.render()
   }
 
   /**

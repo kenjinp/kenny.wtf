@@ -32,11 +32,12 @@ class Scene extends THREE.Scene {
    */
   createScene () {
     this.stages.forEach((stage) => {
+      console.log('stage', stage)
       this.add(stage.clone())
     })
 
     // Fog
-    this.fog = new THREE.Fog(0xffffff, 1300, 3500)
+    this.fog = new THREE.Fog(0xa60bb4, 1300, 3500)
 
     // Add lights
     const ambient = new THREE.AmbientLight(0xffffff)

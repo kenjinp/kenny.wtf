@@ -33,7 +33,7 @@ class Scene extends THREE.Scene {
    */
   createScene () {
     this.stages.forEach((stage) => {
-      this.add(stage.clone())
+      this.add(stage)
     })
 
     // Fog
