@@ -12,21 +12,39 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'WorldView',
-  computed: mapGetters([ 'posts' ]),
+  computed: mapGetters([ 'posts', 'emoji' ]),
   data () {
     return {
-      pages: []
+      pages: [],
+      pageIndex: 0
     }
   },
   watch: {
     posts (pages) {
       if (pages.length) {
-        this.pages = _.map(this.$parent.$children[0].$children, (vue) => {
+        let pages = [this.$parent.$el.firstElementChild]
+        pages = _.concat(pages, _.map(this.$parent.$children[0].$children, (vue) => {
           return vue.$el
+        }))
+        _.each(pages, (page) => {
+          let regexp = new RegExp('#([^\\s]*)', 'g')
+          let name = page.id.replace(regexp, '')
+          page.name = name
         })
+
+        this.pages = pages
         // make world
         this.makeWorld()
       }
+    },
+    // emoji () {
+    //   if (this.pages.length) {
+    //     this.makeWorld()
+    //   }
+    // },
+    $route (route) {
+      this.pageIndex = _.findIndex(this.pages, {name: this.$route.params.postSlug})
+      this.toStage()
     }
   },
   mounted () {
@@ -36,12 +54,12 @@ export default {
     this.touchMove = _.throttle(this.touchMove, 1000, { trailing: false })
     this.touchMove = this.touchMove.bind(this)
     this.touchStart = this.touchStart.bind(this)
+    this.addEventListeners()
   },
   methods: {
     makeWorld () {
       this.world = new World(this.$el, this.pages)
       TweenLite.ticker.addEventListener('tick', () => {
-        // render
         this.world.render()
       })
     },
@@ -65,7 +83,7 @@ export default {
     },
     onMouseMove (event) {
       // move through world
-      // this.world.mouseMove(event.clientX, event.clientY)
+      this.world.mouseMove(event.clientX, event.clientY)
     },
     /**
      * toStage
@@ -73,7 +91,7 @@ export default {
      * @return {Void}
      */
     toStage () {
-      this.world.moveToStage(this.$route.index)
+      this.world.moveToStage(this.pageIndex)
     },
     /**
      * nextStage
@@ -81,8 +99,7 @@ export default {
      * @return {Void}
      */
     nextStage () {
-      const index = this.$route.index
-      this.$router.go({ name: this.routes[index + 1] })
+      this.$router.go({ query: this.pages[this.pageIndex + 1].name })
     },
     /**
      * previousStage
@@ -90,8 +107,7 @@ export default {
      * @return {Void}
      */
     previousStage () {
-      const index = this.$route.index
-      this.$router.go({ name: this.routes[index - 1] })
+      this.$router.go({ query: this.pages[this.pageIndex - 1].name })
     },
     /**
      * keyboardEvent

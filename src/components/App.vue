@@ -2,18 +2,20 @@
   <div id="app">
 
     <!-- <img src="../assets/logo.png"> -->
-    <div id="logo">
-      {{ emoji }}
+    <div :ref="home">
+      <div id="logo">
+        {{ emoji }}
+      </div>
+      <h1>I don't know what to put here.</h1>
+      <small>Maybe that will be enough?</small>
+      <ul>
+        <router-link
+          v-for="slug in slugs"
+          :to="{ name: 'post', params: { postSlug: slug.slug }}">
+          {{ slug.title }}
+        </router-link>
+      </ul>
     </div>
-    <h1>I don't know what to put here.</h1>
-    <small>Maybe that will be enough?</small>
-    <ul>
-      <router-link
-        v-for="slug in slugs"
-        :to="{ name: 'post', params: { postSlug: slug.slug }}">
-        {{ slug.title }}
-      </router-link>
-    </ul>
     <!-- <router-view
       class="view"
       keep-alive

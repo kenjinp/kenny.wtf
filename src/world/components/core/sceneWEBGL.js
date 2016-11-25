@@ -1,5 +1,7 @@
 // import ObjectCloud from '../objects/objectCloud'
-// import Dots from '../objects/dots'
+import Dots from '../objects/dots/index'
+import randomInt from '../../utils/random-int'
+import * as _ from 'lodash'
 // import PostProcessing from '../../postProcessing/postProcessing'
 import * as THREE from 'three'
 
@@ -43,11 +45,11 @@ class Scene extends THREE.Scene {
     const ambient = new THREE.AmbientLight(0xffffff)
     this.add(ambient)
 
-    // // Add dots
-    // this.dots = new Dots()
-    // this.position.z = -600
-    // this.position.y = 0
-    // this.add(this.dots)
+    // Add dots
+    this.dots = new Dots()
+    this.position.z = -600
+    this.position.y = 0
+    this.add(this.dots)
     //
     // // Add boxes to World
     // this.objectCloud = new ObjectCloud()
@@ -68,6 +70,23 @@ class Scene extends THREE.Scene {
     this.add(bbox)
     */
 
+    const geometry = new THREE.BoxGeometry(200, 200, 200)
+    const material = new THREE.MeshLambertMaterial({color: 0x10e6e6, shading: THREE.SmoothShading})
+    this.cubes = []
+    for (var i = 0; i < 100; i++) {
+      this.cubes[i] = new THREE.Mesh(geometry, material)
+      this.cubes[i].position.set(randomInt(-2200, 2200), randomInt(-3500, 3500), randomInt(-15000, 300))
+      this.add(this.cubes[i])
+    }
+
+    // const spot = new THREE.DirectionalLight(0xdfebff, 1.75) // 0xdfebff
+    // spot.position.set(0, 0, -3000)
+    // spot.position.multiplyScalar(1.3)
+    // spot.intensity = 1
+    // spot.castShadow = true
+    // spot.shadowMapWidth = 1000
+    // spot.shadowMapHeight = 1000
+    // this.add(spot)
     // Spot light
     /*
     const spot = new THREE.DirectionalLight(0xdfebff, 1.75) // 0xdfebff
@@ -80,13 +99,11 @@ class Scene extends THREE.Scene {
     this.add(spot) */
 
     // Shadow light
-    /*
-    const shadowlight = new THREE.DirectionalLight(0xffffff, 0.3)
-    shadowlight.position.set(1000, 300, 2000)
-    shadowlight.castShadow = true
-    shadowlight.shadowDarkness = 0.04
-    this.add(shadowlight)
-    */
+    // const shadowlight = new THREE.DirectionalLight(0xffffff, 0.3)
+    // shadowlight.position.set(1000, 300, 2000)
+    // shadowlight.castShadow = true
+    // shadowlight.shadowDarkness = 0.04
+    // this.add(shadowlight)
   }
 
   /**
@@ -95,9 +112,18 @@ class Scene extends THREE.Scene {
    */
   render () {
     // this.objectCloud.update(this.clock.time)
-    // this.dots.update(this.clock.time)
+    this.dots.update(this.clock.time)
 
     // this.postProcessing.update()
+    _.each(this.cubes.slice(0, 50), (cube) => {
+      cube.rotation.x += 0.01
+      cube.rotation.y += 0.01
+    })
+
+    _.each(this.cubes.slice(51, this.cubes.length), (cube) => {
+      cube.rotation.x -= 0.01
+      cube.rotation.y -= 0.01
+    })
   }
 }
 

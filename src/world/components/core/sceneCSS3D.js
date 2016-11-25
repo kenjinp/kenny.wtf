@@ -1,27 +1,27 @@
 // import ObjectCloud from '../objects/objectCloud'
-// import Dots from '../objects/dots'
+// import Dots from '../objects/dots/index'
 // import PostProcessing from '../../postProcessing/postProcessing'
 import * as THREE from 'three'
+
 /**
  * Scene class
  */
 class Scene extends THREE.Scene {
   /**
    * Constructor function
-   * @param {Renderer} Renderer - Renderer instance
-   * @param {Camera}   Camera   - Camera instance
-   * @param {Clock}    Clock    - Clock instance
-   * @param {Stages[]} Stages   - Stages instances
+   * @param {Renderer}     Renderer - Renderer instance
+   * @param {Camera}       Camera   - Camera instance
+   * @param {Stages[]}     Stages   - Stages
+   * @param {domElement[]} Pages    - Pages to add to stages
    */
-  constructor (Renderer, Camera, Clock, Stages) {
+  constructor (Renderer, Camera, Stages, Pages) {
+    console.log('stages', Stages)
     super()
 
     this.renderer = Renderer
     this.camera = Camera
-    this.clock = Clock
     this.stages = Stages
-    // this.postProcessing = new PostProcessing(this, this.renderer, this.camera)
-    this.manager = new THREE.LoadingManager()
+    this.pages = Pages
 
     this.createScene()
   }
@@ -31,62 +31,13 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   createScene () {
-    this.stages.forEach((stage) => {
-      console.log('stage', stage)
-      this.add(stage.clone())
+    this.stages.forEach((s, i) => {
+      const stage = s
+      const obj = new THREE.CSS3DObject(this.pages[i])
+      // obj.position.z = 0 // move a little in front
+      stage.add(obj)
+      this.add(stage)
     })
-
-    // Fog
-    this.fog = new THREE.Fog(0xa60bb4, 1300, 3500)
-
-    // Add lights
-    const ambient = new THREE.AmbientLight(0xffffff)
-    this.add(ambient)
-
-    // // Add dots
-    // this.dots = new Dots()
-    // this.position.z = -600
-    // this.position.y = 0
-    // this.add(this.dots)
-    //
-    // // Add boxes to World
-    // this.objectCloud = new ObjectCloud()
-    // this.objectCloud.z = -1000
-    // this.add(this.objectCloud)
-    //
-    // // Add logo to home stage
-    // var loader = new THREE.ObjectLoader(this.manager)
-    // loader.load('/static/logo-object.json', (logo) => {
-    //   logo.position.z = -1400
-    //   logo.scale.multiplyScalar(500)
-    //   this.stages[0].add(logo)
-    // })
-
-    /*
-    var bbox = new THREE.BoundingBoxHelper(this.objectCloud, 0xff0000)
-    bbox.update()
-    this.add(bbox)
-    */
-
-    // Spot light
-    /*
-    const spot = new THREE.DirectionalLight(0xdfebff, 1.75) // 0xdfebff
-    spot.position.set(0, 0, -3000)
-    spot.position.multiplyScalar(1.3)
-    spot.intensity = 1
-    spot.castShadow = true
-    spot.shadowMapWidth = 1000
-    spot.shadowMapHeight = 1000
-    this.add(spot) */
-
-    // Shadow light
-    /*
-    const shadowlight = new THREE.DirectionalLight(0xffffff, 0.3)
-    shadowlight.position.set(1000, 300, 2000)
-    shadowlight.castShadow = true
-    shadowlight.shadowDarkness = 0.04
-    this.add(shadowlight)
-    */
   }
 
   /**
@@ -94,10 +45,7 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   render () {
-    // this.objectCloud.update(this.clock.time)
-    // this.dots.update(this.clock.time)
-
-    // this.postProcessing.update()
+    this.renderer.render(this, this.camera)
   }
 }
 

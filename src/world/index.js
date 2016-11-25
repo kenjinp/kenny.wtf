@@ -24,10 +24,16 @@ class World {
   constructor (container, pages) {
     console.log('making world', container, pages)
     this.container = container
-    this.stages = _.map(pages, (val, index) => {
-      console.log(val, index)
-      return new Stage('name' + index, new THREE.Vector3(0, index * 500, 0))
+    this.stages = _.map(pages, (stage, index) => {
+      let y = 0
+      if (index !== 0) {
+        y = (stage.offsetTop - stage.scrollTop + stage.clientTop) * -1.5 - parseInt(window.getComputedStyle(stage).height)
+      }
+      console.log(parseInt(window.getComputedStyle(stage).height), y, index)
+      return new Stage('name' + index, new THREE.Vector3(0, y + 60, 0))
     })
+
+    console.log('stages', this.stages)
 
     const width = this.container.offsetWidth
     const height = this.container.offsetHeight
@@ -48,7 +54,7 @@ class World {
     // SCENE (Add stages info/data here too!)
     this.scene = {
       webgl: new SceneWEBGL(this.renderer.webgl, this.camera, this.clock, this.stages),
-      css3d: new SceneCSS3D(this.renderer.css3d, this.camera, this.clock, this.stages)
+      css3d: new SceneCSS3D(this.renderer.css3d, this.camera, this.stages, pages)
     }
   }
 
@@ -57,8 +63,10 @@ class World {
    * @return {void}
    */
   render () {
+    console.log('rendering')
     this.camera.update(this.clock.delta)
-
+    this.renderer.webgl.render(this.scene.webgl, this.camera)
+    this.renderer.css3d.render(this.scene.css3d, this.camera)
     this.scene.webgl.render()
     this.scene.css3d.render()
   }

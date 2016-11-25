@@ -8,5 +8,3 @@
 export const RANDOMIZE_EMOJI = (state, message) => {
   state.emoji = message
 }
-
-// export const FETCH_POSTS = posts.mutations.FETCH_POSTS

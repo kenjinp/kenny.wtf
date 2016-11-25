@@ -13,9 +13,9 @@ class Camera extends THREE.PerspectiveCamera {
    * @param {object} [options] - Camera options
    */
   constructor (width, height, options = {}) {
-    const fov = options.fov || 60
+    const fov = options.fov || 75
     const aspect = options.aspect || width / height
-    const near = options.near || 1
+    const near = options.near || 0.1
     const far = options.far || 10000
 
     super(fov, aspect, near, far)
@@ -28,6 +28,7 @@ class Camera extends THREE.PerspectiveCamera {
     this.windowHalfX = width / 2
     this.windowHalfY = height / 2
     this.mouse = {x: 0, y: 0}
+    this.position.z = 5
 
     this.deviceOrientation = {}
     this.initialDeviceOrientation = null
