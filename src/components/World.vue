@@ -66,6 +66,7 @@ export default {
       document.addEventListener('touchmove', this.touchMove, false)
       document.addEventListener('touchstart', this.touchStart, false)
       document.addEventListener('mousemove', this.onMouseMove, false)
+      window.addEventListener('resize', this.onResize)
     },
     removeEventListeners () {
       window.removeEventListener('keyup', this.keyboardEvent, false)
@@ -73,10 +74,11 @@ export default {
       document.removeEventListener('touchmove', this.touchMove, false)
       document.removeEventListener('touchstart', this.touchStart, false)
       document.removeEventListener('mousemove', this.onMouseMove, false)
+      window.removeEventListener('resize', this.onResize)
     },
     onResize () {
       // set world size
-      // this.world.resize(this.$el.offsetWidth, this.$el.offsetHeight)
+      this.world.resize(this.$el.offsetWidth, this.$el.offsetHeight)
     },
     onMouseMove (event) {
       // move through world

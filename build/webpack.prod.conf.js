@@ -42,6 +42,9 @@ var webpackConfig = merge(baseWebpackConfig, {
     new CopyWebpackPlugin([
       {
         from: 'CNAME', to: 'CNAME', toType: 'file'
+      },
+      {
+        from: '404.html', to: '404.html'
       }
     ]),
     // extract css into its own file
