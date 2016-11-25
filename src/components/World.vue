@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       pages: [],
-      pageIndex: 0
+      pageIndex: 0,
     }
   },
   watch: {
@@ -33,14 +33,20 @@ export default {
         })
 
         this.pages = pages
-        // make world
-        this.makeWorld()
-        this.pageIndex = _.findIndex(this.pages, {name: this.$route.params.postSlug})
-        this.toStage()
       }
     },
     $route (route) {
       this.pageIndex = _.findIndex(this.pages, {name: this.$route.params.postSlug})
+      this.toStage()
+    },
+    pages () {
+      // TODO maybe create world and add stages later?
+      //on pages loaded we can set up the routes and world
+      // make world
+      this.makeWorld()
+      let pQuery = this.$route.query.p
+      pQuery = pQuery ? pQuery.replace(/^\/|\/$/g, '') : null
+      this.pageIndex = _.findIndex(this.pages, {name: pQuery || this.$route.params.postSlug})
       this.toStage()
     }
   },
