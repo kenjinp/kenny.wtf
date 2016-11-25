@@ -2,7 +2,7 @@
   <div id="app">
 
     <!-- <img src="../assets/logo.png"> -->
-    <div :ref="home">
+    <div id="home">
       <div id="logo">
         {{ emoji }}
       </div>

@@ -35,13 +35,10 @@ export default {
         this.pages = pages
         // make world
         this.makeWorld()
+        this.pageIndex = _.findIndex(this.pages, {name: this.$route.params.postSlug})
+        this.toStage()
       }
     },
-    // emoji () {
-    //   if (this.pages.length) {
-    //     this.makeWorld()
-    //   }
-    // },
     $route (route) {
       this.pageIndex = _.findIndex(this.pages, {name: this.$route.params.postSlug})
       this.toStage()
@@ -99,7 +96,8 @@ export default {
      * @return {Void}
      */
     nextStage () {
-      this.$router.go({ query: this.pages[this.pageIndex + 1].name })
+      console.log(this.pages[this.pageIndex + 1].name)
+      this.$router.push(this.pages[this.pageIndex + 1].name)
     },
     /**
      * previousStage
@@ -107,7 +105,8 @@ export default {
      * @return {Void}
      */
     previousStage () {
-      this.$router.go({ query: this.pages[this.pageIndex - 1].name })
+      console.log(this.pages[this.pageIndex - 1].name)
+      this.$router.push(this.pages[this.pageIndex - 1].name)
     },
     /**
      * keyboardEvent

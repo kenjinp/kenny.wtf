@@ -73,9 +73,9 @@ class Scene extends THREE.Scene {
     const geometry = new THREE.BoxGeometry(200, 200, 200)
     const material = new THREE.MeshLambertMaterial({color: 0x10e6e6, shading: THREE.SmoothShading})
     this.cubes = []
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 200; i++) {
       this.cubes[i] = new THREE.Mesh(geometry, material)
-      this.cubes[i].position.set(randomInt(-2200, 2200), randomInt(-3500, 3500), randomInt(-15000, 300))
+      this.cubes[i].position.set(randomInt(-5000, 5000), randomInt(-10000, 10000), randomInt(-15000, 100))
       this.add(this.cubes[i])
     }
 
