@@ -1,5 +1,6 @@
 // import ObjectCloud from '../objects/objectCloud'
 import Dots from '../objects/dots/index'
+// import Stars from '../objects/stars/index'
 import randomInt from '../../utils/random-int'
 import * as _ from 'lodash'
 // import PostProcessing from '../../postProcessing/postProcessing'
@@ -25,6 +26,7 @@ class Scene extends THREE.Scene {
     this.stages = Stages
     // this.postProcessing = new PostProcessing(this, this.renderer, this.camera)
     this.manager = new THREE.LoadingManager()
+    this.modelLoader = new THREE.JSONLoader()
 
     this.createScene()
   }
@@ -38,11 +40,24 @@ class Scene extends THREE.Scene {
       this.add(stage)
     })
 
+    // planet
+    this.planet = null
+    this.modelLoader.load('static/planet.js', (geometry) => {
+      let material = new THREE.MeshStandardMaterial({color: 0x88638c, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
+      this.planet = new THREE.Mesh(geometry, material)
+      this.add(this.planet)
+      this.planet.rotation.z = 50
+      this.planet.scale.set(50, 50, 50)
+      this.planet.position.set(0, 60, -100)
+      this.planet.castShadow = true
+      this.planet.receiveShadow = true
+    })
+
     // Fog
-    this.fog = new THREE.Fog(0xffffff, 1300, 3500)
+    // this.fog = new THREE.Fog(0xffffff, 1300, 3500)
 
     // Add lights
-    const ambient = new THREE.AmbientLight(0xffffff)
+    const ambient = new THREE.AmbientLight(0x4D4250)
     this.add(ambient)
 
     // Add dots
@@ -50,6 +65,9 @@ class Scene extends THREE.Scene {
     this.position.z = -600
     this.position.y = 0
     this.add(this.dots)
+
+    // this.stars = new Stars()
+    // this.add(this.stars)
     //
     // // Add boxes to World
     // this.objectCloud = new ObjectCloud()
@@ -71,7 +89,7 @@ class Scene extends THREE.Scene {
     */
 
     const geometry = new THREE.BoxGeometry(200, 200, 200)
-    const material = new THREE.MeshLambertMaterial({color: 0x10e6e6, shading: THREE.SmoothShading})
+    const material = new THREE.MeshLambertMaterial({color: 0x10e6e6})
     this.cubes = []
     for (var i = 0; i < 200; i++) {
       this.cubes[i] = new THREE.Mesh(geometry, material)
@@ -88,15 +106,14 @@ class Scene extends THREE.Scene {
     // spot.shadowMapHeight = 1000
     // this.add(spot)
     // Spot light
-    /*
     const spot = new THREE.DirectionalLight(0xdfebff, 1.75) // 0xdfebff
-    spot.position.set(0, 0, -3000)
+    spot.position.set(3000, 50, -600)
     spot.position.multiplyScalar(1.3)
     spot.intensity = 1
     spot.castShadow = true
     spot.shadowMapWidth = 1000
     spot.shadowMapHeight = 1000
-    this.add(spot) */
+    this.add(spot)
 
     // Shadow light
     // const shadowlight = new THREE.DirectionalLight(0xffffff, 0.3)
@@ -113,6 +130,9 @@ class Scene extends THREE.Scene {
   render () {
     // this.objectCloud.update(this.clock.time)
     this.dots.update(this.clock.time)
+    if (this.planet) {
+      this.planet.rotation.y += 0.01
+    }
 
     // this.postProcessing.update()
     _.each(this.cubes.slice(0, 50), (cube) => {

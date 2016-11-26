@@ -63,7 +63,6 @@ class World {
    * @return {void}
    */
   render () {
-    console.log('rendering')
     this.camera.update(this.clock.delta)
     this.renderer.webgl.render(this.scene.webgl, this.camera)
     this.renderer.css3d.render(this.scene.css3d, this.camera)
@@ -77,7 +76,10 @@ class World {
    * @return {void}
    */
   moveToStage (index) {
-    this.camera.moveTo(this.stages[index].position)
+    let stage = this.stages[index]
+    if (stage) {
+      this.camera.moveTo(stage.position)
+    }
   }
 
   /**

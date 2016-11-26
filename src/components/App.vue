@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <!-- <img src="../assets/logo.png"> -->
     <div id="home">
       <div id="logo">
@@ -25,11 +24,13 @@
     <!-- main view -->
     <pages></pages>
     <world></world>
+    <loader></loader>
   </div>
 </template>
 <script>
 import Pages from './Pages.vue'
 import World from './World.vue'
+import Loader from './Loader.vue'
 
 import store from '../store/store'
 import { mapGetters, mapActions } from 'vuex'
@@ -37,7 +38,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'AppView',
   computed: mapGetters([ 'emoji', 'posts', 'slugs', 'route' ]),
-  components: { Pages, World },
+  components: { Pages, World, Loader },
   created () {
     this.sayHello()
     this.randomizeEmoji()
@@ -45,7 +46,6 @@ export default {
     this.fetchFingerprints()
   },
   watch: {
-    '$route': 'talkAboutRoutes'
   },
   methods: {
     sayHello () {
@@ -64,9 +64,6 @@ export default {
       console.log('%cHowdy', styleHeader)
       console.log('%c( ͡° ͜ʖ ͡°)', styleText)
     },
-    talkAboutRoutes () {
-      console.log('routes have changed', this.$route, this)
-    },
     ...mapActions([
       'randomizeEmoji',
       'fetchPosts',
@@ -83,7 +80,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #dddddd;
   margin-top: 60px;
 }
 #logo {

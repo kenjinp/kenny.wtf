@@ -17,6 +17,7 @@ export default {
     return {
       pages: [],
       pageIndex: 0,
+      world: null
     }
   },
   watch: {
@@ -37,11 +38,12 @@ export default {
     },
     $route (route) {
       this.pageIndex = _.findIndex(this.pages, {name: this.$route.params.postSlug})
+      console.log('page index', this.pageIndex)
       this.toStage()
     },
     pages () {
       // TODO maybe create world and add stages later?
-      //on pages loaded we can set up the routes and world
+      // on pages loaded we can set up the routes and world
       // make world
       this.makeWorld()
       let pQuery = this.$route.query.p
@@ -58,6 +60,7 @@ export default {
     this.touchMove = this.touchMove.bind(this)
     this.touchStart = this.touchStart.bind(this)
     this.addEventListeners()
+    // if (this.pages) { this.makeWorld() }
   },
   methods: {
     makeWorld () {
@@ -104,8 +107,10 @@ export default {
      * @return {Void}
      */
     nextStage () {
-      console.log(this.pages[this.pageIndex + 1].name)
-      this.$router.push(this.pages[this.pageIndex + 1].name)
+      let next = this.pages[this.pageIndex + 1]
+      if (next) {
+        this.$router.push(next.name)
+      }
     },
     /**
      * previousStage
@@ -113,8 +118,10 @@ export default {
      * @return {Void}
      */
     previousStage () {
-      console.log(this.pages[this.pageIndex - 1].name)
-      this.$router.push(this.pages[this.pageIndex - 1].name)
+      let previous = this.pages[this.pageIndex - 1]
+      if (previous) {
+        this.$router.push(previous.name)
+      }
     },
     /**
      * keyboardEvent
