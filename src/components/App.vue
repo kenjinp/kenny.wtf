@@ -41,7 +41,9 @@ export default {
   components: { Pages, World, Loader },
   created () {
     this.sayHello()
-    this.randomizeEmoji()
+    setInterval(() => {
+      this.randomizeEmoji()
+    }, 1000)
     this.fetchPosts()
     this.fetchFingerprints()
   },
@@ -80,7 +82,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #dddddd;
+  color: #E6A972;
   margin-top: 60px;
 }
 #logo {

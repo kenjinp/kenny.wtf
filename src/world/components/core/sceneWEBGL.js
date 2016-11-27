@@ -1,8 +1,8 @@
 // import ObjectCloud from '../objects/objectCloud'
-import Dots from '../objects/dots/index'
+// import Dots from '../objects/dots/index'
 // import Stars from '../objects/stars/index'
 import randomInt from '../../utils/random-int'
-import * as _ from 'lodash'
+// import * as _ from 'lodash'
 // import PostProcessing from '../../postProcessing/postProcessing'
 import * as THREE from 'three'
 
@@ -31,6 +31,41 @@ class Scene extends THREE.Scene {
     this.createScene()
   }
 
+  makeGasGiant () {
+    let material = new THREE.MeshStandardMaterial({color: 0xE6A972, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
+    let geometry = new THREE.IcosahedronBufferGeometry(10, 3)
+    this.jupiter = new THREE.Mesh(geometry, material)
+    this.jupiter.scale.set(300, 300, 300)
+    this.jupiter.position.set(60, 60, -10000)
+    console.log('jupiter', this.jupiter)
+    this.add(this.jupiter)
+  }
+
+  makeAstroids () {
+    this.asteroidBelt = new THREE.Object3D()
+    this.asteroidBelt.position.set(0, 60, -100)
+    this.add(this.asteroidBelt)
+
+    for (let x = 0; x < 300; x++) {
+      let asteroidSize = randomInt(0.005, 0.05)
+      // let asteroidShape1 = randomInt(4, 10)
+      // let asteroidShape2 = randomInt(4, 10)
+      let asteroidOrbit = randomInt(700, 800)
+      let asteroidPositionY = randomInt(-2, 2)
+      let geo = new THREE.IcosahedronBufferGeometry(asteroidSize, 0)
+      let mat = new THREE.MeshLambertMaterial({color: 0x525252})
+      let asteroid = new THREE.Mesh(geo, mat)
+      asteroid.scale.set(randomInt(1, 5), randomInt(1, 5), randomInt(1, 5))
+
+      asteroid.position.y = asteroidPositionY
+      let radians = randomInt(0, 360) * Math.PI / 180
+      asteroid.position.x = Math.cos(radians) * asteroidOrbit
+      asteroid.position.z = Math.sin(radians) * asteroidOrbit
+
+      this.asteroidBelt.add(asteroid)
+    }
+  }
+
   /**
    * CreateScene function
    * @return {void}
@@ -40,31 +75,42 @@ class Scene extends THREE.Scene {
       this.add(stage)
     })
 
+    // Gas giant
+    this.makeGasGiant()
+
+    this.makeAstroids()
+
     // planet
     this.planet = null
     this.modelLoader.load('static/planet.js', (geometry) => {
       let material = new THREE.MeshStandardMaterial({color: 0x88638c, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
       this.planet = new THREE.Mesh(geometry, material)
       this.add(this.planet)
-      this.planet.rotation.z = 50
       this.planet.scale.set(50, 50, 50)
       this.planet.position.set(0, 60, -100)
       this.planet.castShadow = true
       this.planet.receiveShadow = true
+      this.planet.orbitAngle = randomInt(0, 360)
+      this.planet.orbitSpeed = 0.08
+      this.planet.rotationSpeed = 0.001
+      this.planet.orbitRadius = 800
+      console.log(this.planet)
+      var box = new THREE.Box3().setFromObject(this.planet)
+      console.log('sizes', box.min, box.max, box.size())
     })
 
     // Fog
     // this.fog = new THREE.Fog(0xffffff, 1300, 3500)
 
     // Add lights
-    const ambient = new THREE.AmbientLight(0x4D4250)
-    this.add(ambient)
+    // const ambient = new THREE.AmbientLight(0x4D4250)
+    // this.add(ambient)
 
     // Add dots
-    this.dots = new Dots()
-    this.position.z = -600
-    this.position.y = 0
-    this.add(this.dots)
+    // this.dots = new Dots()
+    // this.position.z = -600
+    // this.position.y = 0
+    // this.add(this.dots)
 
     // this.stars = new Stars()
     // this.add(this.stars)
@@ -88,14 +134,14 @@ class Scene extends THREE.Scene {
     this.add(bbox)
     */
 
-    const geometry = new THREE.BoxGeometry(200, 200, 200)
-    const material = new THREE.MeshLambertMaterial({color: 0x10e6e6})
-    this.cubes = []
-    for (var i = 0; i < 200; i++) {
-      this.cubes[i] = new THREE.Mesh(geometry, material)
-      this.cubes[i].position.set(randomInt(-5000, 5000), randomInt(-10000, 10000), randomInt(-15000, 100))
-      this.add(this.cubes[i])
-    }
+    // const geometry = new THREE.BoxGeometry(200, 200, 200)
+    // const material = new THREE.MeshLambertMaterial({color: 0x10e6e6})
+    // this.cubes = []
+    // for (var i = 0; i < 200; i++) {
+    //   this.cubes[i] = new THREE.Mesh(geometry, material)
+    //   this.cubes[i].position.set(randomInt(-5000, 5000), randomInt(-10000, 10000), randomInt(-15000, 100))
+    //   this.add(this.cubes[i])
+    // }
 
     // const spot = new THREE.DirectionalLight(0xdfebff, 1.75) // 0xdfebff
     // spot.position.set(0, 0, -3000)
@@ -129,21 +175,33 @@ class Scene extends THREE.Scene {
    */
   render () {
     // this.objectCloud.update(this.clock.time)
-    this.dots.update(this.clock.time)
+    // this.dots.update(this.clock.time)
     if (this.planet) {
-      this.planet.rotation.y += 0.01
+      // this.planet.rotation.y += 0.001
+      // this.planet.rotation.x -= 0.001
+      // mercuryOrbitAngle -= mercuryOrbitSpeed;
+      // orbit must be 0 - 360
+      this.planet.orbitAngle -= this.planet.orbitSpeed
+      let radians = this.planet.orbitAngle * Math.PI / 180
+      this.planet.position.x = Math.cos(radians) * this.planet.orbitRadius
+      this.planet.position.z = Math.sin(radians) * this.planet.orbitRadius
+      this.planet.rotation.y += this.planet.rotationSpeed
+
+      this.asteroidBelt.position.x = this.planet.position.x
+      this.asteroidBelt.position.Z = this.planet.position.z
+      this.asteroidBelt.rotation.y += 0.005
     }
 
     // this.postProcessing.update()
-    _.each(this.cubes.slice(0, 50), (cube) => {
-      cube.rotation.x += 0.01
-      cube.rotation.y += 0.01
-    })
-
-    _.each(this.cubes.slice(51, this.cubes.length), (cube) => {
-      cube.rotation.x -= 0.01
-      cube.rotation.y -= 0.01
-    })
+    // _.each(this.cubes.slice(0, 50), (cube) => {
+    //   cube.rotation.x += 0.01
+    //   cube.rotation.y += 0.01
+    // })
+    //
+    // _.each(this.cubes.slice(51, this.cubes.length), (cube) => {
+    //   cube.rotation.x -= 0.01
+    //   cube.rotation.y -= 0.01
+    // })
   }
 }
 

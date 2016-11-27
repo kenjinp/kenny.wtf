@@ -23,6 +23,7 @@ export default {
   watch: {
     posts (pages) {
       if (pages.length) {
+        console.log(this.$parent)
         let pages = [this.$parent.$el.firstElementChild]
         pages = _.concat(pages, _.map(this.$parent.$children[0].$children, (vue) => {
           return vue.$el
@@ -68,6 +69,7 @@ export default {
       TweenLite.ticker.addEventListener('tick', () => {
         this.world.render()
       })
+      this.onResize()
     },
     addEventListeners () {
       window.addEventListener('keyup', this.keyboardEvent, false)
@@ -177,18 +179,11 @@ export default {
  */
 .world {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  backgorund-color: blue;
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  background-color: black;
   overflow: hidden;
   /*// padding: $border-size $border-size ($nav-mobile-height + $border-size) $border-size;*/
-  transform: translateZ(0);
-  .world__inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
+  /*transform: translateZ(0);*/
 }
 </style>

@@ -1,6 +1,6 @@
 import RendererWEBGL from './components/core/rendererWEBGL'
 import RendererCSS3D from './components/core/rendererCSS3D'
-
+// import randomInt from './utils/random-int'
 import SceneWEBGL from './components/core/sceneWEBGL'
 import SceneCSS3D from './components/core/sceneCSS3D'
 
@@ -29,8 +29,9 @@ class World {
       if (index !== 0) {
         y = (stage.offsetTop - stage.scrollTop + stage.clientTop) * -1.5 - parseInt(window.getComputedStyle(stage).height)
       }
-      console.log(parseInt(window.getComputedStyle(stage).height), y, index)
-      return new Stage('name' + index, new THREE.Vector3(0, y + 60, 0))
+      let z = 0// randomInt(-10000, 10000)
+      console.log(parseInt(window.getComputedStyle(stage).height), y, index, z)
+      return new Stage('name' + index, new THREE.Vector3(0, y + 60, z))
     })
 
     console.log('stages', this.stages)
