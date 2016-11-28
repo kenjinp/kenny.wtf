@@ -42,7 +42,7 @@ class Scene extends THREE.Scene {
 
     // planet
     this.planet = null
-    this.modelLoader.load('static/planet.js', (geometry) => {
+    this.modelLoader.load('static/planet2.json', (geometry) => {
       let material = new THREE.MeshStandardMaterial({color: 0x88638c, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
       this.planet = new THREE.Mesh(geometry, material)
       this.add(this.planet)
