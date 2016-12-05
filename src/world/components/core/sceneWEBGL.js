@@ -53,6 +53,19 @@ class Scene extends THREE.Scene {
       this.planet.position.set(0, 60, -100)
       this.planet.castShadow = true
       this.planet.receiveShadow = true
+
+      var radius = 1000
+      var segments = 64
+      var material1 = new THREE.LineDashedMaterial({ color: 0xDEE2EA, linewidth: 1, dashSize: 20, gapSize: 50 })
+      var geometry2 = new THREE.CircleGeometry(radius, segments)
+
+      // Remove center vertex
+      geometry2.vertices.shift()
+      geometry2.computeLineDistances()
+      this.orbit = new THREE.Line(geometry2, material1)
+      this.orbit.position.set(0, 60, -100)
+      this.orbit.rotation.set(90, 15, 45)
+      this.add(this.orbit)
     })
 
     // Fog
@@ -127,7 +140,7 @@ class Scene extends THREE.Scene {
     this.dots.update(this.clock.time)
     this.particles.update(this.clock.time)
     if (this.planet) {
-      this.planet.rotation.y += 0.01
+      this.planet.rotation.y += 0.001
     }
 
     // this.postProcessing.update()

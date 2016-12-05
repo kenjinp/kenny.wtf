@@ -13,12 +13,12 @@ class ObjectCloud extends THREE.Object3D {
     super()
 
     const colors = [
-      new THREE.Color(0xEC6E61),
-      new THREE.Color(0x4689C6),
+      new THREE.Color(0xF6D169),
+      new THREE.Color(0xE6A972),
       new THREE.Color(0xDEE2EA),
       new THREE.Color(0xDEE2EA),
       new THREE.Color(0xDEE2EA),
-      new THREE.Color(0x644E9D)
+      new THREE.Color(0xB66E6F)
     ]
 
     this.size = 75
@@ -44,7 +44,6 @@ class ObjectCloud extends THREE.Object3D {
       mesh.rotation.set(rotation.x, rotation.y, rotation.z)
       mesh.scale.set(randomScale, randomScale, randomScale)
       this.add(mesh)
-
       /*
       // Create Fill Object
       let fill = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0xFFFFFF}))
