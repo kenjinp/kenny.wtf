@@ -1,8 +1,9 @@
 // import ObjectCloud from '../objects/objectCloud'
 import Dots from '../objects/dots/index'
+import Particles from '../objects/particles'
 // import Stars from '../objects/stars/index'
-import randomInt from '../../utils/random-int'
-import * as _ from 'lodash'
+// import randomInt from '../../utils/random-int'
+// import * as _ from 'lodash'
 // import PostProcessing from '../../postProcessing/postProcessing'
 import * as THREE from 'three'
 
@@ -43,7 +44,8 @@ class Scene extends THREE.Scene {
     // planet
     this.planet = null
     this.modelLoader.load('static/planet2.json', (geometry) => {
-      let material = new THREE.MeshStandardMaterial({color: 0x88638c, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
+      // let planetColor = 0x88638c;
+      let material = new THREE.MeshStandardMaterial({color: 0xEEF4F8, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
       this.planet = new THREE.Mesh(geometry, material)
       this.add(this.planet)
       this.planet.rotation.z = 50
@@ -66,6 +68,9 @@ class Scene extends THREE.Scene {
     this.position.y = 0
     this.add(this.dots)
 
+    this.particles = new Particles()
+    this.add(this.particles)
+
     // this.stars = new Stars()
     // this.add(this.stars)
     //
@@ -87,15 +92,6 @@ class Scene extends THREE.Scene {
     bbox.update()
     this.add(bbox)
     */
-
-    const geometry = new THREE.BoxGeometry(200, 200, 200)
-    const material = new THREE.MeshLambertMaterial({color: 0x10e6e6})
-    this.cubes = []
-    for (var i = 0; i < 200; i++) {
-      this.cubes[i] = new THREE.Mesh(geometry, material)
-      this.cubes[i].position.set(randomInt(-5000, 5000), randomInt(-10000, 10000), randomInt(-15000, 100))
-      this.add(this.cubes[i])
-    }
 
     // const spot = new THREE.DirectionalLight(0xdfebff, 1.75) // 0xdfebff
     // spot.position.set(0, 0, -3000)
@@ -128,22 +124,13 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   render () {
-    // this.objectCloud.update(this.clock.time)
     this.dots.update(this.clock.time)
+    this.particles.update(this.clock.time)
     if (this.planet) {
       this.planet.rotation.y += 0.01
     }
 
     // this.postProcessing.update()
-    _.each(this.cubes.slice(0, 50), (cube) => {
-      cube.rotation.x += 0.01
-      cube.rotation.y += 0.01
-    })
-
-    _.each(this.cubes.slice(51, this.cubes.length), (cube) => {
-      cube.rotation.x -= 0.01
-      cube.rotation.y -= 0.01
-    })
   }
 }
 

@@ -1,4 +1,4 @@
-import randomInt from '../../../utils/random-int'
+import {randomInt} from '../../../utils/random'
 import * as THREE from 'three'
 
 /**
