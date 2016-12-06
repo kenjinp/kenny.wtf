@@ -10,7 +10,7 @@ class Dots extends THREE.Object3D {
   constructor () {
     super()
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 8; i++) {
       this.add(new THREE.Points(new DotsGeometry(), new DotsMaterial(i)))
     }
   }

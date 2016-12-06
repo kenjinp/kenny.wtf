@@ -1,7 +1,7 @@
 // import ObjectCloud from '../objects/objectCloud'
 import Dots from '../objects/dots/index'
 import Particles from '../objects/particles'
-// import Stars from '../objects/stars/index'
+import System from '../objects/system/index'
 // import randomInt from '../../utils/random-int'
 // import * as _ from 'lodash'
 // import PostProcessing from '../../postProcessing/postProcessing'
@@ -37,36 +37,10 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   createScene () {
-    this.stages.forEach((stage) => {
-      this.add(stage)
-    })
+    this.system = new System(this.stages)
+    this.add(this.system)
 
-    // planet
-    this.planet = null
-    this.modelLoader.load('static/planet2.json', (geometry) => {
-      // let planetColor = 0x88638c;
-      let material = new THREE.MeshStandardMaterial({color: 0xEEF4F8, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
-      this.planet = new THREE.Mesh(geometry, material)
-      this.add(this.planet)
-      this.planet.rotation.z = 50
-      this.planet.scale.set(50, 50, 50)
-      this.planet.position.set(0, 60, -100)
-      this.planet.castShadow = true
-      this.planet.receiveShadow = true
-
-      var radius = 1000
-      var segments = 64
-      var material1 = new THREE.LineDashedMaterial({ color: 0xDEE2EA, linewidth: 1, dashSize: 20, gapSize: 50 })
-      var geometry2 = new THREE.CircleGeometry(radius, segments)
-
-      // Remove center vertex
-      geometry2.vertices.shift()
-      geometry2.computeLineDistances()
-      this.orbit = new THREE.Line(geometry2, material1)
-      this.orbit.position.set(0, 60, -100)
-      this.orbit.rotation.set(90, 15, 45)
-      this.add(this.orbit)
-    })
+    console.log(this.system.moons)
 
     // Fog
     // this.fog = new THREE.Fog(0xffffff, 1300, 3500)
@@ -139,9 +113,10 @@ class Scene extends THREE.Scene {
   render () {
     this.dots.update(this.clock.time)
     this.particles.update(this.clock.time)
-    if (this.planet) {
-      this.planet.rotation.y += 0.001
-    }
+    // if (this.planet) {
+    //   this.planet.rotation.y += 0.001
+    // }
+    this.system.update()
 
     // this.postProcessing.update()
   }

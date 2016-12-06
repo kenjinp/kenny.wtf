@@ -33,7 +33,7 @@ class World {
       return new Stage('name' + index, new THREE.Vector3(0, y + 60, 0))
     })
 
-    console.log('stages', this.stages)
+    // console.log('stages', this.stages)
 
     const width = this.container.offsetWidth
     const height = this.container.offsetHeight

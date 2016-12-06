@@ -11,7 +11,8 @@ class Stage extends THREE.Group {
   constructor (name, position) {
     super()
     this.name = name
-    this.position.set(position.x, position.y, position.z)
+    this.po = position
+    // position.x, position.y, position.z)
   }
 
   /**
