@@ -2,11 +2,7 @@
   <div id="app">
     <!-- <img src="../assets/logo.png"> -->
     <div id="home">
-      <div id="logo">
-        {{ emoji }}
-      </div>
-      <h1>I don't know what to put here.</h1>
-      <small>Maybe that will be enough?</small>
+      <h1>Kenny(dot)wtf</h1>
       <ul>
         <router-link
           v-for="slug in slugs"
@@ -40,6 +36,7 @@ export default {
   computed: mapGetters([ 'emoji', 'posts', 'slugs', 'route' ]),
   components: { Pages, World, Loader },
   created () {
+    this.makeFavicon()
     this.sayHello()
     this.randomizeEmoji()
     this.fetchPosts()
@@ -66,6 +63,7 @@ export default {
     },
     ...mapActions([
       'randomizeEmoji',
+      'makeFavicon',
       'fetchPosts',
       'fetchFingerprints'
     ])

@@ -1,5 +1,5 @@
 // import ObjectCloud from '../objects/objectCloud'
-import Dots from '../objects/dots/index'
+// import Dots from '../objects/dots/index'
 import Particles from '../objects/particles'
 // import Stars from '../objects/stars/index'
 // import randomInt from '../../utils/random-int'
@@ -44,8 +44,8 @@ class Scene extends THREE.Scene {
     // planet
     this.planet = null
     this.modelLoader.load('static/planet2.json', (geometry) => {
-      // let planetColor = 0x88638c;
-      let material = new THREE.MeshStandardMaterial({color: 0xEEF4F8, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
+      let planetColor = 0xFFFFFF
+      let material = new THREE.MeshStandardMaterial({color: planetColor, shading: THREE.FlatShading, roughness: 0.8, metalness: 0})
       this.planet = new THREE.Mesh(geometry, material)
       this.add(this.planet)
       this.planet.rotation.z = 50
@@ -56,7 +56,7 @@ class Scene extends THREE.Scene {
 
       var radius = 1000
       var segments = 64
-      var material1 = new THREE.LineDashedMaterial({ color: 0xDEE2EA, linewidth: 1, dashSize: 20, gapSize: 50 })
+      var material1 = new THREE.LineDashedMaterial({ color: 0x342e3d, linewidth: 1, dashSize: 20, gapSize: 50 })
       var geometry2 = new THREE.CircleGeometry(radius, segments)
 
       // Remove center vertex
@@ -76,10 +76,10 @@ class Scene extends THREE.Scene {
     this.add(ambient)
 
     // Add dots
-    this.dots = new Dots()
-    this.position.z = -600
-    this.position.y = 0
-    this.add(this.dots)
+    // this.dots = new Dots()
+    // this.position.z = -600
+    // this.position.y = 0
+    // this.add(this.dots)
 
     this.particles = new Particles()
     this.add(this.particles)
@@ -137,7 +137,7 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   render () {
-    this.dots.update(this.clock.time)
+    // this.dots.update(this.clock.time)
     this.particles.update(this.clock.time)
     if (this.planet) {
       this.planet.rotation.y += 0.001
