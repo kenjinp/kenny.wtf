@@ -9,10 +9,17 @@ let makeFavicon = (size, tickPerLoop, tick) => {
   let half = size / 2
 
   let circle = new Path2D()
-  circle.arc(half, half, half, 0, 2 * Math.PI)
+  circle.arc(half, half, half * 0.8, 0, 2 * Math.PI)
+
+  let circleBorder = new Path2D()
+  circleBorder.arc(half, half, half, 0, 2 * Math.PI)
 
   if (tick < tickPerLoop) {
     let scaledAdvancement = tick * (size / tickPerLoop)
+
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fill(circleBorder)
+
     ctx.fillStyle = '#F3928E'
     ctx.fill(circle)
 
@@ -21,7 +28,12 @@ let makeFavicon = (size, tickPerLoop, tick) => {
 
     let moon = new Path2D()
     moon.arc(x(), y(), half / 4, 0, 2 * Math.PI)
+
+    let moonBorder = new Path2D()
+    moonBorder.arc(x(), y(), (half / 4) * 1.5, 0, 2 * Math.PI)
     // circle.moveTo(size, size)
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fill(moonBorder)
     ctx.fillStyle = '#342E3D'
     ctx.fill(moon)
   } else {
@@ -31,9 +43,16 @@ let makeFavicon = (size, tickPerLoop, tick) => {
 
     let moon = new Path2D()
     moon.arc(x(), y(), half / 5, 0, 2 * Math.PI)
+    let moonBorder = new Path2D()
+    moonBorder.arc(x(), y(), (half / 5) * 1.5, 0, 2 * Math.PI)
     // circle.moveTo(size, size)
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fill(moonBorder)
     ctx.fillStyle = '#342E3D'
     ctx.fill(moon)
+
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fill(circleBorder)
 
     ctx.fillStyle = '#F3928E'
     ctx.fill(circle)
