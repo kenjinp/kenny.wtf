@@ -64,7 +64,7 @@ let makeFavicon = (size, tickPerLoop, tick) => {
 }
 
 let render = () => {
-  const MILISECONDS_PER_FRAME = 300
+  const MILISECONDS_PER_FRAME = 100
   const SIZES = [16, 32, 48, 62]
   const LOOP_LENGTH_MILISECONDS = 10000
   let tick = 0

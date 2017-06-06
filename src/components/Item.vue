@@ -1,7 +1,7 @@
 <template>
-  <div class="post" :id="post.fields.slug">
-    <h2 v-html="post.fields.title"></h2>
-    <div v-html="post.fields.body"></div>
+  <div class="item" :id="item.fields.slug">
+    <h2 v-html="item.fields.title"></h2>
+    <div v-html="item.fields.body"></div>
   </div>
 </template>
 
@@ -10,8 +10,8 @@
 // const md = new Markdown({ html: false, linkify: true })
 
 export default {
-  name: 'PostView',
-  props: [ 'post' ]
+  name: 'ItemView',
+  props: [ 'item' ]
 }
 </script>
 

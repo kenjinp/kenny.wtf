@@ -13,8 +13,8 @@ class DotsGeometry extends THREE.Geometry {
 
     for (let i = 0; i < 315; i++) {
       var vertex = new THREE.Vector3()
-      vertex.x = randomInt(-1300, 1300)
-      vertex.y = randomInt(-3000, 3000)
+      vertex.x = randomInt(-1000, 1000)
+      vertex.y = randomInt(-1000, 1000)
       vertex.z = randomInt(-800, 800)
       this.vertices.push(vertex)
     }

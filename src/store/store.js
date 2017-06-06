@@ -1,29 +1,29 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import * as getters from './getters'
-import * as mutations from './mutations'
 import actions from './actions'
-import posts from './modules/posts.js'
-import fingerprints from './modules/fingerprints.js'
+import content from './modules/content.js'
+import page from './modules/page.js'
+import browser from './modules/browser.js'
+import world from './modules/world.js'
 
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
-// Create an object to hold the initial state when
-// the app starts up
 const state = {
-  emoji: ''
+  display: 'world'
 }
 
 export default new Vuex.Store({
   state,
   actions,
-  mutations,
   getters,
   modules: {
-    posts,
-    fingerprints
+    content,
+    page,
+    browser,
+    world
   },
   strict: debug
 })

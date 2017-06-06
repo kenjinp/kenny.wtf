@@ -1,6 +1,3 @@
-// import ObjectCloud from '../objects/objectCloud'
-// import Dots from '../objects/dots/index'
-// import PostProcessing from '../../postProcessing/postProcessing'
 import * as THREE from 'three'
 
 /**
@@ -14,14 +11,12 @@ class Scene extends THREE.Scene {
    * @param {Stages[]}     Stages   - Stages
    * @param {domElement[]} Pages    - Pages to add to stages
    */
-  constructor (Renderer, Camera, Stages, Pages) {
-    console.log('stages', Stages)
+  constructor (Renderer, Camera, Stage) {
     super()
 
     this.renderer = Renderer
     this.camera = Camera
-    this.stages = Stages
-    this.pages = Pages
+    this.stage = Stage
 
     this.createScene()
   }
@@ -31,21 +26,16 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   createScene () {
-    this.stages.forEach((s, i) => {
-      const stage = s
-      const obj = new THREE.CSS3DObject(this.pages[i])
-      // obj.position.z = 0 // move a little in front
-      stage.add(obj)
-      this.add(stage)
-    })
+    this.add(this.stage)
   }
 
   /**
    * Render function
    * @return {void}
    */
-  render () {
+  render (time) {
     this.renderer.render(this, this.camera)
+    this.stage.update(time)
   }
 }
 

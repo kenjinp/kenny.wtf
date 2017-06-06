@@ -19,6 +19,7 @@
     "contentful": "^3.7.1",
     "detect-browser": "^1.5.0",
     "gsap": "^1.19.0",
+    "hammerjs": "^2.0.8",
     "lodash": "^4.17.0",
     "markdown-it": "^8.1.0",
     "mobile-detect": "^1.3.5",

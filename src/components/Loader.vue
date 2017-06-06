@@ -30,7 +30,7 @@ export default {
     posts () {
       setTimeout(() => {
         this.loaded = true
-      }, 3000)
+      }, 500)
     }
   }
 }

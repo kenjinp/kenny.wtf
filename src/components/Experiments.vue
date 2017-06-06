@@ -1,17 +1,17 @@
 <template>
-  <div class="post" :id="post.fields.slug">
-    <h2 v-html="post.fields.title"></h2>
-    <div v-html="post.fields.body"></div>
+  <div class="about">
+    <h1>{{ msg }}</h1>
   </div>
 </template>
 
 <script>
-// import Markdown from 'markdown-it'
-// const md = new Markdown({ html: false, linkify: true })
-
 export default {
-  name: 'PostView',
-  props: [ 'post' ]
+  name: 'ExperimentsView',
+  data () {
+    return {
+      msg: 'Lol! This is the experiments page.'
+    }
+  }
 }
 </script>
 

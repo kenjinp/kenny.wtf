@@ -1,71 +1,54 @@
 <template>
   <div id="app">
-    <!-- <img src="../assets/logo.png"> -->
-    <div id="home">
-      <h1>Kenny(dot)wtf</h1>
-      <ul>
-        <router-link
-          v-for="slug in slugs"
-          :to="{ name: 'post', params: { postSlug: slug.slug }}">
-          {{ slug.title }}
-        </router-link>
-      </ul>
-    </div>
-    <!-- <router-view
+    <home></home>
+    <router-view
       class="view"
       keep-alive
       transition
       transition-mode="out-in">
-    </router-view> -->
-    <!-- main view -->
-    <pages></pages>
-    <world></world>
-    <loader></loader>
+    </router-view>
+    <Browser />
+    <World v-if="display === 'world'"></World>
   </div>
 </template>
 <script>
-import Pages from './Pages.vue'
+// import Pages from './Pages.vue'
 import World from './World.vue'
+import Home from './Home.vue'
+import Browser from './Browser'
 import Loader from './Loader.vue'
-
 import store from '../store/store'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AppView',
-  computed: mapGetters([ 'emoji', 'posts', 'slugs', 'route' ]),
-  components: { Pages, World, Loader },
+  components: { Home, Loader, World, Browser },
+  computed: mapGetters([ 'display' ]),
   created () {
-    this.makeFavicon()
     this.sayHello()
-    this.randomizeEmoji()
-    this.fetchPosts()
-    this.fetchFingerprints()
-  },
-  watch: {
+    this.makeFavicon()
   },
   methods: {
     sayHello () {
       const styleHeader = [
-        'color: #3545E5;',
+        'color: #f3928e;',
         'font-family: sans-serif;',
         'font-weight: bold;',
-        'font-size: 1.8em;'
+        'font-size: 2em;'
       ].join(' ')
       const styleText = [
-        'color: #3545E5;',
+        'color: #f3928e;',
         'font-family: sans-serif;',
         'font-weight: bold;',
         'font-size: 1.1em;'
       ].join(' ')
-      console.log('%cHowdy', styleHeader)
+      console.log('%cAchievement Unlocked!', styleHeader)
       console.log('%c( ͡° ͜ʖ ͡°)', styleText)
+      console.log('%c Nice to see you here. You\'ve accessed the secret level!', styleText)
+      console.log('%c make sure to tweet @kenny_pizza to claim your bragging rights', styleText)
     },
     ...mapActions([
-      'randomizeEmoji',
-      'makeFavicon',
-      'fetchPosts',
-      'fetchFingerprints'
+      'makeFavicon'
     ])
   },
   store
@@ -73,15 +56,30 @@ export default {
 </script>
 
 <style>
+html, body {
+  background-color: #f3928e;
+  margin: 0;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #dddddd;
-  margin-top: 60px;
+  color: #eee;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
-#logo {
-  font-size: 100px;
+.square {
+  backface-visibility: hidden;
+  height: 450px;
+  width: 450px;
+  border: 1em solid #eee;
+}
+.square:hover {
+  background-color: blue;
 }
 </style>

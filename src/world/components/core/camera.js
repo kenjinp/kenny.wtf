@@ -24,7 +24,7 @@ class Camera extends THREE.PerspectiveCamera {
     this.targetPoint = new THREE.Vector3(0, 0, 0)
     this.limitX = 2 // mouse divided by 2
 
-    this.cameraShakeY = 0
+    this.cameraShakeY = 0.1
     this.windowHalfX = width / 2
     this.windowHalfY = height / 2
     this.mouse = {x: 0, y: 0}
