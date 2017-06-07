@@ -9,7 +9,9 @@ const EVENTS = [
   'onMouseMove',
   'onResize',
   'swipeRight',
-  'swipeLeft'
+  'swipeLeft',
+  'swipeUp',
+  'swipeDown'
 ]
 
 // initial state

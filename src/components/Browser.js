@@ -1,7 +1,7 @@
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
 import Vue from 'vue'
-// import Hammer from 'hammerjs'
+import Hammer from 'hammerjs'
 export default Vue.extend({
   name: 'BrowserView',
   computed: mapGetters([ 'events' ]),
@@ -19,12 +19,12 @@ export default Vue.extend({
   methods: {
     // ...mapActions(events),
     addEventListeners () {
-      // let mc = new Hammer(this.$parent.$el, {})
-      // mc.on('swipeleft', (e) => {
-      //   console.log('swipe', e)
-      //   this.swipeLeft(_.clone(e))
-      // })
-      // mc.on('swiperight', (e) => this.swipeRight(_.clone(e)))
+      let mc = new Hammer(this.$parent.$el, {})
+      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
+      mc.on('swipeleft', e => this.swipeLeft(e.deltaX))
+      mc.on('swiperight', e => this.swipeRight(e.deltaX))
+      mc.on('swipeup', e => this.swipeUp(e.deltaX))
+      mc.on('swipedown', e => this.swipeDown(e.deltaX))
       document.addEventListener('keydown',
         this.makeThrottledEvent('keyboardEvent', 300), false)
       window.addEventListener('wheel',

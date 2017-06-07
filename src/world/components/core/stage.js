@@ -56,7 +56,9 @@ class Stage extends THREE.Group {
     this.add(this.centerObject)
     this.faces = []
     this.makeSquare(DEFAULT_SIZE)
+    // make offsets for different screen versions?
     this.rotation.x = -0.05 * (Math.PI / 2)
+    this.position.y = 50
   }
 
   defaultCenterObject () {

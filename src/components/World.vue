@@ -4,8 +4,6 @@
 </template>
 
 <script>
-// import TweenLite from 'gsap'
-// import World from '../world'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -13,11 +11,11 @@ export default {
   computed: mapGetters([ 'posts' ]),
   mounted () {
     let home = this.$parent.$children[0]
-    let collection = home.$children[0]
-    console.log('COLLECTION', collection)
-    let $collection = collection.$refs.collection.children
+    let collections = home.$children
+    console.log('COLLECTION', collections)
+    // let $collection = collection.$refs.collection.children
     this.makeWorld(this.$el)
-    this.setContent($collection)
+    this.setContent(collections)
   },
   methods: mapActions([ 'makeWorld', 'setContent' ])
 }

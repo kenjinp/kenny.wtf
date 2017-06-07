@@ -25,7 +25,9 @@ export default {
     'selectedContentType',
     'keyboardEvent',
     'swipeRight',
-    'swipeLeft'
+    'swipeLeft',
+    'swipeUp',
+    'swipeDown'
   ]),
   data () {
     return {
@@ -35,9 +37,19 @@ export default {
   watch: {
     swipeRight (e) {
       this.decrementContentIndex()
+      this.rotateLeft()
     },
     swipeLeft (e) {
       this.incrementContentIndex()
+      this.rotateRight()
+    },
+    swipeUp (e) {
+      console.log('swipe up')
+      this.rotateDown()
+    },
+    swipeDown (e) {
+      console.log('swipe down')
+      this.rotateUp()
     },
     selectedContentType () {
       this.$router.push(this.selectedContentType)
@@ -47,7 +59,6 @@ export default {
         // left
         case 37:
           this.decrementContentIndex()
-          console.log('LEFT')
           this.rotateLeft()
           break
         // up
@@ -57,7 +68,6 @@ export default {
         // right
         case 39:
           this.incrementContentIndex()
-          console.log('RIGHT')
           this.rotateRight()
           break
         // down
