@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <!--<h1>{{ msg }}</h1>
+    <!--
+    <h1>{{ selectedContentName}}</h1>
     <h2>{{ selectedContentType }}</h2>
     <ul>
       <li v-for="contentType in contentTypes">
@@ -23,63 +24,80 @@ export default {
   computed: mapGetters([
     'contentTypes',
     'selectedContentType',
+    'selectedContentName',
     'keyboardEvent',
     'swipeRight',
     'swipeLeft',
     'swipeUp',
-    'swipeDown'
+    'swipeDown',
+    'route'
   ]),
   data () {
     return {
       msg: 'Kenny (dot) wtf'
     }
   },
+  mounted () {
+    // if (route) {
+    //   move cube and stuff
+    // } else {
+    //   change route to normal
+    // }
+    console.log('hello routes', this.$store.state.route.path)
+    if (this.$store.state.route.path === '/') {
+      this.chageRouteBasedOnSelectedContent()
+    } else {
+      // rerender cube based on path
+    }
+  },
   watch: {
     swipeRight (e) {
       this.decrementContentIndex()
-      this.rotateLeft()
+      // this.rotateLeft()
     },
     swipeLeft (e) {
       this.incrementContentIndex()
-      this.rotateRight()
+      // this.rotateRight()
     },
     swipeUp (e) {
-      console.log('swipe up')
-      this.rotateDown()
+      this.incrementContentChildrenIndex()
+      // this.rotateUp()
     },
     swipeDown (e) {
-      console.log('swipe down')
-      this.rotateUp()
-    },
-    selectedContentType () {
-      this.$router.push(this.selectedContentType)
+      this.decrementContentChildrenIndex()
+      // this.rotateDown()
     },
     keyboardEvent (e) {
       switch (e.keyCode) {
         // left
         case 37:
           this.decrementContentIndex()
-          this.rotateLeft()
+          // this.rotateLeft()
           break
         // up
         case 38:
-          this.rotateUp()
+          this.incrementContentChildrenIndex()
+          // this.rotateUp()
           break
         // right
         case 39:
           this.incrementContentIndex()
-          this.rotateRight()
+          // this.rotateRight()
           break
         // down
         case 40:
-          this.rotateDown()
+          this.decrementContentChildrenIndex()
+          // this.rotateDown()
           break
       }
     }
   },
   methods: mapActions([
     'decrementContentIndex',
+    'decrementContentChildrenIndex',
     'incrementContentIndex',
+    'incrementContentChildrenIndex',
+    'chageRouteBasedOnSelectedContent',
     'rotateRight',
     'rotateLeft',
     'rotateUp',

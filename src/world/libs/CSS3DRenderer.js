@@ -14,6 +14,8 @@ THREE.CSS3DObject = function ( element ) {
 
 	this.addEventListener( 'removed', function ( event ) {
 
+    console.log('removing', this)
+
 		if ( this.element.parentNode !== null ) {
 
 			this.element.parentNode.removeChild( this.element );

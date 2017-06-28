@@ -5,19 +5,37 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import _ from 'lodash'
 
 export default {
   name: 'WorldView',
   computed: mapGetters([ 'posts' ]),
   mounted () {
-    let home = this.$parent.$children[0]
-    let collections = home.$children
-    console.log('COLLECTION', collections)
-    // let $collection = collection.$refs.collection.children
     this.makeWorld(this.$el)
-    this.setContent(collections)
+    this.makeContent()
   },
-  methods: mapActions([ 'makeWorld', 'setContent' ])
+  watch: {
+    // update based on current url path?
+    posts (posts) {
+      // this.$nextTick(() => this.makeContent())
+    }
+  },
+  methods: {
+    makeContent () {
+      let home = this.$parent.$children[0]
+      let content = this.mapContent(home.$children)
+      console.log('MakeContent', content)
+      this.setContent(content)
+    },
+    // should content remap after every change?
+    mapContent (collection) {
+      return _.chain(collection)
+        .map(collection => _.get(collection, '$el.children'))
+        .compact()
+        .value()
+    },
+    ...mapActions([ 'makeWorld', 'setContent' ])
+  }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

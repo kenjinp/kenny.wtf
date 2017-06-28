@@ -46,8 +46,8 @@ class World {
 
     // SCENE
     this.scene = {
-      webgl: new SceneWEBGL(this.renderer.webgl, this.camera, this.clock, this.stage.webgl),
-      css3d: new SceneCSS3D(this.renderer.css3d, this.camera, this.stage.css3d)
+      webgl: new SceneWEBGL(this.renderer.webgl, this.camera, this.clock, this.stage.webgl, 'webgl'),
+      css3d: new SceneCSS3D(this.renderer.css3d, this.camera, this.stage.css3d, 'css3d')
     }
   }
 
