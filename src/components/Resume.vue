@@ -5,14 +5,16 @@
         <div class="col-xs-12">
           <div id="photo-header" class="text-center">
             <!-- PHOTO (AVATAR) -->
-            <router-link to="/">
+            <!--<router-link to="/">-->
+            <a>
               <div id="photo">
-                <div class="home">
+                <!--<div class="home">
                   <i class="fa fa-home fa-3x"></i>
-                </div>
+                </div>-->
                 <img src="../assets/logo.png" alt="kenneth pirman">
               </div>
-            </router-link>
+            </a>
+            <!--</router-link>-->
             <div id="text-header">
               <h1>Hello,<br> I am <span>Kenny Pirman</span>. Here's a few things about me</h1>
             </div>

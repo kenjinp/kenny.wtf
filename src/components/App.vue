@@ -29,7 +29,6 @@ export default {
     ...mapGetters([ 'display' ])
   },
   created () {
-    console.log(this.$route)
     this.sayHello()
     this.makeFavicon()
     this.redirect()
