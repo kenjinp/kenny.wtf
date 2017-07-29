@@ -160,7 +160,14 @@ class Stage extends THREE.Group {
   }
 
   makeSquare (size) {
+    console.log('faces', this.faces)
     this.remove('square')
+
+    _.each(this.faces, face => {
+      let el = _.get(face, 'element')
+      el.remove()
+    })
+
     for (var i = this.children.length - 1; i >= 0; i--) {
       let obj = this.children[i]
       if (obj.name && obj.name === 'square') {
@@ -186,6 +193,7 @@ class Stage extends THREE.Group {
       div.innerHTML = `<h1>${side.name}</h1>`
       div.className += 'square'
       document.body.append(div)
+      console.log('PARENT ELEMENT', div.parentElement)
       let position = new THREE.Vector3(x, y, z)
       let rotation = new THREE.Vector3(xRot, yRot, zRot)
       this.makeFace(div, position, rotation, side.name)

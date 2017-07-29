@@ -11,6 +11,7 @@ export default {
   name: 'WorldView',
   computed: mapGetters([ 'posts' ]),
   mounted () {
+    console.log('world mounted')
     this.makeWorld(this.$el)
     this.makeContent()
   },

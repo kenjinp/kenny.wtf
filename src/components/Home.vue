@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <!--
     <h1>{{ selectedContentName}}</h1>
     <h2>{{ selectedContentType }}</h2>
+    <!--
     <ul>
       <li v-for="contentType in contentTypes">
         <h3 v-bind:class="selectedContentType === contentType?  'selected' : '' ">
@@ -108,25 +108,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-.selected {
-  text-decoration: underline;
-}
-
-a {
-  color: #42b983;
-}
 </style>

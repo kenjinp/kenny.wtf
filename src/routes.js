@@ -1,37 +1,48 @@
 import Router from 'vue-router'
-import ExperimentsView from './components/Experiments.vue'
-import ProjectsView from './components/Projects.vue'
-import PostsView from './components/Posts.vue'
+// import ExperimentsView from './components/Experiments.vue'
+// import ProjectsView from './components/Projects.vue'
+// import PostsView from './components/Posts.vue'
+// import AboutView from './components/About.vue'
+import ResumeView from './components/Resume.vue'
 import Vue from 'vue'
 
 Vue.use(Router)
 
 const ROUTES = [
+  // {
+  //   path: '/posts',
+  //   component: PostsView
+  // },
+  // {
+  //   path: '/posts/:postSlug',
+  //   component: {},
+  //   name: 'post'
+  // },
+  // {
+  //   path: '/projects',
+  //   component: ProjectsView
+  // },
+  // {
+  //   path: '/experiments',
+  //   component: ExperimentsView
+  // },
+  // {
+  //   path: '/about',
+  //   component: AboutView
+  // },
   {
-    path: '/posts',
-    component: PostsView
-  },
-  {
-    path: '/posts/:postSlug',
-    component: {},
-    name: 'post'
-  },
-  {
-    path: '/projects',
-    component: ProjectsView
-  },
-  {
-    path: '/experiments',
-    component: ExperimentsView
+    path: '/resume',
+    component: ResumeView
   }
 ]
 
-export default new Router({
+let router = new Router({
   routes: ROUTES,
   scrollBehavior,
   mode: 'history',
   base: '/'
 })
+export default router
 
 // scrollBehavior:
 // - only available in html5 history mode

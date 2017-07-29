@@ -1,34 +1,52 @@
 <template>
-  <div id="app">
-    <home></home>
+  <div id="app" v-bind:class="{ 'world-view': worldView }">
     <router-view
       class="view"
       keep-alive
       transition
       transition-mode="out-in">
     </router-view>
-    <Browser />
-    <World v-if="display === 'world'"></World>
+    <!-- <Home v-if='worldView' />
+    <Browser v-if='worldView' />
+    <World v-if='worldView' /></World> -->
   </div>
 </template>
 <script>
-// import Pages from './Pages.vue'
-import World from './World.vue'
-import Home from './Home.vue'
-import Browser from './Browser'
-import Loader from './Loader.vue'
+// import World from './World.vue'
+// import Home from './Home.vue'
+// import Browser from './Browser'
 import store from '../store/store'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AppView',
-  components: { Home, Loader, World, Browser },
-  computed: mapGetters([ 'display' ]),
+  // components: { World, Browser, Home },
+  computed: {
+    // a computed getter
+    worldView () {
+      return false // this.$route.path !== '/resume'
+    },
+    ...mapGetters([ 'display' ])
+  },
   created () {
+    console.log(this.$route)
     this.sayHello()
     this.makeFavicon()
+    this.redirect()
   },
   methods: {
+    redirect () {
+      // when we load the page, use q param to redirect
+      // this is a cool hack to use github as a singlepage app with url links
+      let page = this.$route.query.q
+      if (page) {
+        this.$router.push({ path: page, query: {} })
+      } else {
+        if (this.$route.path !== '/resume') {
+          this.$router.push('/resume')
+        }
+      }
+    },
     sayHello () {
       const styleHeader = [
         'color: #f3928e;',
@@ -64,6 +82,9 @@ html, body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+.world-view {
   text-align: center;
   color: #eee;
   position: absolute;
@@ -71,7 +92,6 @@ html, body {
   top: 0;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
 }
 .square {
   backface-visibility: hidden;
