@@ -27,7 +27,8 @@
           <div class="box">
             <h2>About Me</h2>
             <p style="padding:0 0 0 15px;">
-              I enjoy building modular, service oriented, full stack software solutions for the web.
+              I'm all about delighting my users and empowering my team to do great things. I build
+              easy-to-use fullstack services that are designed to be modular and neat (in both senses of the word)
             </p>
           </div>
 
@@ -44,8 +45,12 @@
               </div>
               <div class="col-xs-9">
                 <div class="profession"><a href="http://spaceling.io">Spaceling.io</a></div>
+                <!-- talk about utility it provides, then implementation -->
                 <div class="description">
-                	Innovative automated testing tools SaaS
+
+                	Innovative automated regression testing SaaS. Enables teams to cut costs and significant dev time by
+                  running parallel regression testing in the cloud. Keeps QA teams happy by providing easy
+                  UI and smoke tests that can be automated to run at any time.
                   Built using <b>AWS lambda functions</b> in conjunction with a <b>Kraken</b> dashboard and a
                   <b>Vue.js</b>-based <b>Chrome extension</b> test recording tool.
                   Key concept involves <b>headlesss browser</b> tech and <b>serverless architecture</b>
@@ -87,6 +92,51 @@
             -->
           </div>
 
+          <!-- OSS -->
+          <!-- <div class="box">
+            <h2>Open Source</h2>
+            <div class="job clearfix">
+              <div class="col-xs-3">
+                <div class="where">
+                  Creator
+                </div>
+                <div class="year">Berlin</div>
+                <div class="year">2017-Present</div>
+              </div>
+              <div class="col-xs-9">
+                <div class="profession"><a href="http://spaceling.io">Spaceling.io</a></div>
+                <div class="description">
+                	Innovative automated testing tools SaaS
+                  Built using <b>AWS lambda functions</b> in conjunction with a <b>Kraken</b> dashboard and a
+                  <b>Vue.js</b>-based <b>Chrome extension</b> test recording tool.
+                  Key concept involves <b>headlesss browser</b> tech and <b>serverless architecture</b>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+
+          <!-- PROJECTS -->
+          <div class="box">
+            <h2>Talks</h2>
+            <div class="job clearfix">
+              <div class="col-xs-3">
+                <div class="where">
+                  Softgames Tech Workshop
+                </div>
+                <div class="year">Berlin</div>
+                <div class="year">2016</div>
+              </div>
+              <div class="col-xs-9">
+                <div class="profession"><a href="https://de.slideshare.net/KennethPirman/zombies-memory-management-in-javascript">Zombies! Memory Management in JS</a></div>
+                <div class="description">
+                	Slay zombies while keeping your app imprint light. A talk about the how JS implements <b>garbage collection</b> and what you need to keep in mind
+                  while building webapps. How to use chrome devtools to debug memory leaks and hunt zombie references
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- EXPERIENCE -->
           <div class="box">
             <h2>Experience</h2>
@@ -102,38 +152,52 @@
                 	Advising and building with early stage startups on <b>automation</b>, <b>cloud tech</b>, and <b>API integrations</b>,
                   creating <b>microservices and websites</b>
                 </div>
+                <ul>
+                  <li>
+                    <h5><a href="http://dongxii.com">Dongxii</a></h5>
+                    <div class="description">Automate complex and costly ecommerce tasks like product management across wechat and web stores. Provide devops and admin solutions for China </br> <b>Node</b> / <b>Alibaba Cloud</b></div>
+                  </li>
+                  <li>
+                    <h5><a>Vizart</a></h5>
+                    <div class="description">Introduced modern webtech to industry sector with an innovative worker tracking service and an updated tech stack for their core LMS </br> <b>React</b> / <b>iBeacons</b></div>
+                  </li>
+                  <li>
+                    <h5><a href="http://textingcloud.net/">TextingCloud</h5>
+                    <div class="description">Brought a company from 0 to revenue positive by building and maintaining a microsite-as-a-service platform <br/> <b>Rails</b> / <b>PostgreSQL</b></div>
+                  </li>
+                </ul>
               </div>
             </div>
             <div class="job clearfix">
               <div class="col-xs-3">
-                <div class="where">Online Gaming Company</div>
+                <div class="where">Softgames</div>
                 <div class="year">Berlin</div>
                 <div class="year">2015 - Present</div>
               </div>
               <div class="col-xs-9">
                 <div class="profession">Software Engineer</div>
                 <div class="description">
-                	Web app, APIs, and microservices design and development.
-                	<b>Application architecture</b> research and implementation
-                	Building mostly <b>Javascript</b> / <b>Node</b> solutions using <b>Cloud infrastructure.</b><br>
-                	Management of projects, milestones, <b>project planning</b> and <b>hiring support </b>. Mentoring peers through <b>workshops</b>.<br>
-                	Key concepts in daily work: <b>Single page web-apps, App architecture, microservices, automation </b>
+                  Redesigning / remaking the core platform into a more service-oriented <b>serverless architecture</b> to
+                  speed loading times all while cutting costs, improving the product delviery process, and helping other developers to iterate features faster.
+                  I also create smart <b>business intellegence</b> and <b>tracking services</b> to help game publishers and other team members get more value from our platform.
+                  <br />
+                  <b>Javascript</b> / <b>Node</b> solutions using <b>Cloud infrastructure.</b>
+                	<br /> Architecting projects, <b>project planning</b> and <b>hiring support </b>. Mentoring peers through <b>workshops</b>
                 </div>
               </div>
             </div>
 
             <div class="job clearfix">
               <div class="col-xs-3">
-                <div class="where">BEAM Crowdfunding Education</div>
+                <div class="where">BEAM</div>
                 <div class="year">Beijing</div>
                 <div class="year">2014 - 2015</div>
               </div>
               <div class="col-xs-9">
                 <div class="profession">Front-End Engineer</div>
                 <div class="description">
-                	Development of web applications with <b>Ruby on Rails</b>. Implemented the front-end components of
-                  an award-winning crowdfunding platform. Key tech includes <b>cross-browser compatibility</b> for domestic
-                  browsers
+                	Implemented the front-end components of an award-winning crowdfunding platform. Key tech includes <b>cross-browser compatibility</b> for domestic
+                  browsers. Development of web application with <b>Ruby on Rails</b>
                 </div>
               </div>
             </div>
@@ -148,7 +212,7 @@
                 <div class="description">
                 	Work closely with local artists and small businesses to <b>integrate 3D printing technology</b> into their businesses and installations.
                   Develop models using <b>Blender</b> and various 3D printing platforms and tools. Write educational copy. Speak and <b>host
-                  tech events</b>
+                  tech / design events</b>
                 </div>
               </div>
             </div>
@@ -230,7 +294,6 @@
             <div class="know default">Vue.js</div>
             <div class="know default">Serverless</div>
             <div class="know default">Chrome Extensions</div>
-            <div class="know default">Electron Apps</div>
             <div class="know default">Highspeed APIs</div>
             <div class="know default">WebGL</div>
             <div class="know default">Backend development</div>
@@ -239,9 +302,7 @@
             <div class="know default">Kraken</div>
             <div class="know default">REST APIs</div>
             <div class="know default">MongoDB</div>
-            <div class="know default">NOSQL</div>
             <div class="know default">PostgreSQL</div>
-            <div class="know default">Unix</div>
             <div class="know default">Redis</div>
             <div class="know default">Ruby on Rails</div>
             <div class="know default">GIT</div>
