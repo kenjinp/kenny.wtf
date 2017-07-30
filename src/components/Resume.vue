@@ -178,7 +178,7 @@
                 <div class="profession">Software Engineer</div>
                 <div class="description">
                   Redesigning / remaking the core platform into a more service-oriented <b>serverless architecture</b> to
-                  speed loading times all while cutting costs, improving the product delviery process, and helping other developers to iterate features faster.
+                  speed loading times all while cutting costs, improving the product delivery process, and helping other developers to iterate features faster.
                   I also create smart <b>business intellegence</b> and <b>tracking services</b> to help game publishers and other team members get more value from our platform.
                   <br />
                   <b>Javascript</b> / <b>Node</b> solutions using <b>Cloud infrastructure.</b>
