@@ -322,7 +322,7 @@
               <div class="item-skills" data-percent="0.90" style="width: 240px;">APIs and Microservices</div>
               <div class="item-skills" data-percent="0.70" style="width: 240px;">Automation & Testing</div>
               <div class="item-skills" data-percent="0.70" style="width: 200px;">Cloud & DevOps</div>
-              <div class="skills-legend clearfix" style="width:400px">
+              <div class="skills-legend clearfix">
                 <div class="legend-left legend">Beginner</div>
                 <div class="legend-left legend"><span>Proficient</span></div>
                 <div class="legend-right legend"><span>Expert</span></div>
