@@ -27,8 +27,8 @@
           <div class="box">
             <h2>About Me</h2>
             <p style="padding:0 0 0 15px;">
-              I'm all about delighting my users and empowering my team to do great things. I build
-              easy-to-use fullstack services that are designed to be modular and neat (in both senses of the word)
+              I love delighting my users and empowering my team to create great things. I build
+              easy-to-use fullstack services that are designed not only to be modular, but also neat (in both senses of the word)
             </p>
           </div>
 
@@ -47,10 +47,8 @@
                 <div class="profession"><a href="http://spaceling.io">Spaceling.io</a></div>
                 <!-- talk about utility it provides, then implementation -->
                 <div class="description">
-
-                	Innovative automated regression testing SaaS. Enables teams to cut costs and significant dev time by
-                  running parallel regression testing in the cloud. Keeps QA teams happy by providing easy
-                  UI and smoke tests that can be automated to run at any time.
+                	Automated regression testing SaaS. Enables teams to cut costs and significant dev time by
+                  running parallel regression testing in the cloud.
                   Built using <b>AWS lambda functions</b> in conjunction with a <b>Kraken</b> dashboard and a
                   <b>Vue.js</b>-based <b>Chrome extension</b> test recording tool.
                   Key concept involves <b>headlesss browser</b> tech and <b>serverless architecture</b>
@@ -130,7 +128,7 @@
               <div class="col-xs-9">
                 <div class="profession"><a href="https://de.slideshare.net/KennethPirman/zombies-memory-management-in-javascript">Zombies! Memory Management in JS</a></div>
                 <div class="description">
-                	Slay zombies while keeping your app imprint light. A talk about the how JS implements <b>garbage collection</b> and what you need to keep in mind
+                	Slay zombies while keeping your app's memory profile light. A talk about the how JS implements <b>garbage collection</b> and what you need to keep in mind
                   while building webapps. How to use chrome devtools to debug memory leaks and hunt zombie references
                 </div>
               </div>
