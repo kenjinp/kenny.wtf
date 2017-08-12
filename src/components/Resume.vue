@@ -153,11 +153,11 @@
                 <ul>
                   <li>
                     <h5><a href="http://dongxii.com">Dongxii</a></h5>
-                    <div class="description">Automate complex and costly ecommerce tasks like product management across wechat and web stores. Provide devops and admin solutions for China </br> <b>Node</b> / <b>Alibaba Cloud</b></div>
+                    <div class="description">Automate costly ecommerce tasks like product management across WeChat and web stores. Provide devops and admin solutions for China, technical work in <b>Chinese</b> </br> <b>Node</b> / <b>Alibaba Cloud</b></div>
                   </li>
                   <li>
                     <h5><a>Vizart</a></h5>
-                    <div class="description">Introduced modern webtech to industry sector with an innovative worker tracking service and an updated tech stack for their core LMS </br> <b>React</b> / <b>iBeacons</b></div>
+                    <div class="description">Introduced modern webtech to industry sector with a worker tracking service and an updated tech stack from a difficult php platform to an extensible react one for their core e-learning system </br> <b>React</b> / <b>iBeacons</b></div>
                   </li>
                   <li>
                     <h5><a href="http://textingcloud.net/">TextingCloud</h5>
