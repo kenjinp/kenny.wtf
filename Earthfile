@@ -3,7 +3,6 @@ VERSION 0.6
 build:
   FROM denoland/deno:1.28.0 
   WORKDIR /app
-  USER deno
   COPY . .
   RUN ls
   RUN deno run -A https://deno.land/x/lume/ci.ts
