@@ -5,7 +5,7 @@ build:
   WORKDIR /app
   COPY . .
   RUN ls
-  RUN deno run -A https://deno.land/x/lume/ci.ts
+  RUN deno run -A https://deno.land/x/lume/ci.ts -- --allow-run
   RUN ls
   SAVE ARTIFACT _site
 
