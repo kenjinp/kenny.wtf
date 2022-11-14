@@ -8,7 +8,9 @@ jobs:
   deploy:
     name: Deploy to the World-Net
     runs-on: ubuntu-latest
-    environment: production
+    environment: 
+      name: production
+      url: https://kenny.wtf
     steps:
       - uses: earthly/actions-setup@v1
         with:

@@ -4,10 +4,10 @@ A friendly internet space about procedural generation and critical worldbuilding
 ## Development
 The blog is powered by [lume.land](https://lume.land/), a static site generator for deno
 
-## /.src
+## ./src
 Contains the content that will be rendered in the static website
 
-## /.infra
+## ./infra
 
 > **Info**
 > This is way over-engineered, but I kind of like it?
