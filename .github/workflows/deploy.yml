@@ -8,6 +8,7 @@ jobs:
   deploy:
     name: Deploy to the World-Net
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: earthly/actions-setup@v1
         with:
