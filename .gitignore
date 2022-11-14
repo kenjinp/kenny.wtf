@@ -1,2 +1,5 @@
 /_bin
 /_site
+bin
+node_modules
+.env
