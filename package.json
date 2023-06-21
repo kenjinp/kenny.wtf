@@ -1,0 +1,15 @@
+{
+  "name": "kenny.wtf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "pnpm --filter=web dev",
+    "build": "pnpm --filter=web build --emptyOutDir",
+    "ship": "pulumi up -C=./infra/pulumi -s=dev --yes",
+    "preview": "pulumi preview -C=./infra/pulumi -s=dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
