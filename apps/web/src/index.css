@@ -26,6 +26,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+section {
+  padding: 1rem 0 2rem 0;
+}
+
 #root {
   max-width: 600px;
   margin: 0 auto;
@@ -46,6 +50,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+.content {
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* h2,
@@ -78,15 +88,22 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+::selection {
+  background: var(--idx29);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--idx1);
     background-color: var(--idx21);
   }
   a:hover {
-    color: #747bff;
+    color: var(--idx17);
   }
   button {
     background-color: #f9f9f9;
   }
+  /* ::selection {
+    background: red;
+  } */
 }

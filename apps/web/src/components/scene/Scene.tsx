@@ -39,7 +39,7 @@ export const Scene: React.FC<PropsWithChildren> = ({ children }) => {
         quaternion: cameraQuat
       }}
       shadows
-      style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+      style={{ position: 'fixed', pointerEvents: 'none', top: 0, left: 0, zIndex: 1 }}
     >
       <mesh scale={new Vector3(1, 1, 1).multiplyScalar(1000)}>{/* <Stars /> */}</mesh>
       <LightRig />
