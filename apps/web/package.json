@@ -10,13 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hello-worlds/core": "^0.0.8",
+    "@hello-worlds/planets": "^0.0.16",
+    "@react-three/drei": "^9.77.1",
+    "@react-three/fiber": "^8.13.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.153.0"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/three": "^0.152.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
