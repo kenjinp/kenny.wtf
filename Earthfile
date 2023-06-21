@@ -24,16 +24,15 @@ build:
   RUN pnpm build
   SAVE ARTIFACT ./_dist
 
-pulumiNode:
+pulumi-node:
   FROM +build
   RUN apk update; apk add curl
   RUN curl -fsSL https://get.pulumi.com | sh
   RUN /root/.pulumi/bin/pulumi version
 
 deploy:
-  FROM pulumiNode
+  FROM +pulumi-node
   ARG STACK="dev"
-  COPY +build/out ./_dist
-  COPY infra.ts infra.ts
-  RUN --secret PULUMI_ACCESS_TOKEN pulumi stack select $STACK
-  RUN --secret PULUMI_ACCESS_TOKEN --secret AWS_ACCESS_KEY_ID --secret AWS_SECRET_ACCESS_KEY pulumi up -C=./infra/pulumi -s=dev --yes --skip-preview
+  COPY +build/_dist ./_dist
+  RUN --secret PULUMI_ACCESS_TOKEN /root/.pulumi/bin/pulumi stack select $STACK
+  RUN --secret PULUMI_ACCESS_TOKEN --secret AWS_ACCESS_KEY_ID --secret AWS_SECRET_ACCESS_KEY /root/.pulumi/bin/pulumi up -C=./infra/pulumi -s=dev --yes --skip-preview
