@@ -8,13 +8,13 @@ const projects: ProjectProps[] = [
     title: 'Hello Worlds',
     body: 'Javascript worlds at planetary scales. Real time planet (and more) rendering library for three.js or @react-three/fiber',
     projectUrl: 'https://worlds.kenny.wtf/',
-    projectImage: '/public/islands.png'
+    projectImage: '/islands.png'
   },
   {
     title: 'Hello Cities',
     body: 'A WIP map-generating rogue-like city building game',
     projectUrl: 'https://cities.kenny.wtf/',
-    projectImage: '/public/city-example.jpg'
+    projectImage: '/city-example.jpg'
   },
   {
     title: 'Firmament',
