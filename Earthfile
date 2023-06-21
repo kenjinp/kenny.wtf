@@ -34,5 +34,4 @@ deploy:
   FROM +pulumi-node
   ARG STACK="kenny.wtf/dev"
   COPY +build/_dist ./_dist
-  RUN --secret PULUMI_ACCESS_TOKEN /root/.pulumi/bin/pulumi stack select $STACK
   RUN --secret PULUMI_ACCESS_TOKEN --secret AWS_ACCESS_KEY_ID --secret AWS_SECRET_ACCESS_KEY /root/.pulumi/bin/pulumi up -C=./infra/pulumi -s=dev --yes --skip-preview
