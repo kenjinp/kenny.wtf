@@ -1,6 +1,11 @@
 @import './colors.css';
 
 @font-face {
+  font-family: Diamonaire;
+  src: url(./assets/fonts/Diamonaire.ttf);
+}
+
+@font-face {
   font-family: MonoCraft;
   src: url(./assets/fonts/Monocraft-no-ligatures.ttf);
 }
@@ -42,6 +47,12 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+/* h2,
+h2,
+h3 {
+  font-family: Diamonaire;
+} */
 
 h1 {
   font-size: 3.2em;
