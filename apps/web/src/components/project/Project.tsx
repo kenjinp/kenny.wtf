@@ -12,9 +12,9 @@ export const Project: React.FC<ProjectProps> = ({ title, body, projectUrl, proje
   return (
     <a href={projectUrl}>
       <ProjectWrapper>
-        {projectImage && <ProjectImg  src={projectImage} alt={title} />}
-        <h4>{title}</h4>
-        <h4>{body}</h4>
+        {projectImage && <ProjectImg src={projectImage} alt={title} />}
+        <h3>{title}</h3>
+        <p>{body}</p>
       </ProjectWrapper>
     </a>
   );
