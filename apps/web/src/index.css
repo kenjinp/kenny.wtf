@@ -2,16 +2,45 @@
 
 @font-face {
   font-family: Diamonaire;
-  src: url(./assets/fonts/Diamonaire.ttf);
+  src: url(./fonts/Diamonaire.ttf);
 }
 
 @font-face {
   font-family: MonoCraft;
-  src: url(./assets/fonts/Monocraft-no-ligatures.ttf);
+  src: url(./fonts/Monocraft-no-ligatures.ttf);
+}
+
+@font-face {
+  font-family: Quicksand;
+  src: url('fonts/Quicksand-Regular.ttf');
+}
+
+@font-face {
+  font-family: Quicksand;
+  src: url('fonts/Quicksand-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Quicksand;
+  src: url('fonts/Quicksand-Light.ttf');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: Quicksand;
+  src: url('fonts/Quicksand-Medium.ttf');
+  font-weight: medium;
+}
+
+@font-face {
+  font-family: Quicksand;
+  src: url('fonts/Quicksand-SemiBold.ttf');
+  font-weight: bolder;
 }
 
 :root {
-  font-family: MonoCraft, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Quicksand, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -35,6 +64,12 @@ section {
   margin: 0 auto;
 }
 
+footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 a {
   font-weight: 500;
   color: var(--idx15);
@@ -42,6 +77,10 @@ a {
 }
 a:hover {
   color: var(--idx17);
+}
+
+div {
+  box-sizing: border-box;
 }
 
 body {
@@ -58,11 +97,16 @@ body {
   z-index: 1;
 }
 
-/* h2,
+em {
+  color: var(--idx29);
+  font-family: Diamonaire;
+}
+
+h1,
 h2,
 h3 {
   font-family: Diamonaire;
-} */
+}
 
 h1 {
   font-size: 3.2em;

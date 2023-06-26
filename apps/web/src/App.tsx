@@ -69,7 +69,9 @@ function App() {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between'
+              justifyContent: 'space-between',
+              gap: '1em',
+              flexWrap: 'wrap'
             }}
           >
             <a href="https://twitter.com/KennyPirman">twitter</a>
@@ -81,14 +83,15 @@ function App() {
         <hr />
 
         <footer className="main">
-          version{' '}
-          <a
-            title="commit hash"
-            href={`https://github.com/kenjinp/kenny.wtf/commit/${COMMIT_INFO.hash}`}
-          >
-            {COMMIT_INFO.shortHash}
-          </a>{' '}
-          |{' '}
+          <div>
+            version{' '}
+            <a
+              title="commit hash"
+              href={`https://github.com/kenjinp/kenny.wtf/commit/${COMMIT_INFO.hash}`}
+            >
+              {COMMIT_INFO.shortHash}
+            </a>{' '}
+          </div>
           <span title="build date">{new Date(BUILD_INFO.buildTime).toLocaleDateString('fr')}</span>
         </footer>
       </div>
