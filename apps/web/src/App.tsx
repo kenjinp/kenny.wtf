@@ -18,7 +18,7 @@ const projects: ProjectProps[] = [
   },
   {
     title: 'Firmament',
-    body: 'A WIP and experimental MMO using distributed elixir, javelin ECS, and @react-three/fiber',
+    body: 'A WIP and (mostly failed) experimental MMO using distributed elixir, javelin ECS, and @react-three/fiber',
     projectUrl: 'https://firmament.kenny.wtf/',
     projectImage: '/firmament.png'
   },
@@ -35,10 +35,10 @@ function App() {
       <div className="content">
         <section id="intro">
           <h1>Kenneth Pirman</h1>
-          <h2>A friendly internet space about procedural generation and critical worldbuilding</h2>
+          <h2>A friendly internet space about procedural world-building</h2>
           <p>
             Linguist-turned-programmer interested in answering the question "what gives a virtual
-            space a <em>sense of place</em>"?
+            point of interest a <em>sense of place</em>"?
           </p>
           <p>Creating procedural cities, planets, and worlds - mostly using web technologies</p>
         </section>
@@ -47,8 +47,9 @@ function App() {
         <section id="projects">
           <h2>Projects</h2>
           <p>
-            I'm aiming to create large rich worlds to explore with people together. I'm not a game
-            dev or graphics professional, so these projects constitute my explorations.
+            I'm aiming to create large rich worlds to explore with people together. I'm learning
+            game development and graphics programming from first principles out in the open by
+            working on these projects.
           </p>
           <p>
             Some of them have solidified into libraries which you can use in your own projects. Some
