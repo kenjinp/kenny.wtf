@@ -19,7 +19,8 @@ const projects: ProjectProps[] = [
   {
     title: 'Firmament',
     body: 'A WIP and experimental MMO using distributed elixir, javelin ECS, and @react-three/fiber',
-    projectUrl: 'https://firmament.kenny.wtf/'
+    projectUrl: 'https://firmament.kenny.wtf/',
+    projectImage: '/firmament.png'
   },
   {
     title: 'Stellar Denizen',
