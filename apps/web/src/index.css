@@ -2,40 +2,40 @@
 
 @font-face {
   font-family: Diamonaire;
-  src: url(/fonts/Diamonaire.ttf);
+  src: url(../public/fonts/Diamonaire.ttf);
 }
 
 @font-face {
   font-family: MonoCraft;
-  src: url(/fonts/Monocraft-no-ligatures.ttf);
+  src: url(../public/fonts/Monocraft-no-ligatures.ttf);
 }
 
 @font-face {
   font-family: Quicksand;
-  src: url('/fonts/Quicksand-Regular.ttf');
+  src: url(../public/fonts/Quicksand-Regular.ttf);
 }
 
 @font-face {
   font-family: Quicksand;
-  src: url('/fonts/Quicksand-Bold.ttf');
+  src: url(../public/fonts/Quicksand-Bold.ttf);
   font-weight: bold;
 }
 
 @font-face {
   font-family: Quicksand;
-  src: url('/fonts/Quicksand-Light.ttf');
+  src: url(../public/fonts/Quicksand-Light.ttf);
   font-weight: lighter;
 }
 
 @font-face {
   font-family: Quicksand;
-  src: url('/fonts/Quicksand-Medium.ttf');
+  src: url(../public/fonts/Quicksand-Medium.ttf);
   font-weight: medium;
 }
 
 @font-face {
   font-family: Quicksand;
-  src: url('/fonts/Quicksand-SemiBold.ttf');
+  src: url(../public/fonts/Quicksand-SemiBold.ttf);
   font-weight: bolder;
 }
 
