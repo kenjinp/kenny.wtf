@@ -14,10 +14,7 @@ export type ThreadParams = {
   seaLevel?: number;
 };
 
-export const heightGenerator: ChunkGenerator3Initializer<ThreadParams, number> = ({
-  data: { seed, type },
-  radius
-}) => {
+export const heightGenerator: ChunkGenerator3Initializer<ThreadParams, number> = ({ radius }) => {
   const noise = new Noise({
     seed: 'blip',
     height: 200,
@@ -38,7 +35,6 @@ const colorLerp: Lerp<THREE.Color> = (t: number, p0: THREE.Color, p1: THREE.Colo
 };
 
 const colorSpline = new LinearSpline<THREE.Color>(colorLerp);
-const white = new Color(0xffffff);
 
 // Temp / Aridity
 colorSpline.addPoint(0.0, new Color(0x5fcde4));
@@ -47,10 +43,7 @@ colorSpline.addPoint(0.05, new Color(0x6abe30));
 colorSpline.addPoint(0.4, new Color(0x37946e));
 colorSpline.addPoint(0.9, new Color(0x4b692f));
 colorSpline.addPoint(1.0, new Color(0xbab3a2));
-export const colorGenerator: ColorGeneratorInitializer<ThreadParams> = ({
-  radius,
-  data: { seaLevel, isMap }
-}) => {
+export const colorGenerator: ColorGeneratorInitializer<ThreadParams> = () => {
   const warp = new Noise({
     octaves: 8,
     seed: 'apple', // <-important
@@ -66,5 +59,6 @@ export const colorGenerator: ColorGeneratorInitializer<ThreadParams> = ({
 
 createThreadedPlanetWorker<ThreadParams>({
   heightGenerator,
+  // @ts-ignore
   colorGenerator
 });
