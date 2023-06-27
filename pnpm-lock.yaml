@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .: {}
@@ -15,6 +19,9 @@ importers:
       '@hello-worlds/react':
         specifier: ^0.0.17
         version: 0.0.17(@hello-worlds/core@0.0.8)(@hello-worlds/planets@0.0.16)(@react-three/drei@9.77.1)(@react-three/fiber@8.13.3)(react-dom@18.2.0)(react@18.2.0)(three@0.153.0)
+      '@hello-worlds/vfx':
+        specifier: 0.0.3
+        version: 0.0.3(@react-three/fiber@8.13.3)(@react-three/postprocessing@2.14.11)(postprocessing@6.32.1)(react-dom@18.2.0)(react@18.2.0)(three@0.153.0)
       '@react-three/drei':
         specifier: ^9.77.1
         version: 9.77.1(@react-three/fiber@8.13.3)(@types/three@0.152.1)(react-dom@18.2.0)(react@18.2.0)(three@0.153.0)
@@ -1810,6 +1817,26 @@ packages:
       '@hmans/use-rerender': 0.0.2(react@18.2.0)
       '@react-three/drei': 9.77.1(@react-three/fiber@8.13.3)(@types/three@0.152.1)(react-dom@18.2.0)(react@18.2.0)(three@0.153.0)
       '@react-three/fiber': 8.13.3(react-dom@18.2.0)(react@18.2.0)(three@0.153.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      three: 0.153.0
+      three-stdlib: 2.23.10(three@0.153.0)
+    dev: false
+
+  /@hello-worlds/vfx@0.0.3(@react-three/fiber@8.13.3)(@react-three/postprocessing@2.14.11)(postprocessing@6.32.1)(react-dom@18.2.0)(react@18.2.0)(three@0.153.0):
+    resolution: {integrity: sha512-0fD0saLZCYb+tc+noJZwHikG9ekN7EgTlA/p4vFhl7muGd43NU/Qt26hXcYHWWZWYpAOix3tOrIN5s/pkQfCDw==}
+    peerDependencies:
+      '@react-three/fiber': ^8.8.2
+      '@react-three/postprocessing': '>=2.0.0'
+      postprocessing: '>=6.32.1'
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      three: '>=0.133'
+    dependencies:
+      '@hmans/use-rerender': 0.0.2(react@18.2.0)
+      '@react-three/fiber': 8.13.3(react-dom@18.2.0)(react@18.2.0)(three@0.153.0)
+      '@react-three/postprocessing': 2.14.11(@react-three/fiber@8.13.3)(@types/three@0.152.1)(react@18.2.0)(three@0.153.0)
+      postprocessing: 6.32.1(three@0.153.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       three: 0.153.0
@@ -5235,7 +5262,3 @@ packages:
     dependencies:
       react: 18.2.0
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

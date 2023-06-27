@@ -1,14 +1,11 @@
 import { Planet as HelloPlanet } from '@hello-worlds/react';
-import { useThree } from '@react-three/fiber';
-import { useMemo } from 'react';
-import { Vector3 } from 'three';
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useMemo, useRef } from 'react';
+import { Mesh, Vector3 } from 'three';
 import PlanetWorker from './Planet.worker?worker';
 const worker = () => new PlanetWorker();
 
-const radius = 5_000;
-const position = new Vector3(0, 0, 0);
-
-export const Planet = () => {
+export const Planet: React.FC<{ radius: number; position: Vector3 }> = ({ radius, position }) => {
   const camera = useThree((store) => store.camera);
   const initialData = useMemo(
     () => ({
@@ -16,18 +13,28 @@ export const Planet = () => {
     }),
     []
   );
+  const ref = useRef<Mesh>(null);
+
+  useFrame(() => {
+    if (!ref.current) {
+      return;
+    }
+    ref.current.rotateY(0.002);
+  });
 
   return (
-    <HelloPlanet
-      position={position}
-      radius={radius}
-      minCellSize={32 * 8}
-      minCellResolution={32 * 2}
-      lodOrigin={camera.position}
-      worker={worker}
-      data={initialData}
-    >
-      <meshPhysicalMaterial vertexColors metalness={0} reflectivity={0.01} />
-    </HelloPlanet>
+    <mesh ref={ref}>
+      <HelloPlanet
+        position={position}
+        radius={radius}
+        minCellSize={32 * 8}
+        minCellResolution={32 * 2}
+        lodOrigin={camera.position}
+        worker={worker}
+        data={initialData}
+      >
+        <meshPhysicalMaterial vertexColors metalness={0} reflectivity={0.01} />
+      </HelloPlanet>
+    </mesh>
   );
 };

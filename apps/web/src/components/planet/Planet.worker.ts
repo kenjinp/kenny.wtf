@@ -41,10 +41,11 @@ const colorSpline = new LinearSpline<THREE.Color>(colorLerp);
 const white = new Color(0xffffff);
 
 // Temp / Aridity
-colorSpline.addPoint(0.0, new Color(0x37a726));
-colorSpline.addPoint(0.05, new Color(0x214711));
-colorSpline.addPoint(0.4, new Color(0x526b48));
-colorSpline.addPoint(0.9, new Color(0xab7916));
+colorSpline.addPoint(0.0, new Color(0x5fcde4));
+colorSpline.addPoint(0.1, new Color(0x99e550));
+colorSpline.addPoint(0.05, new Color(0x6abe30));
+colorSpline.addPoint(0.4, new Color(0x37946e));
+colorSpline.addPoint(0.9, new Color(0x4b692f));
 colorSpline.addPoint(1.0, new Color(0xbab3a2));
 export const colorGenerator: ColorGeneratorInitializer<ThreadParams> = ({
   radius,
@@ -53,13 +54,13 @@ export const colorGenerator: ColorGeneratorInitializer<ThreadParams> = ({
   const warp = new Noise({
     octaves: 8,
     seed: 'apple', // <-important
-    height: 2000.0,
+    height: 200.0,
     scale: 1000
   });
 
   return ({ height, input }) => {
     const warpedHeight = height + warp.getFromVector(input);
-    return warpedHeight > 0 ? colorSpline.get(remap(warpedHeight, 0, 5_000, 0, 1)) : oceanColor;
+    return warpedHeight > 0 ? colorSpline.get(remap(warpedHeight, 0, 200, 0, 1)) : oceanColor;
   };
 };
 

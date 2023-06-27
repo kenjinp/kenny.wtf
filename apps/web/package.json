@@ -13,6 +13,7 @@
     "@hello-worlds/core": "^0.0.8",
     "@hello-worlds/planets": "^0.0.16",
     "@hello-worlds/react": "^0.0.17",
+    "@hello-worlds/vfx": "0.0.3",
     "@react-three/drei": "^9.77.1",
     "@react-three/fiber": "^8.13.3",
     "@react-three/postprocessing": "^2.14.11",

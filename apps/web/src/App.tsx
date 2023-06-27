@@ -1,42 +1,11 @@
 import { Planet } from '@components/planet/Planet';
 import { Project, ProjectProps } from '@components/project/Project';
 import { ProjectList } from '@components/project/Project.style';
-import { Atmosphere } from '@components/vfx/atmosphere/Atmosphere';
+import { BUILD_INFO, COMMIT_INFO } from '@constants';
+import { Atmosphere, AtmosphereEffectPlanet, AtmosphereEffectSun } from '@hello-worlds/vfx';
+import { OrbitControls } from '@react-three/drei';
+import { Color, Vector3 } from 'three';
 import { Scene } from './components/scene/Scene';
-import { BUILD_INFO, COMMIT_INFO } from './constants';
-
-const tilt = (beta: number, gamma: number) => {
-  console.log({ beta, gamma });
-};
-
-if (window.DeviceOrientationEvent) {
-  window.addEventListener(
-    'deviceorientation',
-    function () {
-      console.log(event);
-      tilt([event.beta, event.gamma]);
-    },
-    true
-  );
-} else if (window.DeviceMotionEvent) {
-  window.addEventListener(
-    'devicemotion',
-    function () {
-      console.log(event);
-      tilt([event.acceleration.x * 2, event.acceleration.y * 2]);
-    },
-    true
-  );
-} else {
-  window.addEventListener(
-    'MozOrientation',
-    function () {
-      console.log(event);
-      tilt([orientation.x * 50, orientation.y * 50]);
-    },
-    true
-  );
-}
 
 const projects: ProjectProps[] = [
   {
@@ -63,11 +32,33 @@ const projects: ProjectProps[] = [
   }
 ];
 
+const radius = 5_000;
+const planetOrigin = new Vector3();
+const planets: AtmosphereEffectPlanet[] = [
+  {
+    radius,
+    origin: planetOrigin,
+    atmosphereRadius: radius * 3,
+    atmosphereDensity: 0.05
+  }
+];
+
+const AU = 100_000;
+
+const suns: AtmosphereEffectSun[] = [
+  {
+    origin: new Vector3(-1, 0.75, 1).multiplyScalar(AU / 20),
+    color: new Vector3().fromArray(new Color(0xffffff).toArray()),
+    intensity: 30
+  }
+];
+
 function App() {
   return (
     <>
-      <Scene effects={[<Atmosphere key="atmosphere" suns={[]} planets={[]}></Atmosphere>]}>
-        <Planet />
+      <Scene effects={[<Atmosphere key="atmosphere" suns={suns} planets={planets} />]}>
+        <Planet radius={radius} position={planetOrigin} />
+        <OrbitControls />
       </Scene>
       <div className="content">
         <section id="intro">
