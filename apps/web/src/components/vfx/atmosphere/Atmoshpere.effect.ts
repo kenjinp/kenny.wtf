@@ -1,5 +1,5 @@
 import { Effect, EffectAttribute, WebGLExtension } from 'postprocessing';
-import { Camera, Uniform, Vector3 } from 'three';
+import { Camera, Matrix4, Uniform, Vector3 } from 'three';
 import fragment from './Atmosphere.glsl';
 
 export interface AtmosphereEffectPlanet {
@@ -29,8 +29,16 @@ export class AtmosphereEffect extends Effect {
   planets: AtmosphereEffectPlanet[];
   constructor({ camera, suns, planets, primarySteps = 12, lightSteps = 8 }: AtmosphereEffectProps) {
     const cameraDirection = new Vector3();
-    console.log('rendering atmosphere', { camera, suns, planets, primarySteps, lightSteps });
-    camera.getWorldDirection(cameraDirection);
+    // camera.getWorldDirection(cameraDirection);
+    const position = new Vector3();
+    const matrixWorld = new Matrix4();
+    const projectionMatrixInverse = new Matrix4();
+    if (!planets.length) {
+      throw new Error('AtmosphereEffect requires at least one planet');
+    }
+    if (!suns.length) {
+      throw new Error('AtmosphereEffect requires at least one sun');
+    }
     super(
       'AtmosphereEffect',
       fragment
@@ -39,7 +47,7 @@ export class AtmosphereEffect extends Effect {
       {
         // @ts-ignore
         uniforms: new Map<string, Uniform | { value: any }>([
-          ['uCameraPosition', new Uniform(camera.position)],
+          ['uCameraPosition', new Uniform(position)],
           ['uCameraWorldDirection', new Uniform(cameraDirection)],
           ['uPrimarySteps', new Uniform(primarySteps)],
           ['uLightSteps', new Uniform(lightSteps)],
@@ -56,13 +64,14 @@ export class AtmosphereEffect extends Effect {
               value: suns
             }
           ],
-          ['uViewMatrixInverse', new Uniform(camera.matrixWorld)],
-          ['uProjectionMatrixInverse', new Uniform(camera.projectionMatrixInverse)]
+          ['uViewMatrixInverse', new Uniform(matrixWorld)],
+          ['uProjectionMatrixInverse', new Uniform(projectionMatrixInverse)]
         ]),
         attributes: EffectAttribute.DEPTH,
         extensions: new Set([WebGLExtension.DERIVATIVES])
       }
     );
+    console.log({ blah: this });
     this.planets = planets;
     this.suns = suns;
     this.camera = camera;
