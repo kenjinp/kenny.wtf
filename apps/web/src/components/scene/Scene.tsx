@@ -1,6 +1,7 @@
 import { ParticleField } from '@components/vfx/particle-field/ParticleField';
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import { EffectComposer, Noise } from '@react-three/postprocessing';
 import { PropsWithChildren } from 'react';
 import { Quaternion, Vector3 } from 'three';
 
@@ -26,7 +27,11 @@ const cameraQuat = new Quaternion(
   0.38360921119467495
 );
 
-export const Scene: React.FC<PropsWithChildren> = ({ children }) => {
+export const Scene: React.FC<
+  PropsWithChildren<{
+    effects?: React.ReactElement[];
+  }>
+> = ({ children, effects = [] }) => {
   return (
     <Canvas
       id="game-canvas"
@@ -46,6 +51,7 @@ export const Scene: React.FC<PropsWithChildren> = ({ children }) => {
       <OrbitControls />
       <ParticleField />
       {children}
+      <EffectComposer>{effects.concat(<Noise key="Noise" opacity={0.02} />)}</EffectComposer>
     </Canvas>
   );
 };
