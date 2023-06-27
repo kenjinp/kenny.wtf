@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
+import glsl from 'vite-plugin-glsl';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { getLastCommit } from './commitInfo';
 const commitInfo = getLastCommit({});
@@ -19,6 +20,7 @@ export default defineConfig({
   plugins: [
     tsconfigPaths(),
     react(),
+    glsl(),
     {
       name: 'configure-response-headers',
       configureServer: (server) => {
