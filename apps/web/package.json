@@ -17,6 +17,7 @@
     "@react-three/drei": "^9.77.1",
     "@react-three/fiber": "^8.13.3",
     "@react-three/postprocessing": "^2.14.11",
+    "detect-gpu": "^5.0.30",
     "postprocessing": "^6.32.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

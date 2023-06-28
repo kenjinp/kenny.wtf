@@ -44,7 +44,7 @@ export const Scene: React.FC<
       <OrbitControls />
       <ParticleField />
       {children}
-      <color attach="background" args={prefersDarkMode ? ['#222034'] : ['#ffffff']} />
+      <color attach="background" args={prefersDarkMode ? ['#222034'] : ['#cbdbfc']} />
       <EffectComposer>{effects.concat(<Noise key="Noise" opacity={0.01} />)}</EffectComposer>
     </Canvas>
   );

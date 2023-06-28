@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .: {}
@@ -31,6 +27,9 @@ importers:
       '@react-three/postprocessing':
         specifier: ^2.14.11
         version: 2.14.11(@react-three/fiber@8.13.3)(@types/three@0.152.1)(react@18.2.0)(three@0.153.0)
+      detect-gpu:
+        specifier: ^5.0.30
+        version: 5.0.30
       postprocessing:
         specifier: ^6.32.1
         version: 6.32.1(three@0.153.0)
@@ -2257,7 +2256,7 @@ packages:
       '@react-three/fiber': 8.13.3(react-dom@18.2.0)(react@18.2.0)(three@0.153.0)
       '@use-gesture/react': 10.2.27(react@18.2.0)
       camera-controls: 2.6.0(three@0.153.0)
-      detect-gpu: 5.0.29
+      detect-gpu: 5.0.30
       glsl-noise: 0.0.0
       lodash.clamp: 4.0.3
       lodash.omit: 4.5.0
@@ -3079,8 +3078,8 @@ packages:
       object-keys: 1.1.1
     dev: false
 
-  /detect-gpu@5.0.29:
-    resolution: {integrity: sha512-DEqWxHXAKaoIHxF0rtFPDdWWINGoketQ6fk64KbahK3IC0I0LiZR6NbWZo4pwf7UH8khBLY8w4wS+1MHi81LSQ==}
+  /detect-gpu@5.0.30:
+    resolution: {integrity: sha512-TfoGbAsy3uRz82OklH456eYS5eO+9BoqzKRZNpwFcW73ZHN8EvNmlSSrEU2XhLqIuBE+U9GtErl74kG4qTSEYg==}
     dependencies:
       webgl-constants: 1.1.1
     dev: false
@@ -5262,3 +5261,7 @@ packages:
     dependencies:
       react: 18.2.0
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

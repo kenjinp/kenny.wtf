@@ -2,10 +2,16 @@ import { Planet } from '@components/planet/Planet';
 import { Project, ProjectProps } from '@components/project/Project';
 import { ProjectList } from '@components/project/Project.style';
 import { BUILD_INFO, COMMIT_INFO } from '@constants';
-import { Atmosphere, AtmosphereEffectPlanet, AtmosphereEffectSun } from '@hello-worlds/vfx';
+import {
+  Atmosphere,
+  AtmosphereEffectPlanet,
+  AtmosphereEffectProps,
+  AtmosphereEffectSun
+} from '@hello-worlds/vfx';
 import { OrbitControls } from '@react-three/drei';
 import { Color, Vector3 } from 'three';
 import { Scene } from './components/scene/Scene';
+import { useDetectGPU } from './hooks/useDetectGPU';
 
 const projects: ProjectProps[] = [
   {
@@ -39,7 +45,7 @@ const planets: AtmosphereEffectPlanet[] = [
     radius,
     origin: planetOrigin,
     atmosphereRadius: radius * 3,
-    atmosphereDensity: 0.05
+    atmosphereDensity: 0.08
   }
 ];
 
@@ -53,10 +59,33 @@ const suns: AtmosphereEffectSun[] = [
   }
 ];
 
+const RTX: Record<number, Partial<AtmosphereEffectProps>> = {
+  3: {
+    primarySteps: 32,
+    lightSteps: 12
+  },
+  2: {
+    primarySteps: 16,
+    lightSteps: 8
+  },
+  1: {
+    primarySteps: 8,
+    lightSteps: 6
+  }
+};
+
+const RTXLabel = ['Null', 'Potato', 'Middling', 'Fantastic'];
+
 function App() {
+  const gpuTier = useDetectGPU()?.tier || 1;
+
+  const RTXProps = RTX[gpuTier >= 3 ? 3 : gpuTier];
+
   return (
     <>
-      <Scene effects={[<Atmosphere key="atmosphere" suns={suns} planets={planets} />]}>
+      <Scene
+        effects={[<Atmosphere key="atmosphere" suns={suns} planets={planets} {...RTXProps} />]}
+      >
         <Planet radius={radius} position={planetOrigin} />
         <OrbitControls />
       </Scene>
@@ -123,6 +152,7 @@ function App() {
             </a>{' '}
           </div>
           <span title="build date">{new Date(BUILD_INFO.buildTime).toLocaleDateString('fr')}</span>
+          <span>gfx: {RTXLabel[gpuTier]}</span>
         </footer>
       </div>
     </>
