@@ -4,6 +4,12 @@ export const ProjectWrapper = styled.div`
   width: 100%;
   background: var(--idx7);
   padding: 1rem;
+  p,
+  h2,
+  h3,
+  h4 {
+    text-shadow: none;
+  }
 `;
 
 export const ProjectList = styled.div`

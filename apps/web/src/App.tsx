@@ -54,7 +54,7 @@ const AU = 100_000;
 const suns: AtmosphereEffectSun[] = [
   {
     origin: new Vector3(-1, 0.75, 1).multiplyScalar(AU / 20),
-    color: new Vector3().fromArray(new Color(0xffffff).toArray()),
+    color: new Vector3().fromArray(new Color(0x5fcde4).toArray()),
     intensity: 30
   }
 ];

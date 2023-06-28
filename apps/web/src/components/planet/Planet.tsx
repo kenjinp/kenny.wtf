@@ -22,13 +22,15 @@ export const Planet: React.FC<{ radius: number; position: Vector3 }> = ({ radius
     ref.current.rotateY(0.002);
   });
 
+  const concurrency = navigator.hardwareConcurrency;
+
   return (
     <mesh ref={ref}>
       <HelloPlanet
         position={position}
         radius={radius}
-        minCellSize={32 * 8}
-        minCellResolution={32 * 2}
+        minCellSize={(32 * concurrency) / 2}
+        minCellResolution={32 * Math.floor(concurrency * 0.75)}
         lodOrigin={camera.position}
         worker={worker}
         data={initialData}

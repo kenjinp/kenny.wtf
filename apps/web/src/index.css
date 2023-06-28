@@ -136,6 +136,10 @@ button:focus-visible {
   background: var(--idx29);
 }
 
+* {
+  text-shadow: 1px 2px 6px var(--idx1);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--idx1);
@@ -147,7 +151,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-  /* ::selection {
-    background: red;
-  } */
+
+  * {
+    text-shadow: 1px 1px 2px var(--idx20);
+  }
 }
