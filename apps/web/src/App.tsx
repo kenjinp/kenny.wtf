@@ -74,12 +74,18 @@ const RTX: Record<number, Partial<AtmosphereEffectProps>> = {
   }
 };
 
-const RTXLabel = ['Null', 'Potato', 'Middling', 'Fantastic'];
+const RTXLabel = ['Null', 'Meager', 'Middling', 'Magnifique'];
+
+const useAdjustedGPUTier = () => {
+  const gpu = useDetectGPU();
+  const tier = gpu?.tier || 1;
+  return Math.min(Math.max(gpu?.isMobile ? tier - 1 : tier, 1), 3);
+};
 
 function App() {
-  const gpuTier = useDetectGPU()?.tier || 1;
+  const gpuTier = useAdjustedGPUTier();
 
-  const RTXProps = RTX[gpuTier >= 3 ? 3 : gpuTier];
+  const RTXProps = RTX[gpuTier];
 
   return (
     <>
