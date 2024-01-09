@@ -4,7 +4,7 @@ A friendly internet space about procedural generation and critical worldbuilding
 
 ## Development
 
-## ./apps/web
+## ./apps/astri
 
 Contains the website / webapp
 
