@@ -32,6 +32,9 @@ importers:
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
+      plausible-tracker:
+        specifier: ^0.3.8
+        version: 0.3.8
       remark-collapse:
         specifier: ^0.1.2
         version: 0.1.2
@@ -41,9 +44,6 @@ importers:
       satori:
         specifier: ^0.10.8
         version: 0.10.9
-      sharp:
-        specifier: ^0.33.1
-        version: 0.33.1
       tailwindcss:
         specifier: ^3.3.3
         version: 3.3.5
@@ -8467,6 +8467,11 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+
+  /plausible-tracker@0.3.8:
+    resolution: {integrity: sha512-lmOWYQ7s9KOUJ1R+YTOR3HrjdbxIS2Z4de0P/Jx2dQPteznJl2eX3tXxKClpvbfyGP59B5bbhW8ftN59HbbFSg==}
+    engines: {node: '>=10'}
+    dev: false
 
   /postcss-import@15.1.0(postcss@8.4.24):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}

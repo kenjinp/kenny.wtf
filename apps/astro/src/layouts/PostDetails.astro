@@ -6,6 +6,7 @@ import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
+import TableOfContents from "@components/TableOfContents.astro";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -16,7 +17,7 @@ const { post } = Astro.props;
 const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } =
   post.data;
 
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
@@ -48,6 +49,7 @@ const ogUrl = new URL(
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
     <Datetime datetime={pubDatetime} size="lg" className="my-2" />
+    <TableOfContents headings={headings} />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <Content />
     </article>

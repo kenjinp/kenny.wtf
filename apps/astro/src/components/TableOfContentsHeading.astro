@@ -1,0 +1,19 @@
+---
+// TableOfContentsHeading.astro
+const { heading } = Astro.props;
+---
+
+<li class="pt-4">
+  <a href={'#' + heading.slug}>
+    {heading.text}
+  </a>
+  {
+    heading.subheadings.length > 0 && (
+      <ul class="pl-4">
+        {heading.subheadings.map((subheading) => (
+          <Astro.self heading={subheading} />
+        ))}
+      </ul>
+    )
+  }
+</li>
