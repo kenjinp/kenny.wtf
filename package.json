@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pnpm --filter=web dev",
-    "build": "pnpm --filter=web build --emptyOutDir",
+    "start": "pnpm --filter=astro dev",
+    "build": "pnpm --filter=astro build",
     "ship": "pulumi up -C=./infra/pulumi -s=dev --yes",
     "preview": "pulumi preview -C=./infra/pulumi -s=dev"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.33.1"
+  }
 }
