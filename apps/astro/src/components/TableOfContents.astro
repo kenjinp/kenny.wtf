@@ -1,12 +1,20 @@
 ---
 import TableOfContentsHeading from "./TableOfContentsHeading.astro";
+import type { MarkdownHeading } from "astro";
 
-// TableOfContents.astro
+export type Heading = MarkdownHeading & {
+    subheadings: Heading[];
+}
+
+export interface Props {
+  headings: MarkdownHeading[]
+}
+
 const { headings } = Astro.props;
 const toc = buildToc(headings);
 
-function buildToc(headings) {
-  const toc = [];
+function buildToc(headings: MarkdownHeading[]): Heading[] {
+  const toc: Heading[] = [];
   const parentHeadings = new Map();
   headings.forEach((h) => {
     const heading = { ...h, subheadings: [] };

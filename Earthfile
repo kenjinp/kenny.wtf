@@ -1,7 +1,7 @@
 VERSION 0.6
 
 build: 
-  FROM node:18.12-alpine
+  FROM node:18.14.1-alpine
   ARG PNPM_VERSION=8.6.2
   ARG LIVEBLOCKS_API_KEY
   ARG GITHUB_TOKEN

@@ -1,5 +1,10 @@
 ---
-// TableOfContentsHeading.astro
+import type { Heading } from "./TableOfContents.astro"
+
+export interface Props {
+  heading: Heading
+}
+
 const { heading } = Astro.props;
 ---
 
