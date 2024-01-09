@@ -42,6 +42,7 @@ const sortTagsPost = getSortedPosts(tagPosts);
   <Header activeNav="tags" />
   <Main
     pageTitle={[`Tag:`, `${tag}`]}
+    titleTransition={tag}
     pageDesc={`All the articles with the tag "${tag}".`}
   >
     <h1 slot="title">{`Tag:${tag}`}</h1>
