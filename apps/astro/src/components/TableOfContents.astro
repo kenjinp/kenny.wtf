@@ -30,7 +30,7 @@ function buildToc(headings: MarkdownHeading[]): Heading[] {
 }
 ---
 
-<nav class="toc fixed left-0 p-8 invisible lg:visible">
+<nav class="toc fixed left-0 p-8 invisible lg:visible" style={{ width: "calc((100vw - 768px) / 2)" }}>
   <ul>
     {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
   </ul>

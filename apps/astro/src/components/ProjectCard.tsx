@@ -20,7 +20,7 @@ export default function ProjectCard({ href, frontmatter }: Props) {
       >
         {heroImage && (
           <img
-            class="mb-4 h-64 w-full object-cover object-center"
+            className="mb-4 h-64 w-full object-cover object-center"
             src={heroImage as string}
           />
         )}
