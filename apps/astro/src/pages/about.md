@@ -3,11 +3,9 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-<img class="h-64" src="/kenny.jpg" alt="a photo of the author of this website">
+<img class="h-64 object-cover" src="/kenny.jpg" alt="a photo of the author of this website">
 
-# About Kenny
-
-Hello!
+# Hello!
 
 I'm a self-taught programmer who has mostly been doing web engineering out of Geneva, CH in the past years, with the [Neuroinformatics](https://bluebrainnexus.io/) team at the [Blue Brain Project](https://www.epfl.ch/research/domains/bluebrain/) and then later [Nexthink](https://nexthink.com/). Before that I was a fullstack developer in Berlin, and a translator for the film industry in Beijing, China.
 
