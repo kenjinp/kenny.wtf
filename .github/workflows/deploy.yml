@@ -23,4 +23,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - name: run deploy earthfile
-        run: earthly --secret PULUMI_ACCESS_TOKEN="${{ secrets.PULUMI_ACCESS_TOKEN }}" --secret AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" --secret AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }} --secret GITHUB_TOKEN="${{ secrets.GH_FETCH_TOKEN }}" +deploy
+        run: earthly --secret PULUMI_ACCESS_TOKEN="${{ secrets.PULUMI_ACCESS_TOKEN }}" --secret AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" --secret AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}" --secret GITHUB_TOKEN="${{ secrets.GH_FETCH_TOKEN }}" +deploy
