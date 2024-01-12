@@ -4,7 +4,7 @@ build:
   FROM node:18.14.1-alpine
   ARG PNPM_VERSION=8.6.2
   ARG LIVEBLOCKS_API_KEY
-  ARG GITHUB_TOKEN
+  # ARG GITHUB_TOKEN
 
   ENV APP=${APP}
   ENV NODE_OPTIONS="--max-old-space-size=2048"
@@ -21,7 +21,7 @@ build:
   RUN pnpm install  --frozen-lockfile --unsafe-perm --offline
   RUN pnpm test --if-present
   ENV NODE_ENV="production"
-  RUN pnpm build
+  RUN --secret GITHUB_TOKEN pnpm build
   SAVE ARTIFACT ./_dist
 
 pulumi-node:
