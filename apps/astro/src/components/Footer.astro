@@ -2,6 +2,8 @@
 import { SITE } from "@config";
 import Hr from "./Hr.astro";
 import Socials from "./Socials.astro";
+import { commitInfo } from "@utils/commits";
+import LinkButton from "./LinkButton.astro";
 
 const currentYear = new Date().getFullYear();
 
@@ -10,16 +12,34 @@ export interface Props {
 }
 
 const { noMarginTop = false } = Astro.props;
+const buildTime = new Date().toLocaleDateString();
 ---
 
 <footer class={`${noMarginTop ? "" : "mt-auto"}`}>
   <Hr noPadding />
   <div class="footer-wrapper">
     <Socials centered />
-    <div class="copyright-wrapper">
-      <span>Copyright &#169; {SITE.author} {currentYear}</span>
+    <div class="flex flex-col">
+      <div>
+        <small>
+        version{" "}
+        <LinkButton
+          title="commit hash"
+          href={`https://github.com/kenjinp/kenny.wtf/commit/${commitInfo.hash}`}
+        >
+          #{commitInfo.shortHash}
+        </LinkButton><strong>&nbsp|&nbsp</strong>
+        <span title="build date">
+          last updated: {buildTime}
+        </span>
+        </small>
+      </div>
+      <div>
+        <span>Copyright &#169; {SITE.author} {currentYear}</span>
+      </div>
     </div>
   </div>
+
 </footer>
 
 <style>
