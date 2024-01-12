@@ -10,11 +10,13 @@ import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
+import ProjectCard from "@components/ProjectCard";
+import {getProjectsCollection} from "@utils/getProjectsCollection";
 
 const posts = await getCollection("blog");
+const projects = await getProjectsCollection();
 
 const sortedPosts = getSortedPosts(posts);
-// const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -68,17 +70,16 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
     <Hr />
 
-    <!-- {
-      featuredPosts.length > 0 && (
+    {
+      projects.length > 0 && (
         <>
-          <section id="featured">
-            <h2>Featured</h2>
+          <section id="projects">
+            <h2>Current Projects</h2>
             <ul>
-              {featuredPosts.map(({ data }) => (
-                <Card
-                  href={`/posts/${slugify(data)}`}
+              {projects.map(({ data }) => (
+                <ProjectCard
+                  href={`/projects/${slugify(data)}`}
                   frontmatter={data}
-                  secHeading={false}
                 />
               ))}
             </ul>
@@ -86,7 +87,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <Hr />
         </>
       )
-    } -->
+    } 
 
     <section id="recent-posts">
       <h2>Recent Posts</h2>
@@ -147,11 +148,11 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   }
 
   /* ===== Featured & Recent Posts Sections ===== */
-  #featured,
+  #projects,
   #recent-posts {
     @apply pb-6 pt-12;
   }
-  #featured h2,
+  #projects h2,
   #recent-posts h2 {
     @apply text-2xl font-semibold tracking-wide;
   }

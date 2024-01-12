@@ -3,8 +3,9 @@ import type { CollectionEntry } from "astro:content";
 
 export const slugifyStr = (str: string) => slugger(str);
 
-const slugify = (post: CollectionEntry<"blog">["data"]) =>
-  post.postSlug ? slugger(post.postSlug) : slugger(post.title);
+const slugify = (
+  post: CollectionEntry<"blog">["data"] | CollectionEntry<"projects">["data"]
+) => (post.postSlug ? slugger(post.postSlug) : slugger(post.title));
 
 export const slugifyAll = (arr: string[]) => arr.map(str => slugifyStr(str));
 

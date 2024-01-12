@@ -1,0 +1,57 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Projects from "@layouts/Projects.astro";
+import ProjectDetails from "@layouts/ProjectDetails.astro";
+import getPageNumbers from "@utils/getPageNumbers";
+import slugify from "@utils/slugify";
+import { getProjectsCollection } from "@utils/getProjectsCollection";
+import { SITE } from "@config";
+
+export interface Props {
+  project: CollectionEntry<"project">;
+}
+
+export async function getStaticPaths() {
+  const projects = await getProjectsCollection()
+
+  const postResult = projects.map(project => ({
+    params: { slug: slugify(project.data) },
+    props: { project },
+  }));
+
+  const pagePaths = getPageNumbers(projects.length).map(pageNum => ({
+    params: { slug: String(pageNum) },
+  }));
+
+  return [...postResult, ...pagePaths];
+}
+
+const { slug } = Astro.params;
+const { project } = Astro.props;
+
+const projects = await getProjectsCollection()
+
+const totalPages = getPageNumbers(projects.length);
+
+const currentPage =
+  slug && !isNaN(Number(slug)) && totalPages.includes(Number(slug))
+    ? Number(slug)
+    : 0;
+const lastPost = currentPage * SITE.postPerPage;
+const startPost = lastPost - SITE.postPerPage;
+
+const paginatedprojects = projects.slice(startPost, lastPost);
+
+---
+
+{
+  project ? (
+    <ProjectDetails project={project} />
+  ) : (
+    <Projects
+      projects={paginatedprojects}
+      pageNum={currentPage}
+      totalPages={totalPages.length}
+    />
+  )
+}

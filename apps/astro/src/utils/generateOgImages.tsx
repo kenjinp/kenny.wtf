@@ -53,6 +53,14 @@ export async function generateOgImageForPost(post: CollectionEntry<"blog">) {
   return svgBufferToPngBuffer(svg);
 }
 
+export async function generateOgImageForProject(
+  post: CollectionEntry<"projects">
+) {
+  // @ts-ignore
+  const svg = await satori(postOgImage(post), options);
+  return svgBufferToPngBuffer(svg);
+}
+
 export async function generateOgImageForSite() {
   const svg = await satori(siteOgImage(), options);
   return svgBufferToPngBuffer(svg);

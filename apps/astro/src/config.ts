@@ -69,3 +69,5 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
 ];
+
+export const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
