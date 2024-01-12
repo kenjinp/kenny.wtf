@@ -3,12 +3,9 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
-import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
-import TableOfContents from "@components/TableOfContents.astro";
 import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
 
 export interface Props {
   project: CollectionEntry<"projects">;
@@ -19,7 +16,7 @@ const { project } = Astro.props;
 const { title, author, description, ogImage, canonicalURL, githubLink, webLink, heroImage, tags } =
   project.data;
 
-const { Content, headings } = await project.render();
+const { Content } = await project.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
