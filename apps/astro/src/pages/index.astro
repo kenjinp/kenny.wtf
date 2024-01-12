@@ -12,7 +12,6 @@ import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
 import ProjectCard from "@components/ProjectCard";
 import {getProjectsCollection} from "@utils/getProjectsCollection";
-import TableOfContents from "@components/TableOfContents.astro";
 
 const posts = await getCollection("blog");
 const projects = await getProjectsCollection();
