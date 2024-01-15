@@ -4,7 +4,7 @@ featured: true
 draft: false
 githubLink: https://github.com/kenjinp/hello-worlds
 heroImage: "/ocean-planet.png"
-webLink: worlds.kenny.wtf/intro
+webLink: https://worlds.kenny.wtf/intro
 tags:
   - hello-worlds
   - procgen

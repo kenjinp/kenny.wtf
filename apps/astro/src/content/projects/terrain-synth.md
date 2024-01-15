@@ -3,7 +3,7 @@ title: Terrain Synth
 featured: true
 draft: false
 githubLink: https://github.com/kenjinp/terrain-synth
-webLink: terrain-synth.kenny.wtf
+webLink: https://terrain-synth.kenny.wtf
 heroImage: /terrain-synth.png
 tags:
   - terrain-synth

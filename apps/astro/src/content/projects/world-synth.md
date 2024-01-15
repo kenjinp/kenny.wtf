@@ -3,7 +3,7 @@ title: World Synth
 featured: true
 draft: false
 githubLink: https://github.com/kenjinp/world-synth
-webLink: world-synth.kenny.wtf
+webLink: https://world-synth.kenny.wtf
 heroImage: /world-synth.png
 tags:
   - world-synth
