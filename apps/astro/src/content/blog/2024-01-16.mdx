@@ -1,0 +1,153 @@
+---
+pubDatetime: 2024-01-16
+title: Spherical Spatial Hashing + Weblog
+postSlug: spherical-spatial-hashing
+featured: true
+draft: false
+ogImage: ../../public/world-synth.png
+tags:
+  - world-synth
+  - procgen
+  - graphics
+description: Only 3 weeks left in RC, so instead of working on my other projects, I created a new one! welcome to World Synth!
+---
+
+import { Tweet } from "astro-embed";
+import v1 from "../../public/assets/cbd500655bc99b67f988d1bb8c74ec03.mp4";
+import v2 from "../../public/assets/f5a2bea94afe5ceae78d3e3a92f68278.mp4";
+import v3 from "../../public/assets/e1a3f34798545584f84c4883dda499f1.mp4";
+import v4 from "../../public/assets/994d896a90333e875c36b7774a341064.mp4";
+import v5 from "../../public/assets/bb46faeb3811d6c6731f9c4ebbac772b.mp4";
+import v6 from "../../public/assets/cc94bbf520f364c35098f2fc064c53b0.mp4";
+
+# Week 9 Day 2 | Spherical Spatial Hashing + Weblog
+
+(3 weeks left in RC!)
+
+The world is terrifying and I don't want to go back to it. Only 3 weeks left to go in my batch at RC, and I'm spending this short time sick with my 2nd installation of COVID, thankfully mild, but I'm quite medicated regardless. I have not added to my recurse checkins for two weeks, mainly because I don't think I did anything interesting, but after some reflection I think there's some cool stuff to shere.
+
+## World Synth
+
+After feeling a bit "stuck" with the Terrain Synth project, I decided to go back to the thing that drew me to the 3D web in the first place - giant planets! I wanted to create a space that was removed from the Hello World library's repo where I can build large-scale procedurally generated worlds from plate tectonics all the way down to weather patterns, with a goal in the end to making a big "Google Earth" for a fantasy world.
+
+So, I copied the repo over and got started hacking on, a big moon?
+
+Github: https://github.com/kenjinp/world-synth
+Link: https://github.com/kenjinp/world-synth
+
+Current version! Check it out! (if you dare...)
+
+<video controls client:visible>
+  <source src={v1} type="video/mp4" />
+</video>
+
+### Spherical Spatial Hash Grid
+
+One of the biggest problems I ran into when trying to terrain features on planets is that you quickly get into performance issues when generating the terrain mesh / heightmap. Say you have 1000 craters, volcanos, lonely mountains, or other discrete terrain features that you want to represent on your world.
+
+The naïve way to generate the terrain mesh would be to, at each vertex, go through the list of each feature, ask weather that feature is close enough to effect this vertex by doing some relatively expensive distance calculations, and adjust the vertex position accordingly. That's a crazy expensive O(n^2) operation (I think? Look, don't shoot me I never went to school for this). Therefore if we want to stream in our terrain chunks in realtime, we'd have to have a sharp limit to the amount of discrete features our planet could have, perhaps only in the 100s or less.
+
+But! I want to have dramatic fantasy planets with thousands of volcanoes, I want moons with millions of craters, surely we can do better. It's especially obvious we can make improvements on this, when you consider that we're asking vertices to query features that are all the way on the other side of the planet. Perhaps we can chop the planet up into sections to speed things up?
+
+#### The Spatial Hash
+
+[This is old hat for game developers](https://www.youtube.com/watch?v=sx4IIQL0x7c), but new for I, lowly web developer. Basically you can split the game world into equally sized buckets into a map or a hash table, where the key is equivalent to the bounding box coordinates or something. Then when you create your terrain features you can insert them into a bucket depending on their location. At query time, you know what bucket your vertex is in (for our case), and the its a simple O(1) lookup to find what features you care about.
+
+That's lovely for a 2D game like Age of Empires, but we're on a planet. How does one exactly split the world into even buckets?
+
+#### [h3-js](https://github.com/uber/h3-js)
+
+Luckily Uber Corporation has saw fit in their beneficence to relinquish their fast geographic grid system for open consumption. It chops the Earth (or in our case, a fake planet/moon, really any sphere) up into a recursively nested hex grid (yes, hex grids, like in Civ!), with convenient methods to traverse the grid, find neighbors, find children, and get the sizes of hex tiles, etc.
+
+When applied to our planet, adjusting vertex height by distance to their constituent hex's edge, you get something like this! (at various resolutions)
+
+[you can play with this demo here](https://worlds.kenny.wtf/hex)
+
+![](../../public/assets/24d5704e03b3c21580e4802afb2fe12e.png)
+
+![](../../public/assets/89d51e37ca05b20b5927b27174b1ea1b.png)
+
+![](../../public/assets/c1583c52bfbe11a21926496a308c7fe4.png)
+
+(that's a lot of hexs!!!)
+
+My terrain feature spatial hashgrid will be a bit unique to most game dev's spatial hash. It'll use Latitude/Longitude (using my favorite ever class I've made, my [LatLong class!](https://github.com/kenjinp/hello-worlds/blob/main/packages/planets/src/math/LatLong.ts#L11). It will also take the radius of terrain feature, because unlike in most spatial hash grids, our features will cover large areas of land and have the posibility to occupy many hex tiles.
+
+After each feature is created, you can insert it into the spatial hash grid with it's center LongLat and radius. The hash grid will find the hex the center occupies, and if it's large enough expand outward radially to encompass all the rings of hexes until the area of the hex tiles expand past the radius of the terrain feature. It'll then add itself to a hash table where each key is the hex ID and value is the list of terrain feature indices.
+
+from the mesh generator side, on the web worker, each vertex simply asks which hex it appears in, which will return a list of terrain feature indices. It can then iterate over the (much smaller) list of terrain features, adding their height features to the vertex as a function of distance to the feature's center.
+
+Look how fast the terrain chunks stream in! this is an idealized scenario where each features is smaller than the hex. the red tiles contain features:
+
+{/* <ReactPlayer url="../../public/assets/f5a2bea94afe5ceae78d3e3a92f68278.mp4" /> */}
+
+<video controls client:visible>
+  <source src={v2} type="video/mp4" />
+</video>
+
+And here's an example with craters:
+
+<video controls client:visible>
+  <source src={v3} type="video/mp4" />
+</video>
+
+{/* <ReactPlayer url="../../public/assets/e1a3f34798545584f84c4883dda499f1.mp4" /> */}
+
+And here's a density map, where blue = less features found in that hex, and red means more. I think honestly there should not be such an even spread of terrain features like this, they should probably cluster in smaller regions in most cases.
+
+<video controls client:visible>
+  <source src={v4} type="video/mp4" />
+</video>
+{/* <ReactPlayer url="../../public/assets/994d896a90333e875c36b7774a341064.mp4" /> */}
+
+#### Performance
+
+In the naïve case, the larger terrain chunks take about 5 seconds to stream, but as you zoom in, the heigher resolution LODs take longer and longer, 15seconds or more!
+
+<video controls client:visible>
+  <source src={v5} type="video/mp4" />
+</video>
+
+{/* <ReactPlayer url="../../public/assets/bb46faeb3811d6c6731f9c4ebbac772b.mp4" /> */}
+
+It's the exact opposite case, in our spatial hash. Larger tiles take longer to process, more hex buckets to query, but high-res LODs have to query fewer numbers of hex buckets, so their performance improves. from 15seconds before, to ~20ms now. That's quite the jump!
+
+<video controls client:visible>
+  <source src={v6} type="video/mp4" />
+</video>
+{/* <ReactPlayer url="../../public/assets/cc94bbf520f364c35098f2fc064c53b0.mp4" /> */}
+
+I'm very pleased. This will open the flood gates to do all sorts of things, like rivers and mountain chains and canyons and, well... watch this space!
+
+## Kenny.wtf (web log!)
+
+Last week, I also spruced up my website. I wanted some sort of blogging system that will consume my markdown notes and checkins that I write via Obsidian. Thankfully I found [Cassidy Williams' blog](https://blog.cassidoo.co/post/publishing-from-obsidian/) which had exactly that kind of workflow. I decided that I'd like to try Astro, simply for the novelty, and because other recursers had good experiences with it.
+
+The process went much smoother than my last n generations of personal websites. I really found Astro a breeze to use, probably because it uses [vite](https://vitejs.dev/) as the bundler. I am a bit perplexed at [tailwind](https://tailwindcss.com/), except for the media query modifiers which I really enjoy, but the rest is not getting in my way yet.
+
+All last week I've been adding fun features, like a Table of Contents, a Projects section, and a nerdy footer that leads to the build commit. I've really enjoyed the process so far. Like [Reuben](https://reubenson.com/) would say, it's a sculptural process.
+
+## Hello Worlds
+
+I played with threejs' new `BatchedMesh` geometries to try to reduce draw-calls from n \* chunk tiles to 1. (or 6, one for each planet face)
+
+In the end performance did not improve much, probably because preallocation stuff means you have to move a lot more data to the shader attributes to render. In the end I think the number of vertices is probably the thing slowing things down and not draw calls. but it inspired me to redevelop the library so that LOD Levels are a first class citizen, so that each LOD level will be instanced, but the user will be able to do interact more with the lod levels, specifically accessing the heightmap and other attributes at the LOD level, which is something I always end up needing to do. I made a new branch but didn't go further than that
+
+## Extra things
+
+- I had a sit down with Charlie and Isak about the user-input driven ML model for [terrain-synth](https://kenny.wtf/projects/terrain-synth/). Expect a big update in the future! Designing ML models is SUPER interesting.
+- Had an inspiring talk with [Bifrost.ai](https://www.bifrost.ai/) 's CTO, where we nerded out about procgen stuff, talked about what his team is up to, and then he graciously gave me some advice and hints about some interesting industries that might have use of my skillset.
+- I've gotten my 2nd request for help using the [Hello Worlds](https://kenny.wtf/projects/hello-worlds/) library on discord! That's cool!
+- [Hello Worlds](https://kenny.wtf/projects/hello-worlds/) has grown to over 100 stars!!!
+  <Tweet id="https://twitter.com/KennyPirman/status/1745847083628687562" />
+- Gus (who has become my go-to frontend expert) showed me the stack for his new project and showed off a bunch of neat tools:
+  - https://replicache.dev/ -> offline first data
+  - https://developers.cloudflare.com/d1/ -> serverless database service
+  - https://nivo.rocks/ COOL GRAPHS
+  - https://www.framer.com/motion/ -> I know it exists but I always forget about it
+  - https://pusher.com/ -> pubsub messages service
+- I had a great chat with @Reed about htmx and his concepts for a service-worker frontend engine. We discussed how I could implement a JSX / xml based image processing DSL for procgen.
+- Had a talk with the TidesOfRevival dev team [Discord link here](https://discord.gg/KDPt44R49g) who are always eager to help out, about how to implement vertex displacements for rivers and paths, based on splines.
+  <Tweet id="https://twitter.com/KennyPirman/status/1744443965414277587" />
+
+Ok bye!
