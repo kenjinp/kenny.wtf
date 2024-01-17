@@ -18,28 +18,49 @@ const buildTime = new Date().toLocaleDateString();
 <footer class={`${noMarginTop ? "" : "mt-auto"}`}>
   <Hr noPadding />
   <div class="footer-wrapper">
-    <Socials centered />
+    <div class="rc flex flex-col">
+      <div class="w-full">
+        <a
+          id="rc-ring-home"
+          data-rc-uuid="31bbebb6-fcf9-4319-b7d6-ce66bbfa9a41"
+          href="https://ring.recurse.com/"><small>The Recurse Webring</small></a
+        >
+      </div>
+      <div class="flex flex-row place-content-between">
+        <a id="rc-ring-prev" href="https://ring.recurse.com/prev?id=12"
+          ><small>Prev</small></a
+        >
+        <a id="rc-ring-rand" href="https://ring.recurse.com/rand"
+          ><small>Random</small></a
+        >
+        <a id="rc-ring-next" href="https://ring.recurse.com/next?id=12"
+          ><small>Next</small></a
+        >
+      </div>
+    </div>
     <div class="flex flex-col">
       <div>
         <small>
-        version{" "}
-        <LinkButton
-          title="commit hash"
-          href={`https://github.com/kenjinp/kenny.wtf/commit/${commitInfo.hash}`}
-        >
-          #{commitInfo.shortHash}
-        </LinkButton><strong>&nbsp|&nbsp</strong>
-        <span title="build date">
-          last updated: {buildTime}
-        </span>
+          version{" "}
+          <LinkButton
+            title="commit hash"
+            href={`https://github.com/kenjinp/kenny.wtf/commit/${commitInfo.hash}`}
+          >
+            #{commitInfo.shortHash}
+          </LinkButton><strong>&nbsp|&nbsp</strong>
+          <span title="build date">
+            last updated: {buildTime}
+          </span>
         </small>
       </div>
       <div>
-        <span>Copyright &#169; {SITE.author} {currentYear}</span>
+        <Socials centered />
       </div>
     </div>
   </div>
-
+  <div class="mb-4 flex w-full place-content-center">
+    <small>Copyright &#169; {SITE.author} {currentYear}</small>
+  </div>
 </footer>
 
 <style>
@@ -60,5 +81,8 @@ const buildTime = new Date().toLocaleDateString();
   }
   .separator {
     @apply hidden sm:inline;
+  }
+  a {
+    @apply hover:text-skin-accent;
   }
 </style>
