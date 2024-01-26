@@ -4,7 +4,7 @@ featured: true
 draft: false
 githubLink: https://github.com/kenjinp/world-synth
 webLink: https://world-synth.kenny.wtf
-heroImage: /world-synth.png
+heroImage: /world-synth-example.png
 tags:
   - world-synth
   - procgen
