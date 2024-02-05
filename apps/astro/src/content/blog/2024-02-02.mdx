@@ -32,7 +32,7 @@ This series is about my project <LinkButton href="/projects/world-synth">World-S
 
 ### The inspiraiton
 
-This project has been inspired by this [beautiful tectonics-based world generator](https://web.archive.org/web/20180329122135/http://experilous.com/1/project/planet-generator/2015-04-07/version-2) and it's [accompanying blog post](https://web.archive.org/web/20180307135703/https://experilous.com/1/blog/post/procedural-planet-generation), and I've been wanting to build it (and have a couple of discarded attempts) ever since I came across it while looking for a good world map generator for a dnd campaign I was running in 2018. It's largely the reason I began learning webgl and built Hello Worlds. That blog post is a master class in procedural modeling, and includes techniques from tectonic stress simulation to climate modeling for biome placement. It effectively demystified procgen in general for me.
+This project has been inspired by this [beautiful tectonics-based world generator](https://web.archive.org/web/20180329122135/http://experilous.com/1/project/planet-generator/2015-04-07/version-2) and it's [accompanying blog post](https://web.archive.org/web/20180307135703/https://experilous.com/1/blog/post/procedural-planet-generation), and I've been wanting to build it (and have a couple of discarded attempts) ever since I came across it while looking for a good world map generator for a dnd campaign I was running in 2018. It's largely the reason I began learning webgl and built <LinkButton href="/projects/hello-worlds">Hello Worlds</LinkButton>. That blog post is a master class in procedural modeling, and includes techniques from tectonic stress simulation to climate modeling for biome placement. It effectively demystified procgen in general for me.
 
 Since then, [Frozen Fractal](https://mastodon.gamedev.place/@thomastc) has also introduced a beautiful blog series going into a similar technique to creating Earth-like worlds with an incredible amount of depth in the climate modeling aspect, and is ongoing.
 
@@ -51,7 +51,7 @@ What that project doesn't have, however, is space-to-ground rendering of the ter
 
 Since we have a whole planet to cover, this project will provide us a lot of examples and experiments to hack on. Perhaps along the way, we'll be able to generalize it into a set of craft techniques that might be catalogued, in order for others to learn from it as well.
 
-It will be powered by HelloWorlds as the terrain rendering engine, in order to improve that library in tandem, which will handle the spherical quadtree / mesh generation aspect so we can more-or-less focus on the shape of the terrain.
+It will be powered by <LinkButton href="/projects/hello-worlds">Hello Worlds</LinkButton> as the terrain rendering engine, in order to improve that library in tandem, which will handle the spherical quadtree / mesh generation aspect so we can more-or-less focus on the shape of the terrain.
 
 Performance-wise, my goal is to be able to generate large-scale model data in about 10 seconds and then have the terrain chunks stream in in less than 100ms each, so near real-time. The current live version takes about 13 seconds on my hardware and around 120ms, so still a lot to improve even at this early stage.
 
