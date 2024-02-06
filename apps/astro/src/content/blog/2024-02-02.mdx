@@ -14,6 +14,7 @@ description: In which we begin to model the tectonic plates of our world, and gr
 
 import v1 from "../../public/assets/c13857a2e9c2ac5ce64f0ddc3d89a9ca.mp4";
 import LinkButton from "../../components/LinkButton.astro";
+import svg from "../../public/assets/b9f73f50a9a773efbd4edb6e8c2666a5.svg";
 
 # Modeling Verisimilitudinous Worlds: Part 1 - Tectonic Plates
 
@@ -72,7 +73,8 @@ This looks pretty good! (Especially with an elevation color ramp borrowed from N
 
 Instead, we'll create some data structure to hold regional features, like continental details, plate collisions, or whatever that will drive the emergent large-scale phenomena we want to replicate. we'll generate that all upfront, which will take some seconds, and then after in real-time, during terrain chunk generation we'll query our current position against that dataset to see what kind of terrain we want to make. This effectively makes each terrain feature a distance function:
 
-![](../../public/assets/b9f73f50a9a773efbd4edb6e8c2666a5.svg)
+<img src={svg.src} style={{ minHeight: "300px" }} />
+{/* ![](../../public/assets/b9f73f50a9a773efbd4edb6e8c2666a5.svg) */}
 
 There's a rub though. Iterating through each feature on the planet by each vertex is going to be super expensive, so we should create some system to query against only the nearby features, perhaps using some kind of spatial grid system, such as [detailed in my previous post](/posts/spherical-spatial-hashing/) and a bucket of other techniques I haven't thought of yet.
 
