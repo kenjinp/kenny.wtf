@@ -18,3 +18,9 @@ I also enjoy sailing, although I'm not good at it. I've trained up to Day Skippe
 You can find me reading genre fiction at a laundromat or running along the East River.
 
 Give me your book recommendations and tell me the world is gonna be okay ❤️.
+
+## Looking to hire me? [Here's my Resumé!](/kenneth-pirman-resume.pdf)
+
+I just finished my batch at [the Recurse Center](https://www.recurse.com/), and now after all that self-direction exploration of programming, I'm ready to join a new crew.
+
+If you're building a team that makes use of high-performance web technologies and graphics programming, I'll be interested in hearing from you!
