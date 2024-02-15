@@ -23,4 +23,4 @@ Give me your book recommendations and tell me the world is gonna be okay ❤️.
 
 I just finished my batch at [the Recurse Center](https://www.recurse.com/), and now after all that self-direction exploration of programming, I'm ready to join a new crew.
 
-If you're building a team that makes use of high-performance web technologies and graphics programming, I'll be interested in hearing from you!
+If you're building a team that makes use of high-performance web technologies and graphics programming, I'll be interested in hearing from you! Just send me an [email](mailto:hello@keny.wtf) or [dm me on twitter](https://twitter.com/KennyPirman).
