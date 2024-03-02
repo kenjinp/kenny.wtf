@@ -3,7 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-<img class="h-64 object-scale-down" src="/kenny2.jpg" alt="a photo of the author of this website" />
+<img class="h-64 object-scale-down" src="/kenny.jpg" alt="a photo of the author of this website" />
 
 # Hello!
 
