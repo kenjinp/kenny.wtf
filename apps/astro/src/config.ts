@@ -5,7 +5,7 @@ export const SITE: Site = {
   author: "Kenneth Pirman",
   desc: "A friendly internet space about procedural world-building",
   title: "Kenneth Pirman",
-  ogImage: "hello-worlds.png",
+  ogImage: "/hello-worlds.png",
   lightAndDarkMode: true,
   postPerPage: 3,
 };
