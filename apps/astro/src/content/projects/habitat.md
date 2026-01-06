@@ -4,6 +4,7 @@ featured: true
 draft: false
 githubLink: https://github.com/kenjinp/habitat
 heroImage: "/habitat.png"
+heroImageAlt: "Habitat project preview (O'Neill cylinder orbital habitat vignette)"
 webLink: https://habitat.kenny.wtf
 tags:
   - hello-worlds

@@ -4,7 +4,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import type { CollectionEntry } from "astro:content";
-import { slugifyStr } from "@utils/slugify";
+import slugify, { slugifyStr } from "@utils/slugify";
 import LinkButton from "@components/LinkButton.astro";
 
 export interface Props {
@@ -13,14 +13,24 @@ export interface Props {
 
 const { project } = Astro.props;
 
-const { title, author, description, ogImage, canonicalURL, githubLink, webLink, heroImage, tags } =
-  project.data;
+const {
+  title,
+  author,
+  description,
+  ogImage,
+  canonicalURL,
+  githubLink,
+  webLink,
+  heroImage,
+  heroImageAlt,
+  tags,
+} = project.data;
 
 const { Content } = await project.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
-  ogImageUrl ?? `/projects/${slugifyStr(title)}.png`,
+  ogImageUrl ?? `/projects/${slugify(project.data)}.png`,
   Astro.url.origin
 ).href;
 ---
@@ -46,31 +56,49 @@ const ogUrl = new URL(
     </button>
   </div>
   <main id="main-content">
-    {heroImage && (
-      <img
-        class="w-full h-64 object-cover object-center"
-        src={heroImage as string}
-      />
-    )}
+    {
+      heroImage && (
+        <img
+          class="w-full h-64 object-cover object-center"
+          src={heroImage as string}
+          alt={heroImageAlt ?? `Preview image for ${title}`}
+        />
+      )
+    }
 
-<div class="mt-8">
-  <div>
-      Links: <LinkButton href={githubLink}>Github <>{project.data.stars ? <>({project.data.stars} stars)</> : null}</></LinkButton>
-      {webLink &&<> | <LinkButton href={webLink}>Project Link: {webLink}</LinkButton></>}
-  </div>
-</div>
+    <div class="mt-8">
+      <div>
+        Links:
+        <LinkButton href={githubLink}>
+          Github{project.data.stars ? ` (${project.data.stars} stars)` : ""}
+        </LinkButton>
+        {
+          webLink && (
+            <>
+              {" | "}
+              <LinkButton href={webLink}>Project Link: {webLink}</LinkButton>
+            </>
+          )
+        }
+      </div>
+    </div>
 
-    <article id="article" role="article" class="prose mx-auto mt-8 mb-8 max-w-3xl">
+    <article
+      id="article"
+      role="article"
+      class="prose mx-auto mt-8 mb-8 max-w-3xl"
+    >
       <Content />
     </article>
 
     <h3>
-      Follow the <LinkButton href={`/tags/${project.slug}`} >#{project.slug}</LinkButton> tag to read more about this project!
+      Follow the{" "}
+      <LinkButton href={`/tags/${project.slug}`}>#{project.slug}</LinkButton> tag
+      to read more about this project!
     </h3>
 
-
     <ul class="tags-container">
-      {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
+      {tags.map((tag: string) => <Tag name={slugifyStr(tag)} />)}
     </ul>
   </main>
   <Footer />

@@ -1,13 +1,12 @@
 VERSION 0.6
 
 build: 
-  FROM node:18.14.1-alpine
+  FROM node:24-alpine
   ARG PNPM_VERSION=8.6.2
   ARG LIVEBLOCKS_API_KEY
-  # ARG GITHUB_TOKEN
 
   ENV APP=${APP}
-  ENV NODE_OPTIONS="--max-old-space-size=2048"
+  ENV NODE_OPTIONS="--max-old-space-size=8192"
   ENV NEXT_PUBLIC_LIVEBLOCKS_API_KEY=${NEXT_PUBLIC_LIVEBLOCKS_API_KEY}
   ENV NODE_ENV="development"
 

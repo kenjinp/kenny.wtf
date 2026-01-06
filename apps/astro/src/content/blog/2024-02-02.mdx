@@ -4,7 +4,7 @@ title: "Modeling Verisimilitudinous Worlds: Part 1 - Tectonic Plates"
 postSlug: world-synth-tectonic-plates
 featured: true
 draft: false
-ogImage: ../../public/world-synth-part-1.png
+ogImage: /world-synth-part-1.png
 tags:
   - world-synth
   - procgen
@@ -12,9 +12,9 @@ tags:
 description: In which we begin to model the tectonic plates of our world, and grow them into continents and oceans.
 ---
 
-import v1 from "../../public/assets/c13857a2e9c2ac5ce64f0ddc3d89a9ca.mp4";
+export const v1 = "/assets/c13857a2e9c2ac5ce64f0ddc3d89a9ca.mp4";
 import LinkButton from "../../components/LinkButton.astro";
-import svg from "../../public/assets/b9f73f50a9a773efbd4edb6e8c2666a5.svg";
+export const svg = "/assets/b9f73f50a9a773efbd4edb6e8c2666a5.svg";
 
 # Modeling Verisimilitudinous Worlds: Part 1 - Tectonic Plates
 
@@ -27,7 +27,7 @@ This series is about my project <LinkButton href="/projects/world-synth">World-S
 </video>
 
 [Here's the latest (very WIP) version](https://world-synth.kenny.wtf/), which you can enjoy online:
-![](../../public/assets/8428e93c94afaa7b6c50ac5b36892e88.jpeg)
+![](/assets/8428e93c94afaa7b6c50ac5b36892e88.jpeg)
 
 ## What's going on here?
 
@@ -42,9 +42,9 @@ Note: I'll continue to showcase similar projects as I find them, so throw them t
 #### Experilous' Planet Generator
 
 (You can see the gorgeous island arcs and realistic continent shapes that this generator produces, swoon!!!!!!!)
-![](../../public/assets/53a94e408e60ace45cf005eea60a6b76.jpeg)
+![](/assets/53a94e408e60ace45cf005eea60a6b76.jpeg)
 
-![](../../public/assets/8e0afafb798ad34a7f7e11caf6dabbe7.jpeg)
+![](/assets/8e0afafb798ad34a7f7e11caf6dabbe7.jpeg)
 
 ### Project World-Synth
 
@@ -67,14 +67,14 @@ If we were able to generate all the information we want to generate the whole su
 Instead, we could use layers of noise and noise masks to render the whole planet, which would be very fast. Here's an example of what that looks like while I was trying this out (ignore the plate indicators, they weren't used to render the planet this time)
 
 Simple noise planet, pretty nice!
-![](../../public/assets/d09602d957bc2c2a3bfc5f7d58075a74.png)
+![](/assets/d09602d957bc2c2a3bfc5f7d58075a74.png)
 
 This looks pretty good! (Especially with an elevation color ramp borrowed from NOAA), but noise does not give us relationships between regional features. For example, we could know whats above water or under it, but we would not be able to create discrete formations where you would expect plates to collide or pull apart, because we need to qualify the relationship between two points. It would be difficult to generate rivers and mountain chains with this method. There's probably a clever way to achieve this, using multiple derivatives of noise masks or some such thing, but I'm not sure about that.
 
 Instead, we'll create some data structure to hold regional features, like continental details, plate collisions, or whatever that will drive the emergent large-scale phenomena we want to replicate. we'll generate that all upfront, which will take some seconds, and then after in real-time, during terrain chunk generation we'll query our current position against that dataset to see what kind of terrain we want to make. This effectively makes each terrain feature a distance function:
 
-<img src={svg.src} style={{ minHeight: "300px" }} />
-{/* ![](../../public/assets/b9f73f50a9a773efbd4edb6e8c2666a5.svg) */}
+<img src={svg} alt="Diagram illustrating a terrain feature distance function" style={{ minHeight: "300px" }} />
+{/* ![](/assets/b9f73f50a9a773efbd4edb6e8c2666a5.svg) */}
 
 There's a rub though. Iterating through each feature on the planet by each vertex is going to be super expensive, so we should create some system to query against only the nearby features, perhaps using some kind of spatial grid system, such as [detailed in my previous post](/posts/spherical-spatial-hashing/) and a bucket of other techniques I haven't thought of yet.
 
@@ -115,10 +115,10 @@ export interface IRegion {
 ```
 
 Planet subdivided by regions, there are ~41k regions on this sphere.
-![](../../public/assets/2c33b4e35f94f6626e549f8e96eb7b61.jpeg)
+![](/assets/2c33b4e35f94f6626e549f8e96eb7b61.jpeg)
 
 An earlier attempt at using voronoi
-![](../../public/assets/2e9ddcf6ccd2a3e4ce5a85dfb4898f2c.png)
+![](/assets/2e9ddcf6ccd2a3e4ce5a85dfb4898f2c.png)
 
 #### A note about the grid
 
@@ -133,7 +133,7 @@ Next we'll choose a random Region for each Plate we want to have, the number of 
 My first attempts to grow the plates without any sort of cost function led to long, spindly plates, far reaching plates that were not very realistic.
 
 Plates growing snakily.
-![](../../public/assets/4b7d2de189603c97de77ee74402f4208.png)
+![](/assets/4b7d2de189603c97de77ee74402f4208.png)
 
 I needed a way to tune the direction of the plate's growth, so I added two cost functions that score the plate by a normalized `distanceScore` and a `biasDirectionScore`. The first is simply the distance to the origin plate, so it will tend to grow in an expanding circle. The `biasDirectionScore` will favor tiles in a certain degrees of bearing from the plate origin. Both of these scores are attended by parameters, added together, and modulated by 3D noise.
 
@@ -152,21 +152,21 @@ const cost =
 ```
 
 Our new cost function (with no noise modulation) creating some seashell continents
-![](../../public/assets/9e91685de494a8c82c64f1c437250e55.png)
+![](/assets/9e91685de494a8c82c64f1c437250e55.png)
 
 Some more naturalistic continents with noise added, on the same seed and settings as the image above.
-![](../../public/assets/0dbfd81caaa229e53570c38e97f1691e.png)
+![](/assets/0dbfd81caaa229e53570c38e97f1691e.png)
 
 #### From Continental Crust to Ocean Crust
 
 I've taken inspiration from Frozen Fractal's method of growing continental plates outward as the ocean component. This might not be obvious way to go about things, but plates are composed of, it seems, both continental and oceanic crust. The continental crust is simply less dense matter that has frozen out to the top of the crust, and sort of surfs along the much denser oceanic crust layer. You can see here that most plates have a continental component, then an oceanic component that usually expands out in a direction away from the continental crust.
 
-![](../../public/assets/c42e2423a732729f602883b5a4335058.png) [from wikipedia](https://en.wikipedia.org/wiki/Plate_tectonics#)
+![](/assets/c42e2423a732729f602883b5a4335058.png) [from wikipedia](https://en.wikipedia.org/wiki/Plate_tectonics#)
 
 We'll apply the same floodfill algorithm again, this time allowing the plates to expand further by modulating the cost function's penalty, and lowering a bit the noise settings. Each Region that's added to a plate now will be marked as oceanic crust. As we expand, we'll keep track of the regions that bump into another plate, and create a map of these boundary regions. This way, we can render our plate boundary regions a different color, and we'll use this later to create our tectonic collision zones.
 
 Our plates now extend into the ocean on one coast of the continental plate we started with.
-![](../../public/assets/c030286d1fe46ca3ae5671e9a58fd60f.png)
+![](/assets/c030286d1fe46ca3ae5671e9a58fd60f.png)
 
 I'm pretty happy about the shapes of the continents so far. I feel like they're providing some interesting naturalistic shapes, and you can see where continental collisions could raise island chains and mountain ranges.
 

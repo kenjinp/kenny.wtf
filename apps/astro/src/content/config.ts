@@ -48,6 +48,7 @@ const projects = defineCollection({
         })
         .or(z.string())
         .optional(),
+      heroImageAlt: z.string().optional(),
       description: z.string(),
       canonicalURL: z.string().optional(),
     }),

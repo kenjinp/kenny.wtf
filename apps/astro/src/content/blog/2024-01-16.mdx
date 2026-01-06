@@ -4,7 +4,7 @@ title: Spherical Spatial Hashing + Weblog
 postSlug: spherical-spatial-hashing
 featured: true
 draft: false
-ogImage: ../../public/world-synth.png
+ogImage: /world-synth.png
 tags:
   - world-synth
   - procgen
@@ -13,12 +13,12 @@ description: Only 3 weeks left in RC, so instead of working on my other projects
 ---
 
 import { Tweet } from "astro-embed";
-import v1 from "../../public/assets/cbd500655bc99b67f988d1bb8c74ec03.mp4";
-import v2 from "../../public/assets/f5a2bea94afe5ceae78d3e3a92f68278.mp4";
-import v3 from "../../public/assets/e1a3f34798545584f84c4883dda499f1.mp4";
-import v4 from "../../public/assets/994d896a90333e875c36b7774a341064.mp4";
-import v5 from "../../public/assets/bb46faeb3811d6c6731f9c4ebbac772b.mp4";
-import v6 from "../../public/assets/cc94bbf520f364c35098f2fc064c53b0.mp4";
+export const v1 = "/assets/cbd500655bc99b67f988d1bb8c74ec03.mp4";
+export const v2 = "/assets/f5a2bea94afe5ceae78d3e3a92f68278.mp4";
+export const v3 = "/assets/e1a3f34798545584f84c4883dda499f1.mp4";
+export const v4 = "/assets/994d896a90333e875c36b7774a341064.mp4";
+export const v5 = "/assets/bb46faeb3811d6c6731f9c4ebbac772b.mp4";
+export const v6 = "/assets/cc94bbf520f364c35098f2fc064c53b0.mp4";
 
 # Week 9 Day 2 | Spherical Spatial Hashing + Weblog
 
@@ -63,11 +63,11 @@ When applied to our planet, adjusting vertex height by distance to their constit
 
 [you can play with this demo here](https://worlds.kenny.wtf/hex)
 
-![](../../public/assets/24d5704e03b3c21580e4802afb2fe12e.png)
+![](/assets/24d5704e03b3c21580e4802afb2fe12e.png)
 
-![](../../public/assets/89d51e37ca05b20b5927b27174b1ea1b.png)
+![](/assets/89d51e37ca05b20b5927b27174b1ea1b.png)
 
-![](../../public/assets/c1583c52bfbe11a21926496a308c7fe4.png)
+![](/assets/c1583c52bfbe11a21926496a308c7fe4.png)
 
 (that's a lot of hexs!!!)
 
@@ -79,7 +79,7 @@ from the mesh generator side, on the web worker, each vertex simply asks which h
 
 Look how fast the terrain chunks stream in! this is an idealized scenario where each features is smaller than the hex. the red tiles contain features:
 
-{/* <ReactPlayer url="../../public/assets/f5a2bea94afe5ceae78d3e3a92f68278.mp4" /> */}
+{/* <ReactPlayer url="/assets/f5a2bea94afe5ceae78d3e3a92f68278.mp4" /> */}
 
 <video controls client:visible>
   <source src={v2} type="video/mp4" />
@@ -91,14 +91,14 @@ And here's an example with craters:
   <source src={v3} type="video/mp4" />
 </video>
 
-{/* <ReactPlayer url="../../public/assets/e1a3f34798545584f84c4883dda499f1.mp4" /> */}
+{/* <ReactPlayer url="/assets/e1a3f34798545584f84c4883dda499f1.mp4" /> */}
 
 And here's a density map, where blue = less features found in that hex, and red means more. I think honestly there should not be such an even spread of terrain features like this, they should probably cluster in smaller regions in most cases.
 
 <video controls client:visible>
   <source src={v4} type="video/mp4" />
 </video>
-{/* <ReactPlayer url="../../public/assets/994d896a90333e875c36b7774a341064.mp4" /> */}
+{/* <ReactPlayer url="/assets/994d896a90333e875c36b7774a341064.mp4" /> */}
 
 #### Performance
 
@@ -108,14 +108,14 @@ In the naïve case, the larger terrain chunks take about 5 seconds to stream, bu
   <source src={v5} type="video/mp4" />
 </video>
 
-{/* <ReactPlayer url="../../public/assets/bb46faeb3811d6c6731f9c4ebbac772b.mp4" /> */}
+{/* <ReactPlayer url="/assets/bb46faeb3811d6c6731f9c4ebbac772b.mp4" /> */}
 
 It's the exact opposite case, in our spatial hash. Larger tiles take longer to process, more hex buckets to query, but high-res LODs have to query fewer numbers of hex buckets, so their performance improves. from 15seconds before, to ~20ms now. That's quite the jump!
 
 <video controls client:visible>
   <source src={v6} type="video/mp4" />
 </video>
-{/* <ReactPlayer url="../../public/assets/cc94bbf520f364c35098f2fc064c53b0.mp4" /> */}
+{/* <ReactPlayer url="/assets/cc94bbf520f364c35098f2fc064c53b0.mp4" /> */}
 
 I'm very pleased. This will open the flood gates to do all sorts of things, like rivers and mountain chains and canyons and, well... watch this space!
 

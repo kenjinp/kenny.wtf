@@ -4,6 +4,7 @@ featured: true
 draft: false
 githubLink: https://github.com/kenjinp/hello-worlds
 heroImage: "/ocean-planet.png"
+heroImageAlt: "Hello Worlds project preview (rendered ocean planet)"
 webLink: https://worlds.kenny.wtf/intro
 tags:
   - hello-worlds

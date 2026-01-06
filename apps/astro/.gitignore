@@ -25,6 +25,9 @@ pnpm-debug.log*
 # ignore Jampack cache files
 .jampack/
 
+# generated OpenGraph images (generated at build time)
+public/og/
+
 # yarn
 .yarn/*
 !.yarn/patches

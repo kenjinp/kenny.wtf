@@ -2,7 +2,7 @@
 import Tracking from "@components/Tracking.astro";
 import { SITE } from "@config";
 import "@styles/base.css";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -67,8 +67,10 @@ const socialImageURL = new URL(
 
     <meta name="theme-color" content="" />
 
-    <script src="https://ring.recurse.com/ring.js" type="text/javascript"></script>
-
+    <script
+      is:inline
+      src="https://ring.recurse.com/ring.js"
+      type="text/javascript"></script>
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -82,7 +84,7 @@ const socialImageURL = new URL(
       )
     }
 
-    <ViewTransitions />
+    <ClientRouter />
     <Tracking />
 
     <script is:inline src="/toggle-theme.js"></script>

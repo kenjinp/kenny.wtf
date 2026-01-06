@@ -6,7 +6,7 @@ export interface Props {
 }
 
 export default function ProjectCard({ href, frontmatter }: Props) {
-  const { title, description, stars, heroImage } = frontmatter;
+  const { title, description, stars, heroImage, heroImageAlt } = frontmatter;
 
   const headerProps = {
     className: "text-lg font-medium decoration-dashed hover:underline",
@@ -22,6 +22,7 @@ export default function ProjectCard({ href, frontmatter }: Props) {
           <img
             className="mb-4 h-64 w-full object-cover object-center"
             src={heroImage as string}
+            alt={heroImageAlt ?? `Preview image for ${title}`}
           />
         )}
         <h3 {...headerProps}>

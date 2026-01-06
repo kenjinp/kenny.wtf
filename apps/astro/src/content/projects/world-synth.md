@@ -5,6 +5,7 @@ draft: false
 githubLink: https://github.com/kenjinp/world-synth
 webLink: https://world-synth.kenny.wtf
 heroImage: /world-synth-example.png
+heroImageAlt: "World Synth project preview (procedural planet generation)"
 tags:
   - world-synth
   - procgen

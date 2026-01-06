@@ -5,6 +5,7 @@ draft: false
 githubLink: https://github.com/kenjinp/terrain-synth
 webLink: https://terrain-synth.kenny.wtf
 heroImage: /terrain-synth.png
+heroImageAlt: "Terrain Synth project preview (example-based terrain generation)"
 tags:
   - terrain-synth
   - procgen
