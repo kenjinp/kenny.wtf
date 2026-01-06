@@ -1,8 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { generateOgImageForProject } from "@utils/generateOgImages";
 import { slugifyStr } from "@utils/slugify";
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 
 export async function getStaticPaths() {
   const posts = await getCollection("projects").then((p) =>
@@ -17,14 +16,7 @@ export async function getStaticPaths() {
 
 export const GET: APIRoute = async ({ props }) =>
   new Response(
-    await readFile(
-      fileURLToPath(
-        new URL(
-          `../../../../public/og/projects/${slugifyStr((props as CollectionEntry<"projects">).data.title)}.png`,
-          import.meta.url,
-        ),
-      ),
-    ),
+    await generateOgImageForProject(props as CollectionEntry<"projects">),
     {
       headers: { "Content-Type": "image/png" },
     },

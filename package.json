@@ -13,16 +13,6 @@
     "ship": "pulumi up -C=./infra/pulumi -s=dev --yes",
     "preview": "pulumi preview -C=./infra/pulumi -s=dev"
   },
-  "engines": {
-    "node": ">=24"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "esbuild",
-      "sharp"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
