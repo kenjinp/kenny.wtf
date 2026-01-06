@@ -6,6 +6,10 @@
   "scripts": {
     "start": "pnpm --filter=astro dev",
     "build": "pnpm --filter=astro build",
+    "format": "pnpm --filter=astro format",
+    "format:check": "pnpm --filter=astro format:check",
+    "lint": "pnpm --filter=astro lint",
+    "lint:fix": "pnpm --filter=astro lint:fix",
     "ship": "pulumi up -C=./infra/pulumi -s=dev --yes",
     "preview": "pulumi preview -C=./infra/pulumi -s=dev"
   },
