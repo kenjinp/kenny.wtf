@@ -55,7 +55,7 @@ export const getLastCommit = (options: any) => {
   const a = res.split(splitCharacter);
 
   // e.g. master\n or master\nv1.1\n or master\nv1.1\nv1.2\n
-  const branchAndTags = a[a.length - 1].split("\n").filter((n) => n);
+  const branchAndTags = a[a.length - 1].split("\n").filter(n => n);
   const branch = branchAndTags[0];
   const tags = branchAndTags.slice(1);
 

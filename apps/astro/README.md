@@ -94,10 +94,10 @@ Documentation can be read in two formats\_ _markdown_ & _blog post_.
 **UI/UX** - [Figma](https://figma.com)  
 **Fuzzy Search** - [FuseJS](https://fusejs.io/)  
 **Icons** - [Boxicons](https://boxicons.com/) | [Tablers](https://tabler-icons.io/)  
-**Code Formatting** - [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)  
+**Code Formatting** - [Prettier](https://prettier.io/)  
 **Deployment** - [Cloudflare Pages](https://pages.cloudflare.com/)  
 **Illustration in About Page** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
-**Linting** - [oxlint](https://oxc.rs/docs/guide/usage/linter.html)
+**Linting** - [ESLint](https://eslint.org)
 
 ## 👨🏻‍💻 Running Locally
 
@@ -133,12 +133,11 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`          | Starts local dev server at `localhost:4321`                                                                                      |
 | `npm run build`        | Build your production site to `./dist/`                                                                                          |
 | `npm run preview`      | Preview your build locally, before deploying                                                                                     |
-| `npm run format:check` | Check code format with oxfmt                                                                                                     |
-| `npm run format`       | Format code with oxfmt                                                                                                           |
+| `npm run format:check` | Check code format with Prettier                                                                                                  |
+| `npm run format`       | Format codes with Prettier                                                                                                       |
 | `npm run sync`         | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
 | `npm run cz`           | Commit code changes with commitizen                                                                                              |
-| `npm run lint`         | Lint with oxlint                                                                                                                 |
-| `npm run lint:fix`     | Lint and auto-fix with oxlint                                                                                                    |
+| `npm run lint`         | Lint with ESLint                                                                                                                 |
 
 > Warning! Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
 

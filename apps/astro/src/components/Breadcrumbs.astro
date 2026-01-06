@@ -8,9 +8,8 @@ const breadcrumbList = currentUrlPath.split("/").slice(1);
 
 // if breadcrumb is Home > Posts > 1 <etc>
 // replace Posts with Posts (page number)
-if (breadcrumbList[0] === "posts") {
+breadcrumbList[0] === "posts" &&
   breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
-}
 ---
 
 <nav class="breadcrumb" aria-label="breadcrumb">

@@ -3,18 +3,18 @@ import { getCollection } from "astro:content";
 
 export const getProjectsCollection = async () => {
   let projects = await getCollection("projects");
-  const promises = projects.map(async (project) => {
+  const promises = projects.map(async project => {
     const response = await fetch(
       `https://api.github.com/repos/${project.data.githubLink.replace(
         "https://github.com/",
-        "",
+        ""
       )}`,
       {
         headers: {
           Authorization: `Bearer ${GITHUB_TOKEN}`,
           "X-GitHub-Api-Version": "2022-11-28",
         },
-      },
+      }
     );
     const data = await response.json();
     return {
