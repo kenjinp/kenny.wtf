@@ -1,6 +1,1 @@
-.husky
-.vscode
-node_modules
-public
-dist
-.yarn
+src/env.d.ts
