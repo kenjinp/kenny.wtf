@@ -6,6 +6,7 @@
   "scripts": {
     "start": "pnpm --filter=astro dev",
     "build": "pnpm --filter=astro build",
+    "new:post": "pnpm --filter=astro new:post",
     "format": "pnpm --filter=astro format",
     "format:check": "pnpm --filter=astro format:check",
     "lint": "pnpm --filter=astro lint",
