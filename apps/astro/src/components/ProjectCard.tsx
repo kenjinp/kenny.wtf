@@ -1,4 +1,5 @@
 import type { CollectionEntry } from "astro:content";
+import Datetime from "@components/Datetime";
 
 export interface Props {
   href?: string;
@@ -6,7 +7,8 @@ export interface Props {
 }
 
 export default function ProjectCard({ href, frontmatter }: Props) {
-  const { title, description, stars, heroImage, heroImageAlt } = frontmatter;
+  const { title, description, stars, heroImage, heroImageAlt, lastCommitDate } =
+    frontmatter;
 
   const headerProps = {
     className: "text-lg font-semibold leading-snug",
@@ -39,6 +41,13 @@ export default function ProjectCard({ href, frontmatter }: Props) {
             )}
           </h3>
           <p className="mt-1 text-skin-base/80">{description}</p>
+          {lastCommitDate && (
+            <Datetime
+              datetime={lastCommitDate}
+              label="Last commit:"
+              className="mt-2"
+            />
+          )}
         </div>
       </a>
     </li>

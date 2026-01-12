@@ -3,6 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
+import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import slugify, { slugifyStr } from "@utils/slugify";
 import LinkButton from "@components/LinkButton.astro";
@@ -24,6 +25,7 @@ const {
   heroImage,
   heroImageAlt,
   tags,
+  lastCommitDate,
 } = project.data;
 
 const { Content } = await project.render();
@@ -81,6 +83,13 @@ const ogUrl = new URL(
           )
         }
       </div>
+      {
+        lastCommitDate && (
+          <div class="mt-2">
+            <Datetime datetime={lastCommitDate} label="Last commit:" />
+          </div>
+        )
+      }
     </div>
 
     <article
