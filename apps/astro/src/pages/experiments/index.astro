@@ -1,0 +1,18 @@
+---
+import { SITE } from "@config";
+import Experiments from "@layouts/Experiments.astro";
+import getPageNumbers from "@utils/getPageNumbers";
+import { getCollection } from "astro:content";
+import getSortedExperiments from "@utils/getSortedExperiments";
+
+const all = await getCollection("experiments");
+const sorted = getSortedExperiments(all);
+const totalPages = getPageNumbers(sorted.length);
+const paginated = sorted.slice(0, SITE.postPerPage);
+---
+
+<Experiments
+  experiments={paginated}
+  pageNum={1}
+  totalPages={totalPages.length}
+/>

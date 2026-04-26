@@ -1,0 +1,72 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Experiments from "@layouts/Experiments.astro";
+import ExperimentDetails from "@layouts/ExperimentDetails.astro";
+import ExperimentFullScreen from "@layouts/ExperimentFullScreen.astro";
+import getSortedExperiments from "@utils/getSortedExperiments";
+import getPageNumbers from "@utils/getPageNumbers";
+import slugify from "@utils/slugify";
+import { SITE } from "@config";
+
+export interface Props {
+  experiment?: CollectionEntry<"experiments">;
+}
+
+export async function getStaticPaths() {
+  const all = await getCollection("experiments");
+  const published = all.filter(({ data }) => !data.draft);
+
+  const experimentPaths = published.map((experiment) => ({
+    params: { slug: slugify(experiment.data) },
+    props: { experiment },
+  }));
+
+  const pagePaths = getPageNumbers(published.length).map((pageNum) => ({
+    params: { slug: String(pageNum) },
+  }));
+
+  return [...experimentPaths, ...pagePaths];
+}
+
+const { slug } = Astro.params;
+const { experiment } = Astro.props;
+
+const all = await getCollection("experiments");
+const sorted = getSortedExperiments(all);
+const totalPages = getPageNumbers(sorted.length);
+
+const currentPage =
+  slug && !isNaN(Number(slug)) && totalPages.includes(Number(slug))
+    ? Number(slug)
+    : 0;
+const last = currentPage * SITE.postPerPage;
+const start = last - SITE.postPerPage;
+const paginated = sorted.slice(start, last);
+---
+
+{
+  experiment ? (
+    experiment.data.fullScreen ? (
+      <ExperimentFullScreen
+        title={experiment.data.title}
+        author={experiment.data.author}
+        description={experiment.data.description}
+        component={experiment.data.component}
+        ogImage={
+          typeof experiment.data.ogImage === "string"
+            ? experiment.data.ogImage
+            : experiment.data.ogImage?.src
+        }
+        canonicalURL={experiment.data.canonicalURL}
+      />
+    ) : (
+      <ExperimentDetails experiment={experiment} />
+    )
+  ) : (
+    <Experiments
+      experiments={paginated}
+      pageNum={currentPage}
+      totalPages={totalPages.length}
+    />
+  )
+}

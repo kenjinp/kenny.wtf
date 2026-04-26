@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog")).filter(
-    (post: CollectionEntry<"blog">) => !post.data.draft && !post.data.ogImage
+    (post: CollectionEntry<"blog">) => !post.data.draft && !post.data.ogImage,
   );
 
   return posts.map((post: CollectionEntry<"blog">) => ({
@@ -21,13 +21,13 @@ export const GET: APIRoute = async ({ props }) =>
       fileURLToPath(
         new URL(
           `../../../../public/og/posts/${slugify(
-            (props as CollectionEntry<"blog">).data
+            (props as CollectionEntry<"blog">).data,
           )}.png`,
-          import.meta.url
-        )
-      )
+          import.meta.url,
+        ),
+      ),
     ),
     {
       headers: { "Content-Type": "image/png" },
-    }
+    },
   );

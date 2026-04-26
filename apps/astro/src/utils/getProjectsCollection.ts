@@ -27,7 +27,7 @@ export const getProjectsCollection = async () => {
           `https://api.github.com/repos/${repoSlug}`,
           {
             headers,
-          }
+          },
         );
 
         if (!response.ok) return project;

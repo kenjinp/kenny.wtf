@@ -1,0 +1,51 @@
+---
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import ExperimentRoot from "@components/experiments/ExperimentRoot";
+
+export interface Props {
+  title: string;
+  author: string;
+  description: string;
+  component: string;
+  ogImage?: string;
+  canonicalURL?: string;
+}
+
+const {
+  title,
+  author,
+  description,
+  component,
+  ogImage,
+  canonicalURL,
+} = Astro.props;
+
+const ogUrl = new URL(ogImage ?? SITE.ogImage ?? "og.png", Astro.url.origin)
+  .href;
+---
+
+<Layout
+  title={title}
+  author={author}
+  description={description}
+  ogImage={ogUrl}
+  canonicalURL={canonicalURL}
+>
+  <a
+    href="/experiments"
+    class="experiment-back focus-outline fixed left-4 top-4 z-50 rounded-md border border-skin-line/60 bg-skin-fill/80 px-3 py-2 text-sm font-medium text-skin-base shadow-sm backdrop-blur-sm transition hover:border-skin-accent/50 hover:text-skin-accent"
+  >
+    ← Experiments
+  </a>
+  <div class="experiment-canvas-root fixed inset-0 h-screen w-screen">
+    <ExperimentRoot client:only="react" name={component} />
+  </div>
+</Layout>
+
+<style is:global>
+  body:has(.experiment-canvas-root) {
+    margin: 0;
+    overflow: hidden;
+  }
+</style>

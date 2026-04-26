@@ -55,4 +55,25 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { blog, projects };
+const experiments = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      author: z.string().default(SITE.author),
+      pubDatetime: z.date(),
+      title: z.string(),
+      postSlug: z.string().optional(),
+      featured: z.boolean().optional(),
+      draft: z.boolean().optional(),
+      tags: z.array(z.string()).default(["experiments"]),
+      description: z.string(),
+      component: z.string(),
+      fullScreen: z.boolean().default(true),
+      ogImage: image().or(z.string()).optional(),
+      heroImage: image().or(z.string()).optional(),
+      heroImageAlt: z.string().optional(),
+      canonicalURL: z.string().optional(),
+    }),
+});
+
+export const collections = { blog, projects, experiments };

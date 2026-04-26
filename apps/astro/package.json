@@ -1,9 +1,6 @@
 {
   "name": "astro",
   "version": "3.0.0",
-  "engines": {
-    "node": ">=24"
-  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -24,16 +21,20 @@
     "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.14",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "astro": "^5.16.6",
     "astro-embed": "^0.11.0",
     "fuse.js": "^7.1.0",
     "github-slugger": "^2.0.0",
+    "koota": "^0.6.6",
     "plausible-tracker": "^0.3.9",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "satori": "^0.18.3",
     "satori-astro": "0.3.2",
     "tailwindcss": "^3.4.19",
+    "three": "^0.184.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
@@ -48,6 +49,7 @@
     "@types/node": "^24.10.4",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
+    "@types/three": "^0.184.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "lint-staged": "^14.0.1",
@@ -69,5 +71,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "engines": {
+    "node": ">=24"
   }
 }
