@@ -78,8 +78,12 @@ export function buildTerrainLandUseDataTexture(
       if (!edge) continue;
       const o = k * 4;
       out[o] = Math.round(rgba[o]! * (1 - BORDER_MIX) + br * BORDER_MIX);
-      out[o + 1] = Math.round(rgba[o + 1]! * (1 - BORDER_MIX) + bg * BORDER_MIX);
-      out[o + 2] = Math.round(rgba[o + 2]! * (1 - BORDER_MIX) + bb * BORDER_MIX);
+      out[o + 1] = Math.round(
+        rgba[o + 1]! * (1 - BORDER_MIX) + bg * BORDER_MIX,
+      );
+      out[o + 2] = Math.round(
+        rgba[o + 2]! * (1 - BORDER_MIX) + bb * BORDER_MIX,
+      );
     }
   }
 

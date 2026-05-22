@@ -22,7 +22,10 @@ export default function RiverEdges() {
         c.geometry.dispose();
         if (!Array.isArray(c.material)) c.material.dispose();
       }
-      if ("dispose" in c && typeof (c as THREE.ArrowHelper).dispose === "function") {
+      if (
+        "dispose" in c &&
+        typeof (c as THREE.ArrowHelper).dispose === "function"
+      ) {
         (c as THREE.ArrowHelper).dispose();
       }
     }

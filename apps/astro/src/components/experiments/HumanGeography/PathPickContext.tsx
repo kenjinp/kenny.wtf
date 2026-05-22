@@ -115,7 +115,9 @@ export function PathPickProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <PathPickContext.Provider value={value}>{children}</PathPickContext.Provider>
+    <PathPickContext.Provider value={value}>
+      {children}
+    </PathPickContext.Provider>
   );
 }
 

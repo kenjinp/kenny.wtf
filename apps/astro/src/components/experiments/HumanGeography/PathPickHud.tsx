@@ -48,10 +48,10 @@ export default function PathPickHud() {
       <Row label="Source" info={sourceInfo} />
       <Row label="Sink" info={sinkInfo} />
       <p className="mt-2 border-t border-neutral-800 pt-2 text-[10px] text-neutral-500">
-        Variable-density blue-noise sites with Delaunay / Voronoi neighbors. Hover
-        the terrain for land-use rent / cost details. Hold B and click two sites
-        (when enabled) for A* on the graph. Cyan / rose mark source and sink; amber
-        shows the path.
+        Variable-density blue-noise sites with Delaunay / Voronoi neighbors.
+        Hover the terrain for land-use rent / cost details. Hold B and click two
+        sites (when enabled) for A* on the graph. Cyan / rose mark source and
+        sink; amber shows the path.
       </p>
     </div>
   );

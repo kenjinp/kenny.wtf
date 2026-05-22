@@ -2,12 +2,7 @@ import type { Delaunay } from "d3-delaunay";
 import type { Entity } from "koota";
 import { astarWeighted } from "./astarWeightedGraph";
 import { Road, RiverDownstream, WireTo } from "./relations";
-import {
-  Position,
-  RoadSegment,
-  RiverSegment,
-  SiteIndex,
-} from "./traits";
+import { Position, RoadSegment, RiverSegment, SiteIndex } from "./traits";
 import { HEURISTIC_MIN_MULT } from "./transportConstants";
 import { TERRAIN_SIZE } from "./terrainConstants";
 
@@ -39,7 +34,10 @@ function hashBiasU32(i: number, j: number, salt: number): number {
 }
 
 /** Random point on map boundary `side` (XZ world; margin inset from corners). */
-export function randomEdgePoint(side: EdgeSide, rng: () => number): [number, number] {
+export function randomEdgePoint(
+  side: EdgeSide,
+  rng: () => number,
+): [number, number] {
   const half = TERRAIN_SIZE / 2;
   const margin = TERRAIN_SIZE * 0.06;
   const span = TERRAIN_SIZE - 2 * margin;
@@ -124,7 +122,8 @@ export function buildRoadRiverInfrastructure(
   const rivA = entities[riverEntry]!;
   const rivB = entities[riverExit]!;
 
-  const neighbors = (e: Entity) => e.targetsFor(WireTo).filter((t) => t.isAlive());
+  const neighbors = (e: Entity) =>
+    e.targetsFor(WireTo).filter((t) => t.isAlive());
 
   const roadHalf1 = astarWeighted(
     roadA,
@@ -142,15 +141,14 @@ export function buildRoadRiverInfrastructure(
   );
   const roadPath = joinPaths(roadHalf1 ?? [], roadHalf2 ?? []);
 
-  const riverBiasCost =
-    (salt: number) => (from: Entity, to: Entity) => {
-      const base = edgeLength(from, to);
-      const i = from.get(SiteIndex)!.index;
-      const j = to.get(SiteIndex)!.index;
-      const u = hashBiasU32(i, j, salt) / 4294967296;
-      const bias = 1 + u * 0.55;
-      return base * bias;
-    };
+  const riverBiasCost = (salt: number) => (from: Entity, to: Entity) => {
+    const base = edgeLength(from, to);
+    const i = from.get(SiteIndex)!.index;
+    const j = to.get(SiteIndex)!.index;
+    const u = hashBiasU32(i, j, salt) / 4294967296;
+    const bias = 1 + u * 0.55;
+    return base * bias;
+  };
 
   const riverHalf1 = astarWeighted(
     rivA,

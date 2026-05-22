@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useMemo,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { Delaunay } from "d3-delaunay";
 import type { Entity } from "koota";
 import { useQuery } from "koota/react";

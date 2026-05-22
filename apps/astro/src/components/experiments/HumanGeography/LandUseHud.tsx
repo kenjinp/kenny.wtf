@@ -19,7 +19,13 @@ import {
   COST_ROAD,
 } from "./transportConstants";
 import { useSiteGraph } from "./siteGraphContext";
-import { Capital, EffectiveTransportDist, LandUse, LandValue, Position } from "./traits";
+import {
+  Capital,
+  EffectiveTransportDist,
+  LandUse,
+  LandValue,
+  Position,
+} from "./traits";
 
 function fmt(n: number, digits = 1) {
   return n.toFixed(digits);
@@ -43,8 +49,7 @@ export default function LandUseHud() {
     const bd = rentBreakdownForCell(dEucl, dEff);
     const lu = ent.get(LandUse);
     const lv = ent.get(LandValue);
-    const assignedKind = (lu?.kind ??
-      LandUseKind.Wilderness) as LandUseKindId;
+    const assignedKind = (lu?.kind ?? LandUseKind.Wilderness) as LandUseKindId;
     const assignedRent = lv?.rent ?? 0;
 
     return { bd, assignedKind, assignedRent, siteIndex: hover.siteIndex };
@@ -74,7 +79,10 @@ export default function LandUseHud() {
         </div>
         <ul className="space-y-1.5">
           {LEGEND_ORDER.map((kind) => (
-            <li key={kind} className="flex items-center gap-2 text-[11px] text-neutral-200">
+            <li
+              key={kind}
+              className="flex items-center gap-2 text-[11px] text-neutral-200"
+            >
               <span
                 className="h-3 w-3 shrink-0 rounded-sm border border-neutral-700"
                 style={{ backgroundColor: rgbCss(LAND_USE_PALETTE[kind]) }}
@@ -122,7 +130,9 @@ export default function LandUseHud() {
               · assigned{" "}
               <span
                 className="font-medium"
-                style={{ color: rgbCss(LAND_USE_PALETTE[tooltip.assignedKind]) }}
+                style={{
+                  color: rgbCss(LAND_USE_PALETTE[tooltip.assignedKind]),
+                }}
               >
                 {landUseLabel(tooltip.assignedKind)}
               </span>
@@ -131,7 +141,9 @@ export default function LandUseHud() {
           <div className="mb-2 space-y-0.5 font-mono text-[10px] text-neutral-400">
             <div>
               Crow-flight to city{" "}
-              <span className="text-neutral-200">{fmt(tooltip.bd.distance)}</span>{" "}
+              <span className="text-neutral-200">
+                {fmt(tooltip.bd.distance)}
+              </span>{" "}
               u (
               <span className="text-neutral-200">
                 {fmt(tooltip.bd.distance / WORLD_UNITS_PER_METRE, 0)}
@@ -209,14 +221,14 @@ export default function LandUseHud() {
           </table>
           {tooltip.assignedKind === LandUseKind.Wilderness && (
             <p className="mt-1 text-[10px] text-neutral-400">
-              No crop has positive net rent at this effective distance — tile stays
-              uncultivated.
+              No crop has positive net rent at this effective distance — tile
+              stays uncultivated.
             </p>
           )}
           <p className="mt-2 border-t border-neutral-800 pt-2 text-[10px] leading-relaxed text-neutral-500">
             <span className="font-mono">b·d</span> uses effective transport{" "}
-            <span className="font-mono">d</span> from the weighted graph. Assigned net
-            rent:{" "}
+            <span className="font-mono">d</span> from the weighted graph.
+            Assigned net rent:{" "}
             <span className="font-mono text-neutral-300">
               {fmt(tooltip.assignedRent, 1)}
             </span>

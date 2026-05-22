@@ -47,16 +47,14 @@ export default function PathEdges() {
     pos.needsUpdate = true;
   }, [pathEntities]);
 
-  return (
-    pathEntities && pathEntities.length >= 2 ? (
-      <lineSegments
-        ref={lineRef}
-        geometry={geometry}
-        frustumCulled={false}
-        renderOrder={1}
-      >
-        <lineBasicMaterial color="#fbbf24" toneMapped={false} />
-      </lineSegments>
-    ) : null
-  );
+  return pathEntities && pathEntities.length >= 2 ? (
+    <lineSegments
+      ref={lineRef}
+      geometry={geometry}
+      frustumCulled={false}
+      renderOrder={1}
+    >
+      <lineBasicMaterial color="#fbbf24" toneMapped={false} />
+    </lineSegments>
+  ) : null;
 }

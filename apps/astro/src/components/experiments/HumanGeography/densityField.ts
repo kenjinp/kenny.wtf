@@ -39,7 +39,11 @@ export function density01(x: number, z: number): number {
   const nz = (z + HALF) / TERRAIN_SIZE;
   const scale = 4;
   const a = valueNoise01(nx * scale * 32, nz * scale * 32, DENSITY_SEED);
-  const b = valueNoise01(nx * scale * 64 + 2.2, nz * scale * 64 + 1.7, DENSITY_SEED ^ 0xdeadbeef);
+  const b = valueNoise01(
+    nx * scale * 64 + 2.2,
+    nz * scale * 64 + 1.7,
+    DENSITY_SEED ^ 0xdeadbeef,
+  );
   const m = 0.6 * a + 0.4 * b;
   return Math.min(1, Math.max(0, m));
 }

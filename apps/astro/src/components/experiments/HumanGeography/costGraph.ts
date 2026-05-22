@@ -88,7 +88,10 @@ function directedWeight(
 
   const mx = (coords[2 * i]! + coords[2 * j]!) * 0.5;
   const mz = (coords[2 * i + 1]! + coords[2 * j + 1]!) * 0.5;
-  if (!roadSet.has(ek) && midpointNearRiverPolyline(mx, mz, riverSpine, coords)) {
+  if (
+    !roadSet.has(ek) &&
+    midpointNearRiverPolyline(mx, mz, riverSpine, coords)
+  ) {
     return COST_RIVER_CROSSING * L;
   }
   return COST_LAND * L;

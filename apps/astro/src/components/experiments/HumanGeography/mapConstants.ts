@@ -10,5 +10,7 @@ export const SITE_TEX_WIDTH = 100;
 export const SITE_TEX_HEIGHT = 100;
 
 if (MAX_SITES > SITE_TEX_WIDTH * SITE_TEX_HEIGHT) {
-  throw new Error("MAX_SITES exceeds SITE_TEX_WIDTH * SITE_TEX_HEIGHT; bump atlas size.");
+  throw new Error(
+    "MAX_SITES exceeds SITE_TEX_WIDTH * SITE_TEX_HEIGHT; bump atlas size.",
+  );
 }
