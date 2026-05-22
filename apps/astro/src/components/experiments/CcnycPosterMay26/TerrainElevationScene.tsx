@@ -78,7 +78,7 @@ function MarqueeOverlay() {
           {Array.from({ length: repeats * 2 }).map((_, i) => (
             <span
               key={i}
-              className="px-6 font-mono text-[64px] uppercase tracking-[0.3em] text-[#72f19b]"
+              className="px-6 font-mono text-[2em] uppercase tracking-[0.3em] text-[#72f19b]"
             >
               {text} •
             </span>
@@ -326,49 +326,49 @@ export default function TerrainElevationScene() {
   const g = useMemo(() => ccnycTerrainGraph(), []);
 
   return (
-    <div className="p-12 relative flex h-full w-full touch-none items-center justify-center bg-black gap-10">
-      <div className="relative aspect-[1080/1920] h-full max-h-full w-auto max-w-full bg-neutral-950">
-        <Canvas
-          className="h-full w-full"
-          shadows
-          gl={async (props) => {
-            props.alpha = true;
-            props.antialias = true;
-            const renderer = new THREE.WebGPURenderer({
-              ...(props as WebGPURendererParameters),
-              logarithmicDepthBuffer: true,
-            });
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            renderer.shadowMap.enabled = true;
-            await renderer.init();
-            return renderer;
-          }}
-          camera={{
-            near: 0.001,
-            far: Number.MAX_SAFE_INTEGER,
-            position: [
-              269.5317108828801, 40.52457873883865, 105.59194546191813,
-            ],
-          }}
-          dpr={[1, 1]}
-          performance={{ min: 0.5 }}
-        >
-          <ambientLight intensity={0.2} />
-          {/* <directionalLight intensity={1} position={[1, 1, 1]} /> */}
-          <directionalLight
-            intensity={0.5}
-            position={new THREE.Vector3(-1, 1, -2).normalize().negate()}
-            color="purple"
-          />
-          <TerrainMeshSceneImpl g={g} />
-          <OrbitControls
-            makeDefault
-            target={[-20, 60, 20]}
-            autoRotate
-            autoRotateSpeed={0.025}
-          />
-          <CameraPositionLogger />
-          <Suspense fallback={null}>
+    <Suspense fallback={null}>
+      <div className="p-4 relative flex flex-col h-full w-full touch-none items-center justify-center bg-black gap-10">
+        <div className="relative aspect-[1080/1920] h-full max-h-full w-auto max-w-full bg-neutral-950">
+          <Canvas
+            className="h-full w-full"
+            shadows
+            gl={async (props) => {
+              props.alpha = true;
+              props.antialias = true;
+              const renderer = new THREE.WebGPURenderer({
+                ...(props as WebGPURendererParameters),
+                logarithmicDepthBuffer: true,
+              });
+              renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+              renderer.shadowMap.enabled = true;
+              await renderer.init();
+              return renderer;
+            }}
+            camera={{
+              near: 0.001,
+              far: Number.MAX_SAFE_INTEGER,
+              position: [
+                269.5317108828801, 40.52457873883865, 105.59194546191813,
+              ],
+            }}
+            dpr={[1, 1]}
+            performance={{ min: 0.5 }}
+          >
+            <ambientLight intensity={0.2} />
+            {/* <directionalLight intensity={1} position={[1, 1, 1]} /> */}
+            <directionalLight
+              intensity={0.5}
+              position={new THREE.Vector3(-1, 1, -2).normalize().negate()}
+              color="purple"
+            />
+            <TerrainMeshSceneImpl g={g} />
+            <OrbitControls
+              makeDefault
+              target={[-20, 60, 20]}
+              autoRotate
+              autoRotateSpeed={0.025}
+            />
+            <CameraPositionLogger />
             <Skybox>
               <Stars>
                 {({ radius }) => {
@@ -388,11 +388,11 @@ export default function TerrainElevationScene() {
                 }}
               </Stars>
             </Skybox>
-          </Suspense>
-        </Canvas>
-        <MarqueeOverlay />
+          </Canvas>
+          <MarqueeOverlay />
+        </div>
+        <p>Poster for Creative Coding NYC May 26</p>
       </div>
-      <p>Poster for Creative Coding NYC May 26</p>
-    </div>
+    </Suspense>
   );
 }
