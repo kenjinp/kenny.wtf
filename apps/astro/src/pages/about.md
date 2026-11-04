@@ -27,4 +27,4 @@ You can find me reading genre-fiction at a laundromat or running along the East 
 
 ## Contact Me
 
-Feel free to reach out [email](mailto:hello@keny.wtf) or [dm me on twitter](https://twitter.com/KennyPirman).
+Feel free to reach out [email](mailto:hello@kenny.wtf) or [dm me on twitter](https://twitter.com/KennyPirman).
